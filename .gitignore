@@ -1,0 +1,6 @@
+vender/
+
+.DS_Store
+
+composer.lock
+
