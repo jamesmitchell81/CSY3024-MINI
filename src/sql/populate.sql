@@ -1,42 +1,49 @@
 INSERT INTO Departments (DepartmentName)
 VALUES ("Computing"), ("Business"), ("Graphic Design"), ("Art"), ("Fashion");
 
-INSERT INTO FacultyMember (_idDepartment, Title, FirstName, LastName, EmailAddress)
+INSERT INTO FacultyMember (_idDepartment, Title, FirstName, LastName, EmailAddress, OfficeNo, MobileNo)
 VALUES (
   SELECT idDepartment FROM Departments WHERE DepartmentName = "Computing",
-  "Mr", "James", "Mitchell", "james@mini.ac.uk"
+  "Mr", "James", "Mitchell", "james@mini.ac.uk", "12345-123456", "12345-123-123"
 ), (
   SELECT idDepartment FROM Departments WHERE DepartmentName = "Computing",
-  "Mr", "Owen", "Routier", "owen@mini.ac.uk"
+  "Mr", "Owen", "Routier", "owen@mini.ac.uk", "12345-123456", "12345-123-123"
 ), (
   SELECT idDepartment FROM Departments WHERE DepartmentName = "Art",
-  "Miss", "Isla", "Routier", "isla@mini.ac.uk"
+  "Miss", "Isla", "Routier", "isla@mini.ac.uk", "12345-123456", "12345-123-123"
 ), (
   SELECT idDepartment FROM Departments WHERE DepartmentName = "Fashion",
-  "Mrs", "Sally", "Routier", "sally@mini.ac.uk"
+  "Mrs", "Sally", "Routier", "sally@mini.ac.uk", "12345-123456", "12345-123-123"
 ), (
   SELECT idDepartment FROM Departments WHERE DepartmentName = "Computing",
-  "Mr", "Adam", "Routier", "adam@mini.ac.uk"
+  "Mr", "Adam", "Routier", "adam@mini.ac.uk", "12345-123456", "12345-123-123"
 ), (
   SELECT idDepartment FROM Departments WHERE DepartmentName = "Business",
-  "Mrs", "Sue", "Mitchell", "sue@mini.ac.uk"
+  "Mrs", "Sue", "Mitchell", "sue@mini.ac.uk", "12345-123456", "12345-123-123"
 ), (
   SELECT idDepartment FROM Departments WHERE DepartmentName = "Computing",
-  "Mr", "Simon", "Mitchell", "simon@mini.ac.uk"
+  "Mr", "Simon", "Mitchell", "simon@mini.ac.uk", "12345-123456", "12345-123-123"
 ), (
   SELECT idDepartment FROM Departments WHERE DepartmentName = "Graphic Design",
-  "Mrs", "Joanna", "Hatfield", "joanna@mini.ac.uk"
+  "Mrs", "Joanna", "Hatfield", "joanna@mini.ac.uk", "12345-123456", "12345-123-123"
 );
 
-INSERT INTO Mechanic (Title, FirstName, LastName, ...Grade...)
+INSERT INTO MechanicGrade (GradeName)
+VALUES ("PartsManager", "Mechanic");?
+
+INSERT INTO Mechanic (Title, FirstName, LastName, _idMechanicGrade)?
 
 -- Types: Minibus, Car
 INSERT INTO Vehicles (VehicleReg, MileageRate, Type, SeatCount, CurrentMileage)
 VALUES
 ("tfbs1", 1.2, "Hatchback", 5, 0),
-("tfbs2", 3.6, "Minibus",  12, 0),
-("tfbs3", 2.4, "Minivan",   8, 0),
-("tfbs1", 1.8, "Saloon",    5, 0),
+("tfbs2", 3.6, "Minibus", 12, 0),
+("tfbs3", 2.4, "Minivan", 8, 0),
+("tfbs4", 1.8, "Saloon", 5, 0),
+("tfbs5", 1.2, "Hatchback", 5, 0),
+("tfbs6", 3.6, "Minibus", 12, 0),
+("tfbs7", 2.4, "Minivan", 8, 0),
+("tfbs8", 1.8, "Saloon", 5, 0);
 
 -- MOT Lists.
 INSERT INTO MOTCategory (Title)
@@ -87,13 +94,55 @@ VALUES
 (SELECT idMOTCategory FROM MOTCategory WHERE Title = "Emissions"), "Emissions"),
 
 
+INSERT INTO PartCategory (Name)
+VALUES ("Oil"), ("Gauges"), ("Electrics"), ("Brakes"), ("Engine"), ("Engine Cooling"), ("Exhaust"), ("Fuel Supply");
+
 -- Parts
-INSERT INTO PartList (PartName, MinimumQuantity)
+INSERT INTO Parts (_idCategory, PartName, MinimumQuantity)
 VALUES
-("Oil", 10),
-("Oil filters", 10),
-("Cam belts", 10),
-("...", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Oil"), "Oil", 10), -- Oil
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Oil"), "Oil filter", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Oil"), "Oil gasket", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Oil"), "Oil pump", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Gauges"), "Fuel gauge", 10), -- Gauges
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Gauges"), "Speedometer", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Gauges"), "Tyre pressure gauge", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Electrics"), "Ignition coil", 10), -- Electics
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Electrics"), "Alternator", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Electrics"), "Battery", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Electrics"), "Distributor", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Electrics"), "Spark plug", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Electrics"), "Fog Light bulb", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Electrics"), "Headlamp bulb", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Electrics"), "Tail light bulb", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Electrics"), "Indicator bulb", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Brakes"), "Brake pad", 10), -- Brakes
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Brakes"), "Brake drum", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Brakes"), "Brake pedal", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Brakes"), "Brake piston", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Brakes"), "Brake pump", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Brakes"), "Caliper", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Engine"), "Camshaft", 10), -- Engine
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Engine"), "Air intake housing", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Engine"), "Crank shaft", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Engine"), "Cylinder head", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Engine Cooling"), "Fan blade", 10), -- Engine cooling.
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Engine Cooling"), "Fan clutch", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Engine Cooling"), "Water pump", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Engine Cooling"), "Water tank", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Exhaust"), "Exhaust pipe", 10), -- Exhaust
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Exhaust"), "Catalytic converter", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Exhaust"), "Heat shield", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Exhaust"), "Exhaust gasket", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Fuel Supply"), "Air filter", 10), -- fuel supply
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Fuel Supply"), "Carburetor", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Fuel Supply"), "Fuel cell", 10),
+((SELECT idCategory FROM PartCategory c WHERE c.Name = "Fuel Supply"), "Fuel tank", 10),
+
+
+
+
+
 
 
 
