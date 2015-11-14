@@ -1,0 +1,19 @@
+{% extends "Layout.html" %}
+{% block content %}
+    <h1>Login</h1>
+
+    <form class="form form-50" action="/login" method="post">
+      <fieldset class="form__fieldset">
+        <legend class="form__legend">Login</legend>
+
+        <label class="form__label" for="email">Email Address</label>
+        <input class="form__input" type="email" name="email" id="email">
+
+        <label class="form__label" for="password">Password</label>
+        <input class="form__input" type="text" name="password" id="email">
+
+        <input class="form__button" type="submit" value="login">
+      </fieldset>
+    </form>
+
+{% endblock %}

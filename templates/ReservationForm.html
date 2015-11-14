@@ -1,0 +1,47 @@
+{% extends "Layout.html" %}
+{% block content %}
+    <h1>Make Reservation</h1>
+
+    <form class="form form-50" action="/faculty/reserve" method="post">
+      <fieldset class="form__fieldset">
+        <legend class="form__legend">Travel Dates</legend>
+
+        <label class="form__label" for="email">Departure Date</label>
+        <input class="form__input" type="date" name="departure-date" id="departure-date">
+
+        <label class="form__label" for="email">Return Date</label>
+        <input class="form__input" type="date" name="departure-date" id="departure-date">
+      </fieldset>
+
+      <fieldset class='form__group'>
+        <span class='form__legend form__group-title'>Required Seats</span>
+
+        <div class='form__group-element'>
+          <label class='form__radio-label' for='radioA'>2</label>
+          <input class='form__radio' name='required-seats' id='radioA' type="radio">
+        </div>
+
+        <div class='form__group-element'>
+          <label class='form__radio-label' for='radioB'>5</label>
+          <input class='form__radio' name='required-seats' id='radioB' type="radio">
+        </div>
+
+        <div class='form__group-element'>
+          <label class='form__radio-label' for='radioC'>8</label>
+          <input class='form__radio' name='required-seats' id='radioC' type="radio">
+        </div>
+
+        <div class='form__group-element'>
+          <label class='form__radio-label' for='radioC'>12</label>
+          <input class='form__radio' name='required-seats' id='radioC' type="radio">
+        </div>
+      </fieldset>
+
+      <fieldset class="form__fieldset">
+        <legend class="form__legend">Destination</legend>
+        <label class="form__label" for="email">Post Code</label>
+        <input class="form__input" type="date" name="departure-date" id="departure-date">
+      </fieldset>
+    </form>
+
+{% endblock %}

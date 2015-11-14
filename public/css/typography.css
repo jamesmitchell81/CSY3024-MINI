@@ -1,0 +1,10 @@
+body {
+	font-family: Fira Sans Light;
+}
+
+.form__input,
+.form__label,
+.form__button,
+.form__select {
+	font-size: 1.125em;
+}
