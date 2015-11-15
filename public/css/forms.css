@@ -17,7 +17,16 @@
 }
 
 .form__group .form__group-element:last-child {
-	border-radius: 0 0 4px 4px;
+	border-radius: 0 0 4px 0;
+}
+
+.form__group .form__group-element:first-child {
+	border-radius: 0 0 0 4px;
+}
+
+.flex-column {
+	display: flex;
+	flex-direction: row;
 }
 
 .form__legend {
@@ -38,8 +47,7 @@
 	border-width: 0 1px 1px 1px;
 	border-color: #cacaca;
 	border-style: solid;
-	padding: 0.5em 0.75em;
-	display: block;
+	flex-grow: 1;
 }
 
 .form__label,
@@ -55,8 +63,23 @@
 	padding-bottom: 0.25em;
 }
 
+.form__radio,
 .form__check {
-	/*margin-left: -1000px;*/
+	position: absolute;
+	left: -999px;
+}
+
+.form__radio-label,
+.form__check-label {
+	cursor: pointer;
+	text-align: center;
+	padding: 0.75em 0.75em;
+	transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+.form__radio:checked + .form__radio-label {
+	background: #000;
+	color: #fff;
 }
 
 .form__input {
