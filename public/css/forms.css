@@ -24,11 +24,6 @@
 	border-radius: 0 0 0 4px;
 }
 
-.flex-column {
-	display: flex;
-	flex-direction: row;
-}
-
 .form__legend {
 	padding: 0.5em 0.75em;
 	display: block;

@@ -5,6 +5,7 @@ namespace MINI;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+date_default_timezone_set('Europe/London');
 error_reporting(E_ALL);
 
 $env = 'dev';

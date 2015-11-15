@@ -19,7 +19,7 @@ class Home
         $this->view = $view;
     }
 
-    public function show()
+    public function display()
     {
         $data = [
             'name' => $this->request->getParameter('name', 'stranger'),

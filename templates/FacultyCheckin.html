@@ -1,0 +1,22 @@
+{% extends "Layout.html" %}
+{% block content %}
+  <h1>Check In Vehicle</h1>
+
+    <form action="/faculty/checkin" method="post" class="form form-50">
+      <fieldset class='form__fieldset'>
+        <legend class='form__legend'>Vehicle Check In</legend>
+
+        <label for="odometer-end" class="form__label">Journey Odometer Reading</label>
+        <input type="text" class="form__input" name="odometer-end" id="odometer-end" value="">
+
+        <label for="fuel-purchased" class="form__label">Fuel Purchased</label>
+        <input type="text" class="form__input" name="fuel-purchased" id="fuel-purchased" value="">
+
+        <label for="fuel-purchased" class="form__label">Maintenance Issues</label>
+        <textarea class="form__input" name="maintenance-issues" id="maintenance-issues" cols="30" rows="10"></textarea>
+
+      </fieldset>
+
+      <button class="form__button">Confirm</button>
+    </form>
+{% endblock %}

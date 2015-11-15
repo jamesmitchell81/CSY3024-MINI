@@ -1,0 +1,63 @@
+{% extends "Layout.html" %}
+{% block content %}
+    <h1>Mechanic Home</h1>
+
+    <h2>Current Maintenance</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Vehicle Reg</th>
+          <th>Maintenance Type</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>tfbs1</td>
+          <td>MOT</td>
+          <td><a href="/mechanic/maintenance/1">Review</a></td>
+        </tr>
+        <tr>
+          <td>tfbs2</td>
+          <td>General</td>
+          <td><a href="/mechanic/maintenance/2">Review</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Maintenance Issues</h2>
+
+    <table>
+      <thead>
+        <th>Vehicle Reg</th>
+        <th>Reported Issue</th>
+        <th>Reported</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <td>tfbs1</td>
+        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas a laudantium quas ipsam, earum eos deleniti. Nulla minus explicabo possimus.</td>
+        <td>2015-11-14</td>
+        <td><a href="/mechanic/checkout/1">Checkout</a></td>
+      </tbody>
+    </table>
+
+    <h2>MOT Due/Required</h2>
+
+    <table>
+      <thead>
+        <th>Vehicle Reg</th>
+        <th>MOT Due date</th>
+        <th></th>
+      </thead>
+      <tbody>
+        <td>tfbs1</td>
+        <td>2015-11-14</td>
+        <td><a href="/mechanic/motcheckout/1">Checkout</a></td>
+      </tbody>
+    </table>
+
+    <h2>Vehicles</h2>
+
+{% endblock %}
