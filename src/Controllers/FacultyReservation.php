@@ -2,15 +2,33 @@
 
 class FacultyReservation extends Controller
 {
-  public function display()
+
+  public function display($params = [])
   {
-    $html = $this->view->render('ReservationForm');
+    $data = ['action' => '/faculty/reserve/add'];
+
+    if ( array_key_exists('action', $params) )
+    {
+      $data = ['action' => '/faculty/reserve/update'];
+      // .. get current.
+    }
+
+    $html = $this->view->render('ReservationForm', $data);
     $this->response->setContent($html);
   }
 
-  public function make()
+  public function add()
   {
     var_dump($this->request->getParameters());
   }
 
+  public function update()
+  {
+    var_dump($this->request->getParameters());
+  }
+
+  public function delete()
+  {
+
+  }
 }

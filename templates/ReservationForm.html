@@ -2,15 +2,17 @@
 {% block content %}
     <h1>Make Reservation</h1>
 
-    <form class="form form-50" action="/faculty/reserve" method="post">
+    <form class="form form-50" action="{{ action }}" method="post">
       <fieldset class="form__fieldset">
         <legend class="form__legend">Travel Dates</legend>
 
         <label class="form__label" for="email">Departure Date</label>
-        <input class="form__input" type="date" name="departure-date" id="departure-date">
+        <input class="form__input" type="date"
+               name="departure-date" id="departure-date"
+               value="{{ departure-date ? departure-date : 'now'|date('Y-m-d') }}">
 
-        <label class="form__label" for="email">Return Date</label>
-        <input class="form__input" type="date" name="departure-date" id="departure-date">
+        <label class="form__label" for="return-date">Return Date</label>
+        <input class="form__input" type="date" name="return-date" id="return-date">
       </fieldset>
 
       <fieldset class='form__group'>
@@ -18,32 +20,36 @@
 
         <div class="flex-column">
           <div class='form__group-element form__group-element-col'>
-            <input class='form__radio' name='required-seats' id='radioA' type="radio">
-            <label class='form__radio-label' for='radioA'>2</label>
+            <input class='form__radio' name='required-seats' id='seats-2' type="radio">
+            <label class='form__radio-label' for='seats-2'>2</label>
           </div>
 
           <div class='form__group-element form__group-element-col'>
-            <input class='form__radio' name='required-seats' id='radioB' type="radio">
-            <label class='form__radio-label' for='radioB'>5</label>
+            <input class='form__radio' name='required-seats' id='seats-5' type="radio">
+            <label class='form__radio-label' for='seats-5'>5</label>
           </div>
 
           <div class='form__group-element form__group-element-col'>
-            <input class='form__radio' name='required-seats' id='radioC' type="radio">
-            <label class='form__radio-label' for='radioC'>8</label>
+            <input class='form__radio' name='required-seats' id='seats-8' type="radio">
+            <label class='form__radio-label' for='seats-8'>8</label>
           </div>
 
           <div class='form__group-element form__group-element-col'>
-            <input class='form__radio' name='required-seats' id='radioD' type="radio">
-            <label class='form__radio-label' for='radioD'>12</label>
+            <input class='form__radio' name='required-seats' id='seats-12' type="radio">
+            <label class='form__radio-label' for='seats-12'>12</label>
           </div>
         </div>
       </fieldset>
 
       <fieldset class="form__fieldset">
         <legend class="form__legend">Destination</legend>
-        <label class="form__label" for="email">Post Code</label>
-        <input class="form__input" type="date" name="departure-date" id="departure-date">
+        <label class="form__label" for="post-code">Post Code</label>
+        <input class="form__input" type="date"
+               name="post-code" id="post-code"
+               value="{{ post-code ? post-code : '' }}">
       </fieldset>
+
+      <button class="form__button">Confirm</button>
     </form>
 
 {% endblock %}
