@@ -1,0 +1,19 @@
+{% extends "Layout.html" %}
+{% block content %}
+    <h1>Confirm Cancelation</h1>
+
+    <form class="form form-50" method="post" action="{{ action }}">
+      <fieldset class="form__fieldset">
+        <legend class="form__legend">Cancelation Confirmation</legend>
+
+        <p class="form__information">Please enter your password to confirm cancalation</p>
+        <label for="password" class="form__label">Password</label>
+        <input class="form__input" type="text" name="password" id="password">
+      </fieldset>
+
+      <button class="form__button">Complete Cancelation</button>
+      <a class="form__button" href="{{ returnto }}">Do not cancel and return</a>
+    </form>
+
+
+{% endblock %}

@@ -7,12 +7,12 @@ return [
     // Faculty.
     ['GET',  '/faculty',                 ['MINI\Controllers\FacultyHome', 'display']],
     //  Reserve
-    ['GET',  '/faculty/reserve/add',     ['MINI\Controllers\ReservationAddForm', 'display']],
-    ['GET',  '/faculty/reserve/update',  ['MINI\Controllers\ReservationUpdateForm', 'display']],
-    ['GET',  '/faculty/reserve/delete',  ['MINI\Controllers\ReservationDeleteForm', 'display']],
-    ['POST', '/faculty/reserve/add',     ['MINI\Controllers\FacultyReservation', 'add']],
-    ['POST', '/faculty/reserve/update',  ['MINI\Controllers\FacultyReservation', 'update']],
-    ['POST', '/faculty/reserve/delete',  ['MINI\Controllers\FacultyReservation', 'delete']],
+    ['GET',  '/faculty/reservation/add',             ['MINI\Controllers\ReservationAdd', 'display']],
+    ['GET',  '/faculty/reservation/update/{id:\d}',  ['MINI\Controllers\ReservationUpdate', 'display']],
+    ['GET',  '/faculty/reservation/delete/{id:\d}',  ['MINI\Controllers\ReservationDelete', 'display']],
+    ['POST', '/faculty/reservation/add',             ['MINI\Controllers\ReservationAdd', 'add']],
+    ['POST', '/faculty/reservation/update/{id:\d}',  ['MINI\Controllers\ReservationUpdate', 'update']],
+    ['POST', '/faculty/reservation/delete/{id:\d}',  ['MINI\Controllers\ReservationDelete', 'delete']],
     //  Checkout
     ['GET',  '/faculty/checkout/{id:\d}', ['MINI\Controllers\FacultyCheckout', 'display']],
     ['POST', '/faculty/checkout',         ['MINI\Controllers\FacultyCheckout', 'checkout']],
@@ -38,5 +38,6 @@ return [
     ['GET',  '/vehicle/update/{reg}', ['MINI\Controllers\VehicleDetails', 'display']],
     ['POST', '/vehicle/update', ['MINI\Controllers\VehicleDetails', 'update']],
     ['GET',  '/vehicle/delete', ['MINI\Controllers\VehicleDetails', 'displayRemove']],
+
     ['POST', '/vehicle/delete', ['MINI\Controllers\VehicleDetails', 'delete']],
 ];

@@ -21,7 +21,7 @@ class MaintenanceDetailItem extends Controller
     var_dump($params);
 
     $data = [];
-    $html = $this->view->render('MaintenanceItemDeleteConfirm', $data);
+    $html = $this->view->render('DeleteConfirm', $data);
     $this->response->setContent($html);
   }
 
