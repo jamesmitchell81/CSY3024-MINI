@@ -19,9 +19,9 @@ return [
     ['GET',  '/faculty/checkin/{id:\d}',  ['MINI\Controllers\FacultyCheckin', 'display']],
     ['POST', '/faculty/checkin',          ['MINI\Controllers\FacultyCheckin', 'checkin']],
     // Mechanics.
-    ['GET',  '/mechanic',                  ['MINI\Controllers\MechanicHome', 'display']],
-    ['GET',  '/mechanic/checkout/{id:\d}', ['MINI\Controllers\MaintenanceCheckout', 'display']],
-    ['POST', '/mechanic/checkout',         ['MINI\Controllers\MaintenanceCheckout', 'checkout']],
+    ['GET',  '/mechanic',                        ['MINI\Controllers\MechanicHome', 'display']],
+    ['GET',  '/mechanic/checkout/{id:\d}',       ['MINI\Controllers\MaintenanceCheckout', 'display']],
+    ['POST', '/mechanic/checkout',               ['MINI\Controllers\MaintenanceCheckout', 'checkout']],
     ['GET',  '/mechanic/{id}/mot/vehicle/{reg}', ['MINI\Controllers\MaintenanceMOT', 'display']],
     // Vehicle Maintenance.
     ['GET',  '/vehicle/{reg}/maintenance-detail', ['MINI\Controllers\MaintenanceDetail', 'display']],
@@ -32,12 +32,11 @@ return [
     ['GET',  '/vehicle/{reg}/maintenance-detail/{lognumber}/maintenace-item/remove/{id:\d}', ['MINI\Controllers\MaintenanceDetailItem', 'displayRemove']],
     ['POST', '/vehicle/{reg}/maintenance-detail/{lognumber}/maintenace-item/remove/{id:\d}', ['MINI\Controllers\MaintenanceDetailItem', 'delete']],
     // Vehicles.
-    ['GET',  '/vehicles', ['MINI\Controllers\VehicleList', 'display']],
-    ['GET',  '/vehicle/add', ['MINI\Controllers\VehicleDetails', 'display']],
-    ['POST', '/vehicle/add', ['MINI\Controllers\VehicleDetails', 'add']],
-    ['GET',  '/vehicle/update/{reg}', ['MINI\Controllers\VehicleDetails', 'display']],
-    ['POST', '/vehicle/update', ['MINI\Controllers\VehicleDetails', 'update']],
-    ['GET',  '/vehicle/delete', ['MINI\Controllers\VehicleDetails', 'displayRemove']],
-
-    ['POST', '/vehicle/delete', ['MINI\Controllers\VehicleDetails', 'delete']],
+    ['GET',  '/vehicles',             ['MINI\Controllers\VehicleList',   'display']],
+    ['GET',  '/vehicle/add',          ['MINI\Controllers\VehicleAdd',    'display']],
+    ['POST', '/vehicle/add',          ['MINI\Controllers\VehicleAdd',    'add']],
+    ['GET',  '/vehicle/update/{reg}', ['MINI\Controllers\VehicleUpdate', 'display']],
+    ['POST', '/vehicle/update/{reg}', ['MINI\Controllers\VehicleUpdate', 'update']],
+    ['GET',  '/vehicle/delete/{reg}', ['MINI\Controllers\VehicleDelete', 'display']],
+    ['POST', '/vehicle/delete/{reg}', ['MINI\Controllers\VehicleDelete', 'delete']],
 ];

@@ -15,7 +15,8 @@
         "nikic/fast-route": "^0.6.0",
         "rdlowrey/auryn": "^1.1",
         "mustache/mustache": "^2.9",
-        "twig/twig": "~1.0"
+        "twig/twig": "~1.0",
+        "phpunit/phpunit": "4.8.*"
     },
     "autoload": {
         "psr-4": {

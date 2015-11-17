@@ -1,6 +1,6 @@
 <?php namespace MINI\Controllers;
 
-class VehicleDetails extends Controller
+class VehicleAdd extends Controller
 {
 
   public function display($params)
@@ -9,11 +9,6 @@ class VehicleDetails extends Controller
       'action' => '/vehicle/add'
     ];
 
-    if ( $params )
-    {
-      $data = ['action' => '/vehicle/update'];
-    }
-
     $html = $this->view->render('VehicleForm', $data);
     $this->response->setContent($html);
   }
@@ -21,7 +16,6 @@ class VehicleDetails extends Controller
   public function add()
   {
     $details = $this->request->getParameters();
-
     var_dump($details);
   }
 }
