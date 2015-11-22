@@ -39,4 +39,18 @@ return [
     ['POST', '/vehicle/update/{reg}', ['MINI\Controllers\VehicleUpdate', 'update']],
     ['GET',  '/vehicle/delete/{reg}', ['MINI\Controllers\VehicleDelete', 'display']],
     ['POST', '/vehicle/delete/{reg}', ['MINI\Controllers\VehicleDelete', 'delete']],
+    // Vehicle details.
+    ['GET', '/vehicle/{reg}/mileage/{year}', ['MINI\Controllers\Vehicle', 'mileage']],
+    // Vechicle Reservations.
+    ['GET', '/vehicles/reservations', ['MINI\Controllers\VehicleReservations', 'display']],
+    ['GET', '/vehicle/reservation/{id:\d}/department', ['MINI\Controllers\VehicleReservations', 'department']],
+    // Parts.
+    // ['GET', '/parts', ['MINI\Controllers\PartsList', 'display']],
+    // Department.
+    ['GET', '/department/{id}/reservations/{year}', ['MINI\Controllers\Department', 'reservations']],
+    ['GET', '/department/{id}/mileage/{year}', ['MINI\Controllers\Department', 'mileage']],
+    ['GET', '/department/{id}/billings/{year}', ['MINI\Controllers\Department', 'billings']],
 ];
+
+
+
