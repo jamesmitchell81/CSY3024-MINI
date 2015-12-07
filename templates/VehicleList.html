@@ -13,7 +13,19 @@
       <th>Seats</th>
       <th>Mileage Rate</th>
     </tr>
+    {% for vehicle in vehicles %}
+      <tr>
+        <td>{{ vehicle.VehicleReg }}</td>
+        <td>{{ vehicle.Make }}</td>
+        <td>{{ vehicle.Model }}</td>
+        <td>{{ vehicle.VehicleTypeName }}</td>
+        <td>{{ vehicle.Colour }}</td>
+        <td>{{ vehicle.Seats }}</td>
+        <td>{{ vehicle.MileageRate }}</td>
+      </tr>
+    {% endfor %}
   </table>
+
 
   <a href="/vehicle/add">Add New Vehicle</a>
 

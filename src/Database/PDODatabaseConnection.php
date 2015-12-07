@@ -1,5 +1,7 @@
 <?php namespace MINI\Database;
 
+use PDO;
+
 class PDODatabaseConnection
 {
   private $host;

@@ -1,6 +1,8 @@
 <?php namespace MINI\Database;
 
-class PDODatabaseStatement implements DatabaseStatement
+use PDO;
+
+class PDODatabaseStatement
 {
   private $connection;
   private $statement;
@@ -9,7 +11,7 @@ class PDODatabaseStatement implements DatabaseStatement
 
   public function __construct()
   {
-    $this->db = new DatabaseConnection();
+    $this->db = new PDODatabaseConnection();
     $this->connection = $this->db->connect();
   }
 
@@ -70,5 +72,36 @@ class PDODatabaseStatement implements DatabaseStatement
   {
     $this->fetchMode = $fetchMode;
     return $this;
+  }
+
+  public function first()
+  {
+    return $this->statement->fetch();
+  }
+
+  public function all()
+  {
+    return $this->statement->fetchAll();
+  }
+
+  public function select($sql)
+  {
+    $this->query($sql);
+    return $this;
+  }
+
+  public function insert($sql)
+  {
+    return $this->query($sql);
+  }
+
+  public function update($sql)
+  {
+    return $this->query($sql);
+  }
+
+  public function delete($sql)
+  {
+    return $this->query($sql);
   }
 }
