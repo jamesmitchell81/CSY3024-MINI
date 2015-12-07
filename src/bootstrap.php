@@ -3,6 +3,8 @@
 // https://github.com/PatrickLouys/no-framework-tutorial
 namespace MINI;
 
+use PDO;
+
 require __DIR__ . '/../vendor/autoload.php';
 
 date_default_timezone_set('Europe/London');
@@ -60,4 +62,3 @@ switch ($routeInfo[0]) {
 }
 
 echo $response->getContent();
-
