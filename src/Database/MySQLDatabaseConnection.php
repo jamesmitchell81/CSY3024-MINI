@@ -2,7 +2,7 @@
 
 use PDO;
 
-class PDODatabaseConnection
+class MySQLDatabaseConnection implements DatabaseConnection
 {
   private $host;
   private $db_name;
@@ -21,7 +21,7 @@ class PDODatabaseConnection
     $this->password = "donkey";
   }
 
-  public function connect()
+  public function open()
   {
     try {
       $this->db = new PDO($this->connection_str, $this->user, $this->password);
@@ -32,7 +32,7 @@ class PDODatabaseConnection
     return $this->db;
   }
 
-  public function disconnect()
+  public function close()
   {
     $this->db = null;
   }

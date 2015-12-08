@@ -1,6 +1,6 @@
 <?php namespace MINI\Controllers;
 
-use MINI\Models\Vehicles;
+use MINI\Models\VehicleGateway;
 
 class VehicleList extends Controller
 {
@@ -8,8 +8,8 @@ class VehicleList extends Controller
   public function display()
   {
     // get vehicles.
-    $vehicles = new Vehicles;
-    $list = $vehicles->getAllVehicles();
+    $vehicles = new VehicleGateway;
+    $list = $vehicles->findAll();
 
     $data = [
       'vehicles' => $list

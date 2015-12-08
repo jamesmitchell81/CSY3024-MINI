@@ -1,10 +1,14 @@
 <?php namespace MINI\Models;
 
-use MINI\Database\PDODatabaseConnection as Connection;
-use MINI\Database\PDODatabaseStatement as Statement;
-
 class Vehicle
 {
-
-
+  public $id;
+  public $reg;
+  public $mileageRate;
+  public $currentMileage;
+  public $image;
+  public $model;
+  public $seats;
+  public $manufacturer;
+  public $type;
 }

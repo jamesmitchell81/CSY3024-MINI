@@ -9,15 +9,15 @@ class PDODatabaseStatement
   private $parameters = [];
   private $fetchMode = PDO::FETCH_ASSOC;
 
-  public function __construct()
+  public function __construct(DatabaseConnection $db)
   {
-    $this->db = new PDODatabaseConnection();
-    $this->connection = $this->db->connect();
+    $this->db = $db;
+    $this->connection = $this->db->open();
   }
 
   public function __destruct()
   {
-    $this->db->disconnect();
+    $this->db->close();
   }
 
   public function query($sql, $fetchMode = PDO::FETCH_ASSOC)
@@ -92,7 +92,8 @@ class PDODatabaseStatement
 
   public function insert($sql)
   {
-    return $this->query($sql);
+    $this->query($sql);
+    return $this->connection->lastInsertId();
   }
 
   public function update($sql)

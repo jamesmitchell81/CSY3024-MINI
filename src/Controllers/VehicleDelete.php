@@ -5,10 +5,9 @@ class VehicleDelete extends Controller
 
   public function display($params)
   {
-    $reg = arrray_key_exists('reg', $params) ? $params['reg'] : return;
+    $reg = array_key_exists('reg', $params) ? $params['reg'] : '';
 
     // get current data.
-
     $data = [
       'action' => '/vehicle/delete/{reg}',
       'returnto' => '/vehicles'

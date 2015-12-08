@@ -34,24 +34,72 @@ VALUES (
 -- INSERT INTO Mechanic (Title, FirstName, LastName, _idMechanicGrade)?
 
 -- Types: Minibus, Car
-INSERT INTO VehicleTypes (VehicleTypeName)
-VALUES 
-("Hatchback"),
-("Minibus"),
-("Minivan"),
-("Saloon");
-
-
-INSERT INTO Vehicles (VehicleReg, MileageRate, _idVehicleTypes, Seats, CurrentMileage)
+INSERT INTO VehicleType (TypeName, Seats)
 VALUES
-("tfbs1", 1.2, (SELECT idVehicleTypes FROM VehicleTypes WHERE VehicleTypeName = "Hatchback"), 5, 0),
-("tfbs2", 3.6, (SELECT idVehicleTypes FROM VehicleTypes WHERE VehicleTypeName = "Minibus"), 12, 0),
-("tfbs3", 2.4, (SELECT idVehicleTypes FROM VehicleTypes WHERE VehicleTypeName = "Minivan"), 8, 0),
-("tfbs4", 1.8, (SELECT idVehicleTypes FROM VehicleTypes WHERE VehicleTypeName = "Saloon"), 5, 0),
-("tfbs5", 1.2, (SELECT idVehicleTypes FROM VehicleTypes WHERE VehicleTypeName = "Hatchback"), 5, 0),
-("tfbs6", 3.6, (SELECT idVehicleTypes FROM VehicleTypes WHERE VehicleTypeName = "Minibus"), 12, 0),
-("tfbs7", 2.4, (SELECT idVehicleTypes FROM VehicleTypes WHERE VehicleTypeName = "Minivan"), 8, 0),
-("tfbs8", 1.8, (SELECT idVehicleTypes FROM VehicleTypes WHERE VehicleTypeName = "Saloon"), 5, 0);
+("Hatchback", 5),
+("Minibus", 12),
+("Minivan", 8),
+("Saloon", 5),
+("SUV", 8);
+
+INSERT INTO Manufacturers (Manufacturer)
+VALUES
+("Ford"),
+("Volkswagen");
+
+INSERT INTO Models (_idManufacturers, _idVehicleType, Model)
+VALUES
+(
+  (SELECT idManufacturers FROM Manufacturers WHERE Manufacturer = "Ford" ),
+  (SELECT idVehicleType FROM VehicleType WHERE TypeName = "Hatchback" ),
+  "Focus"
+),
+(
+  (SELECT idManufacturers FROM Manufacturers WHERE Manufacturer = "Ford" ),
+  (SELECT idVehicleType FROM VehicleType WHERE TypeName = "Minibus" ),
+  "Transit"
+),
+(
+  (SELECT idManufacturers FROM Manufacturers WHERE Manufacturer = "Ford" ),
+  (SELECT idVehicleType FROM VehicleType WHERE TypeName = "Minivan" ),
+  "Cargo"
+),
+(
+  (SELECT idManufacturers FROM Manufacturers WHERE Manufacturer = "Ford" ),
+  (SELECT idVehicleType FROM VehicleType WHERE TypeName = "Saloon" ),
+  "Fusion"
+),
+(
+  (SELECT idManufacturers FROM Manufacturers WHERE Manufacturer = "Volkswagen" ),
+  (SELECT idVehicleType FROM VehicleType WHERE TypeName = "Hatchback" ),
+  "Golf"
+),
+(
+  (SELECT idManufacturers FROM Manufacturers WHERE Manufacturer = "Volkswagen" ),
+  (SELECT idVehicleType FROM VehicleType WHERE TypeName = "Minibus" ),
+  "Microbus"
+),
+(
+  (SELECT idManufacturers FROM Manufacturers WHERE Manufacturer = "Volkswagen" ),
+  (SELECT idVehicleType FROM VehicleType WHERE TypeName = "SUV" ),
+  "Touareg"
+),
+(
+  (SELECT idManufacturers FROM Manufacturers WHERE Manufacturer = "Volkswagen" ),
+  (SELECT idVehicleType FROM VehicleType WHERE TypeName = "Saloon" ),
+  "Passat"
+);
+
+INSERT INTO Vehicles (_idModels, VehicleReg, MileageRate, CurrentMileage)
+VALUES
+( (SELECT idModels FROM Models WHERE Model = "Focus"),    "tfbs1", 1.2, 0), -- ford focus
+( (SELECT idModels FROM Models WHERE Model = "Transit"),  "tfbs2", 3.6, 0), -- ford transit
+( (SELECT idModels FROM Models WHERE Model = "Cargo"),    "tfbs3", 2.4, 0), -- ford cargo
+( (SELECT idModels FROM Models WHERE Model = "Fusion"),   "tfbs4", 1.8, 0), -- ford fusion
+( (SELECT idModels FROM Models WHERE Model = "Golf"),     "tfbs5", 1.2, 0), -- VW Golf
+( (SELECT idModels FROM Models WHERE Model = "Microbus"), "tfbs6", 3.6, 0), -- VW Microbus
+( (SELECT idModels FROM Models WHERE Model = "Touareg"),  "tfbs7", 2.4, 0), -- VW Touareg
+( (SELECT idModels FROM Models WHERE Model = "Passat"),   "tfbs8", 1.8, 0); -- VW Passat
 
 -- MOT Lists.
 -- INSERT INTO MOTCategory (Title)
