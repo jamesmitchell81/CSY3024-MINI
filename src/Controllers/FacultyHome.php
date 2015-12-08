@@ -5,6 +5,7 @@ use Http\Response;
 
 use MINI\Template\View;
 use MINI\Models\FacultyGateway;
+use MINI\Models\ReservationGateway;
 
 class FacultyHome
 {
@@ -26,7 +27,7 @@ class FacultyHome
 
       // get user details.
       $details = (new FacultyGateway)->find($id);
-
+      $reservations = (new ReservationGateway)->findByUser($id);
 
       // get user reservations
       // get user checked out
@@ -34,7 +35,8 @@ class FacultyHome
       // show user reservations
       // show user checked out
       $data = [
-        'details' => $details
+        'details'      => $details,
+        'reservations' => $reservations
       ];
 
       $html = $this->view->render('FacultyHome', $data);

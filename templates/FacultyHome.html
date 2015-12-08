@@ -28,10 +28,39 @@
       <a class="btn btn-neutual" href="">Update Details</a>
     </div>
 
+    <div>
+      <h2>Reservations</h2>
 
-    <h2>Reservations</h2>
-
-
+      {% if reservations %}
+        <table>
+          <tr>
+            <th>Vehicle Registration</th>
+            <th>Vehicle</th>
+            <th>Type</th>
+            <th>Seats</th>
+            <th>Pick up Date</th>
+            <th>Return Date</th>
+            <th>Journey Duration</th>
+            <th>Destination</th>
+          </tr>
+          {% for reservation in reservations %}
+          <tr>
+            <td>{{ reservation.VehicleReg }}</td>
+            <td>{{ reservation.Manufacturer }} {{ reservation.Model }}</td>
+            <td>{{ reservation.TypeName }}</td>
+            <td>{{ reservation.Seats }}</td>
+            <td>{{ reservation.DepartureDate }}</td>
+            <td>{{ reservation.ReturnDueDate }}</td>
+            <td>{{ reservation.Duration }}</td>
+            <td>{{ reservation.Destination }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      {% else %}
+        <span>No Pending reservations.</span>
+      {% endif %}
+      <a class="btn btn-positive" href="/faculty/{{ details.idFacultyMembers }}/reservation/add">Add Reservation</a>
+    </div>
 
     <h2>Checked Out</h2>
 {% endblock %}

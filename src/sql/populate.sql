@@ -101,6 +101,9 @@ VALUES
 ( (SELECT idModels FROM Models WHERE Model = "Touareg"),  "tfbs7", 2.4, 0), -- VW Touareg
 ( (SELECT idModels FROM Models WHERE Model = "Passat"),   "tfbs8", 1.8, 0); -- VW Passat
 
+INSERT INTO ReservationStatusCode (StatusDescription)
+VALUES ("Pending"), ("Cancelled"), ("In Progress"), ("Completed");
+
 -- MOT Lists.
 -- INSERT INTO MOTCategory (Title)
 -- VALUES

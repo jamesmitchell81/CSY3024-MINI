@@ -38,6 +38,11 @@ class VehicleGateway
     return $statement->select($SQL)->first();
   }
 
+  public function findAvailable($start, $end)
+  {
+    $SQL = ""
+  }
+
   public function insert(Vehicle $vehicle)
   {
     // if reg... this vehicle already exists.
