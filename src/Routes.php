@@ -33,6 +33,7 @@ return [
     ['POST', '/vehicle/{reg}/maintenance-detail/{lognumber}/maintenace-item/remove/{id:\d}', ['MINI\Controllers\MaintenanceDetailItem', 'delete']],
     // Vehicles.
     ['GET',  '/vehicles',             ['MINI\Controllers\VehicleList',   'display']],
+    ['GET',  '/vehicles/{seats:\d}available/{from}/{to}', ['MINI\Controllers\VehicleList', 'available']],
     ['GET',  '/vehicle/add',          ['MINI\Controllers\VehicleAdd',    'display']],
     ['POST', '/vehicle/add',          ['MINI\Controllers\VehicleAdd',    'add']],
     ['GET',  '/vehicle/{reg}/update', ['MINI\Controllers\VehicleUpdate', 'display']],

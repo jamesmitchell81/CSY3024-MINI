@@ -48,6 +48,12 @@ class VehicleGateway
     $statement = new Statement($this->connection);
     $statement->setStr("start", $start);
     $statement->setStr("end", $end);
+
+    $data = $statement->select($SQL)->all();
+    $available = implode(",", $data);
+
+
+
     return $statement->select($SQL)->all();
   }
 

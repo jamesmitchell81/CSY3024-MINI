@@ -18,4 +18,12 @@ class VehicleList extends Controller
     $html = $this->view->render('VehicleList', $data);
     $this->response->setContent($html);
   }
+
+  public function available($params)
+  {
+    $from = $params['from'];
+    $to = $params['to'];
+
+    var_dump($params);
+  }
 }
