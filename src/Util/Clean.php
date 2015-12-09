@@ -13,4 +13,9 @@ class Clean
   {
     return $int;
   }
+
+  public static function date($dt)
+  {
+    return $dt;
+  }
 }

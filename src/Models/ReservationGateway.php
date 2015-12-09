@@ -30,5 +30,10 @@ class ReservationGateway
     return $statement->select($SQL)->all();
   }
 
+  public function insert(Reservation $reservation)
+  {
+
+  }
+
 
 }

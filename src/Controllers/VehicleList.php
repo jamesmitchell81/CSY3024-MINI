@@ -1,6 +1,7 @@
 <?php namespace MINI\Controllers;
 
 use MINI\Models\VehicleGateway;
+use MINI\Util\Clean;
 
 class VehicleList extends Controller
 {
@@ -21,9 +22,18 @@ class VehicleList extends Controller
 
   public function available($params)
   {
-    $from = $params['from'];
-    $to = $params['to'];
+    $seats = Clean::int($params['seats']);
+    $from = Clean::date($params['from']);
+    $to = Clean::date($params['to']);
 
-    var_dump($params);
+    // validate
+
+    $vehicles = new VehicleGateway;
+    $list = $vehicles->findAvailable($seats, $from, $to);
+
+    $data['vehicles'] = $list;
+
+    $html = $this->view->render('VehicleSelectionList', $data);
+    $this->response->setContent($html);
   }
 }

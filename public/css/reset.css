@@ -1,6 +1,6 @@
 html, body, div, article, header, nav, ul, ol, li, a, form, fieldset,
 legend, input, button, label, p, img, textarea,
-h1, h2, h3, h4, h5, h6, span {
+h1, h2, h3, h4, h5, h6, span, table, tr, th, td, thead, tbody {
   margin: 0; padding: 0;
   list-style: none;
 }
@@ -10,6 +10,10 @@ Reference: [Paul Irish](http://www.paulirish.com/2012/box-sizing-border-box-ftw/
 */
 html {
   box-sizing: border-box;
+}
+
+table {
+  border-collapse: collapse;
 }
 
 *, *:before, *:after {

@@ -22,7 +22,7 @@ class PDODatabaseStatement
 
   public function query($sql, $fetchMode = PDO::FETCH_ASSOC)
   {
-    $this->fetchMode = $fetchMode;
+    // $this->fetchMode = $fetchMode;
     $this->statement = $this->prepare($sql)->bindParams();
     $this->statement->setFetchMode($this->fetchMode);
     return $this->statement->execute();
@@ -104,5 +104,10 @@ class PDODatabaseStatement
   public function delete($sql)
   {
     return $this->query($sql);
+  }
+
+  public function fetchModeArray()
+  {
+    $this->setFetchMode(PDO::FETCH_NUM);
   }
 }

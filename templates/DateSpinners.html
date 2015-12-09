@@ -1,0 +1,36 @@
+        <span class='flex-row'>
+          <span class="flex-column date-spinner">
+             <label for="departure-year date-spinner">Year</label>
+             <input class="form__input form__input-date" type="number" min="{{ 'now'|date('Y') }}"
+                   name="departure-year" id="departure-year"
+                   value="{{ departure-year ? departure-year : 'now'|date('Y') }}" required>
+          </span>
+          <span class="flex-column date-spinner">
+            <label for="departure-month">Month</label>
+            <input class="form__input form__input-date" type="number" min="1" max="12"
+                 name="departure-month" id="departure-month"
+                 value="{{ departure-month ? departure-month : 'now'|date('m') }}" required>
+          </span>
+          <span class='flex-column date-spinner'>
+            <label for="departure-day">Day</label>
+             <input class="form__input form__input-date" type="number" min="1" max="31"
+                   name="departure-day" id="departure-day"
+                   value="{{ departure-day ? departure-day : 'now'|date('d') }}" required>
+          </span>
+        </span>
+
+        <label class="form__label" for="">Pick up time</label>
+        <span class="flex-row">
+          <span class="flex-column time-spinner">
+            <label for="departure-hours">Hours</label>
+            <input class="form__input form__input-time" type="number" min="0" max="23"
+                   name="departure-hours" id="departure-hours"
+                   value="{{ departure-hours ? departure-hours : '09' }}" required>
+          </span>
+          <span class="flex-column time-spinner">
+            <label for="departure-hours">Minutes</label>
+            <input class="form__input form__input-time" type="number" min="0" max="55" step="15"
+                   name="departure-minutes" id="departure-minutes"
+                   value="{{ departure-minutes ? departure-minutes : '00' }}" required>
+          </span>
+        </span>

@@ -6,81 +6,14 @@
       <fieldset class="form__fieldset">
         <legend class="form__legend">Travel Dates</legend>
 
-        <label class="form__label" for="">Departure Date</label>
-        <span class='flex-row'>
-          <span class="flex-column date-spinner">
-             <label for="departure-year date-spinner">Year</label>
-             <input class="form__input form__input-date" type="number" min="{{ 'now'|date('Y') }}"
-                   name="departure-year" id="departure-year"
-                   value="{{ departure-year ? departure-year : 'now'|date('Y') }}" required>
-          </span>
-          <span class="flex-column date-spinner">
-            <label for="departure-month">Month</label>
-            <input class="form__input form__input-date" type="number" min="1" max="12"
-                 name="departure-month" id="departure-month"
-                 value="{{ departure-month ? departure-month : 'now'|date('m') }}" required>
-          </span>
-          <span class='flex-column date-spinner'>
-            <label for="departure-day">Day</label>
-             <input class="form__input form__input-date" type="number" min="1" max="31"
-                   name="departure-day" id="departure-day"
-                   value="{{ departure-day ? departure-day : 'now'|date('d') }}" required>
-          </span>
-        </span>
+        <label class="form__label" for="departure-date">Departure Date <span class='label-help'>yyyy/mm/dd</span></label>
+        <input class="form__input" type="date" id="departure-date" name="departure-date"
+                value="{{ departure-date ? departure-date : 'now'|date('Y-m-d') }}" required>
 
-        <label class="form__label" for="">Pick up time</label>
-        <span class="flex-row">
-          <span class="flex-column time-spinner">
-            <label for="departure-hours">Hours</label>
-            <input class="form__input form__input-time" type="number" min="0" max="23"
-                   name="departure-hours" id="departure-hours"
-                   value="{{ departure-hours ? departure-hours : '09' }}" required>
-          </span>
-          <span class="flex-column time-spinner">
-            <label for="departure-hours">Minutes</label>
-            <input class="form__input form__input-time" type="number" min="0" max="55" step="15"
-                   name="departure-minutes" id="departure-minutes"
-                   value="{{ departure-minutes ? departure-minutes : '00' }}" required>
-          </span>
-        </span>
+        <label class="form__label" for="return-date">Return Date <span class='label-help'>yyyy/mm/dd</span></label>
+        <input class="form__input" type="date" id="return-date" name="return-date"
+                value="{{ return-date ? return-date : 'now'|date('Y-m-d') }}" required>
 
-        <label class="form__label" for="">Return Date</label>
-        <span class='flex-row'>
-          <span class="flex-column date-spinner">
-             <label for="return-year date-spinner">Year</label>
-             <input class="form__input form__input-date" type="number" min="{{ 'now'|date('Y') }}"
-                   name="return-year" id="return-year"
-                   value="{{ return-year ? return-year : 'now'|date('Y') }}" required>
-          </span>
-          <span class="flex-column date-spinner">
-            <label for="departure-month">Month</label>
-            <input class="form__input form__input-date" type="number" min="1" max="12"
-                 name="return-month" id="return-month"
-                 value="{{ return-month ? return-month : 'now'|date('m') }}" required>
-          </span>
-          <span class='flex-column date-spinner'>
-            <label for="departure-day">Day</label>
-             <input class="form__input form__input-date" type="number" min="1" max="31"
-                   name="return-day" id="return-day"
-                   value="{{ return-day ? return-day : 'now'|date('d') }}" required>
-          </span>
-        </span>
-
-        <label class="form__label" for="">Drop off time</label>
-        <span class="flex-row">
-          <span class="flex-column time-spinner">
-            <label for="departure-hours">Hours</label>
-            <input class="form__input form__input-time" type="number" min="0" max="23"
-                   name="return-hours" id="return-hours"
-                   value="{{ return-hours ? return-hours : '09' }}" required>
-          </span>
-          <span class="flex-column time-spinner">
-            <label for="departure-hours">Minutes</label>
-            <input class="form__input form__input-time" type="number" min="0" max="55" step="15"
-                   name="return-minutes" id="return-minutes"
-                   value="{{ departure-minutes ? departure-minutes : '00' }}" required>
-          </span>
-        </span>
       </fieldset>
 
       <fieldset class='form__group'>
@@ -109,17 +42,27 @@
         </div>
       </fieldset>
 
-
+      <fieldset class="form__fieldset">
+        <legend class="form__legend">Select Vehicle</legend>
+        <div id="vehicle-selection">
+          <span class="label-help">
+            Please enter your dates of travel and select required seating.
+          </span>
+        </div>
+      </fieldset>
 
       <fieldset class="form__fieldset">
         <legend class="form__legend">Destination</legend>
-        <label class="form__label" for="post-code">Post Code: ... http://postcodes.io ...</label>
-        <input class="form__input" type="date"
+        <label class="form__label" for="post-code">Post Code</label>
+        <input class="form__input" type="text"
                name="post-code" id="post-code"
-               value="{{ post-code ? post-code : a }}">
+               value="{{ post-code ? post-code : '' }}" required>
       </fieldset>
 
       <button class="form__button">Confirm</button>
     </form>
+
+<script src='/js/ajax.js'></script>
+<script src='/js/reservation.js'></script>
 
 {% endblock %}

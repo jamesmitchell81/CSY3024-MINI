@@ -16,6 +16,30 @@
 	margin: 2em 1em 0 1em;
 }
 
+.form__table {
+	font-size: 0.85em;
+	text-align: left;
+	width: 100%;
+}
+
+.form__table tr:nth-child(even) {
+	background: #eaeaea;
+}
+
+.form__table th {
+	border-bottom: 1px solid #989898;
+	text-transform: uppercase;
+	padding: 1em 0 0.5em 0.5em;
+}
+
+.form__table td {
+	padding: 1em 0.5em;
+}
+
+.table-radio {
+	margin-left: 30%;
+}
+
 .form__group .form__group-element:last-child {
 	border-radius: 0 0 4px 0;
 }
@@ -59,6 +83,13 @@
 	padding-bottom: 0.25em;
 }
 
+.label-help {
+	font-size: 0.9em;
+	color: #686868;
+	float: right;
+	padding-right: 0.5em;
+}
+
 .form__radio,
 .form__check {
 	position: absolute;
@@ -74,7 +105,8 @@
 }
 
 .form__radio:checked + .form__radio-label,
-.form__check:checked + .form__check-label {
+.form__check:checked + .form__check-label,
+.form__radio:checked + .form__table-label {
 	background: #000;
 	color: #fff;
 }
@@ -85,6 +117,14 @@
 	width: 100%;
 	line-height: 1.5;
 	padding: 0.5em;
+}
+
+.form__input-finder {
+	width: 80%;
+}
+
+.form__btn-finder {
+	width: 20%;
 }
 
 .form__select {
@@ -100,24 +140,4 @@
 	line-height: 1.75;
 	margin-top: 1.5em;
 	padding: 0.5em;
-}
-
-.date-spinner {
-	width: 33%;
-}
-
-.time-spinner {
-	width: 25%;
-}
-
-.time-spinner label,
-.date-spinner label {
-	text-align: center;
-	padding: 0.5em 1em 0.25em 0;
-	color: #686868;
-}
-
-.form__input-date,
-.form__input-time {
-	text-align: center;
 }
