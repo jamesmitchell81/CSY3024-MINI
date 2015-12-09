@@ -3,11 +3,15 @@
 class ReservationUpdate extends Controller
 {
 
-  public function display()
+  public function display($params)
   {
-    $id = array_key_exists('id', $params) ? $params['id'] : 0;
+    $id = $params['id'];
+    $reservation = $params['reservation'];
+
+    // get current data.
+
     $data = [
-      "action" => "/faculty/reservation/update/{$id}"
+      "action" => "/faculty/{$id}/reservation/update/{$reservation}"
     ];
 
     $html = $this->view->render('ReservationForm', $data);
@@ -16,7 +20,9 @@ class ReservationUpdate extends Controller
 
   public function update($params)
   {
-    $id = array_key_exists('id', $params) ? $params['id'] : return;
+    $id = $params['id'];
+    $reservation = $params['reservation'];
+
     $data = $this->request->getParameters();
     // validate
 

@@ -2,31 +2,7 @@
 {% block content %}
     <h1>Faculty Home</h1>
 
-    <div>
-      <table>
-        <tr>
-          <th>Name:</th>
-          <td>{{ details.Title }} {{ details.FirstName }} {{ details.LastName }}</td>
-        </tr>
-        <tr>
-          <th colspan="2">Contact Details</th>
-        </tr>
-        <tr>
-          <th>Email:</th>
-          <td>{{ details.EmailAddress }}</td>
-        </tr>
-        <tr>
-          <th>Office Number:</th>
-          <td>{{ details.OfficeNo }}</td>
-        </tr>
-        <tr>
-          <th>Mobile Number:</th>
-          <td>{{ details.MobileNo }}</td>
-        </tr>
-      </table>
-
-      <a class="btn btn-neutual" href="">Update Details</a>
-    </div>
+    {{ include('FacultyDetails.html') }}
 
     <div>
       <h2>Reservations</h2>
@@ -42,6 +18,8 @@
             <th>Return Date</th>
             <th>Journey Duration</th>
             <th>Destination</th>
+            <th></th>
+            <th></th>
           </tr>
           {% for reservation in reservations %}
           <tr>
@@ -53,13 +31,15 @@
             <td>{{ reservation.ReturnDueDate }}</td>
             <td>{{ reservation.Duration }}</td>
             <td>{{ reservation.Destination }}</td>
+            <td><a class='btn btn-neutral' href="/faculty/{{details.idFacultyMembers}}/reservation/update/{{reservation.idReservations}}">Update</a></td>
+            <td><a class='btn btn-warning' href="/faculty/{{details.idFacultyMembers}}/reservation/delete/{{reservation.idReservations}}">Delete</a></td>
           </tr>
           {% endfor %}
         </table>
       {% else %}
         <span>No Pending reservations.</span>
       {% endif %}
-      <a class="btn btn-positive" href="/faculty/{{ details.idFacultyMembers }}/reservation/add">Create Reservation</a>
+      <a class="btn btn-positive" href="/faculty/{{details.idFacultyMembers}}/reservation/add">Create Reservation</a>
     </div>
 
     <h2>Checked Out</h2>

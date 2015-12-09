@@ -6,9 +6,11 @@ class ReservationDelete extends Controller
   public function display($params)
   {
     // get details of item to delete
-    $id = array_key_exists('id', $params) ? $params['id'] : return;
+    $id = $params['id'];
+    $reservation =  $params['reservation'];
+
     $data = [
-      "action" => "/faculty/reservation/delete/{$id}",
+      "action" => "/faculty/{$id}reservation/delete/{$reservation}",
       "returnto" => "/faculty"
     ];
 
@@ -18,7 +20,8 @@ class ReservationDelete extends Controller
 
   public function delete($params)
   {
-    $id = array_key_exists('id', $params) ? $params['id'] : return;
+    $id = $params['id'];
+    $reservation = $params['reservation'];
     $data = $this->request->getParameters();
     // validate input
 
