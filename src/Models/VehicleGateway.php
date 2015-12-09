@@ -40,7 +40,15 @@ class VehicleGateway
 
   public function findAvailable($start, $end)
   {
-    $SQL = ""
+    $reservations = 'SELECT _idVehicles FROM Reservations
+                     WHERE (:start BETWEEN DepartureDate AND ReturnDueDate)
+                     AND (:end BETWEEN DepartureDate AND ReturnDueDate)';
+    $maintenance = "SELECT _idVehicle FROM Maintenance WHERE DateReturned IS NULL AND DateReturned > :start";
+    $SQL = "SELECT idVehicles FROM Vehicles WHERE idVehicles NOT IN ({reservations}) AND idVehicles NOT IN ({$maintenance})";
+    $statement = new Statement($this->connection);
+    $statement->setStr("start", $start);
+    $statement->setStr("end", $end);
+    return $statement->select($SQL)->all();
   }
 
   public function insert(Vehicle $vehicle)

@@ -8,6 +8,7 @@ SELECT * FROM Departments;
 SELECT * FROM Vehicles;
 SELECT * FROM VehicleType;
 SELECT * FROM FacultyMembers;
+SELECT * FROM Reservations;
 
 -- views
 SELECT * FROM VehicleView;

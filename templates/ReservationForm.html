@@ -7,12 +7,21 @@
         <legend class="form__legend">Travel Dates</legend>
 
         <label class="form__label" for="email">Departure Date</label>
-        <input class="form__input" type="date"
-               name="departure-date" id="departure-date"
-               value="{{ departure-date ? departure-date : 'now'|date('Y-m-d') }}">
+        <span class='flex-column'>
+          <input class="form__input" type="date"
+                 name="departure-date" id="departure-date"
+                 value="{{ departure-date ? departure-date : 'now'|date('Y-m-d') }}">
+          <input class="form__input" type="time"
+                 name="departure-time" id="departure-time"
+                 value="{{ departure-time ? departure-time : 'now'|date('H:i') }}">
+        </span>
 
         <label class="form__label" for="return-date">Return Date</label>
-        <input class="form__input" type="date" name="return-date" id="return-date">
+        <span class='flex-column'>
+          <input class="form__input" type="date" name="return-date" id="return-date">
+          <input class="form__input" type="time" name="return-time" id="return-date">
+        </span>
+
       </fieldset>
 
       <fieldset class='form__group'>
@@ -46,7 +55,7 @@
         <label class="form__label" for="post-code">Post Code: ... http://postcodes.io ...</label>
         <input class="form__input" type="date"
                name="post-code" id="post-code"
-               value="{{ post-code ? post-code : '' }}">
+               value="{{ post-code ? post-code : a }}">
       </fieldset>
 
       <button class="form__button">Confirm</button>
