@@ -3,7 +3,7 @@
 class Validation
 {
   private $feedback = [];
-  private $field = ""
+  private $field = "";
   private $value;
 
   public function passed()
@@ -15,12 +15,22 @@ class Validation
   {
     $this->field = $field;
     $this->value = $value;
+    return $this;
   }
 
   public function required()
   {
     if ( empty($this->value) )
       $this->feedback[$this->field] = "This field is required";
+
+    return $this;
+  }
+
+  public function not($test, $message = "")
+  {
+    if ( $message == "" ) $message = "This value is incorrect";
+    if ( $this->value == $test )
+      $this->feedback[$this->field] = $message;
 
     return $this;
   }
@@ -49,6 +59,12 @@ class Validation
     if ( !filter_var($this->value, FILTER_VALIDATE_INT) || $this->value <= 0 )
       $this->feedback[$this->field] = "Positive numbers only please";
 
+    return $this;
+  }
+
+  public function date()
+  {
+    //
     return $this;
   }
 

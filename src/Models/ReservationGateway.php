@@ -32,7 +32,19 @@ class ReservationGateway
 
   public function insert(Reservation $reservation)
   {
+    $SQL = 'INSERT INTO Reservations (_idVehicles, _idFacultyMembers, _idReservationStatusCode, DepartureDate, ReturnDueDate, Destination)
+            VALUES (:vehicle, :faculty, :status, :datefrom, :dateto, :destination)';
 
+    $statement = new Statement($this->connection);
+    $statement->setInt("vehicle", $reservation->vehicle);
+    $statement->setInt("faculty", $reservation->facultyMember);
+    $statement->setInt("status", $reservation->status);
+    $statement->setStr("datefrom", date('Y-m-d H:i:s', strtotime($reservation->departure)));
+    $statement->setStr("dateto", date('Y-m-d H:i:s', strtotime($reservation->return)));
+    $statement->setStr("destination", $reservation->destination);
+
+    $success = $statement->insert($SQL);
+    return $success;
   }
 
 

@@ -17,7 +17,8 @@
       <td>{{ vehicle.Seats }}</td>
       <td>{{ vehicle.MileageRate }}</td>
       <td class="">
-        <input class="table-radio" name="vehicle" id="vehicle-{{ vehicle.idVehicles }}" type="radio">
+        <input class="table-radio" name="vehicle" id="vehicle-{{ vehicle.idVehicles }}"
+               type="radio" value="{{ vehicle.idVehicles }}" {{ loop.first ? 'checked="checked"' : '' }}>
       </td>
     </tr>
   {% endfor %}

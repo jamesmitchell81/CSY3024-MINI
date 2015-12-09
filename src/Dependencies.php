@@ -18,7 +18,8 @@ $injector->share('Http\HttpResponse');
 
 $injector->delegate('Twig_Environment', function() use ($injector) {
     $loader = new Twig_Loader_Filesystem(dirname(__DIR__) . '/templates');
-    $twig = new Twig_Environment($loader);
+    $twig = new Twig_Environment($loader, ['debug' => true]);
+    $twig->addExtension(new Twig_Extension_Debug());
     return $twig;
 });
 

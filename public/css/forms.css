@@ -10,6 +10,19 @@
 	width: 50%;
 }
 
+.form__error {
+	background: #ffcaca;
+	color: #333333;
+	display: block;
+	width: 98%;
+	padding: 0.5em;
+	margin: 0.2em;
+	font-style: italic;
+	font-size: 0.85em;
+	border-radius: 3px;
+	box-shadow: inset 1px 1px 2px #ddbaba;
+}
+
 .form__fieldset,
 .form__group {
 	border: none;

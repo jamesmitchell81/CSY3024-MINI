@@ -9,8 +9,8 @@ for ( var i = 0; i < requiredSeatsBox.length; i++ )
 
 function getDates()
 {
-  var fromDate = doc.getElementById("departure-date").value;
-  var toDate = doc.getElementById("return-date").value;
+  var fromDate = doc.getElementById("departuredate").value;
+  var toDate = doc.getElementById("returndate").value;
 
   from = new Date(fromDate);
   to = new Date(toDate);
@@ -24,13 +24,13 @@ function getDates()
 function getAvailableVehicles(e)
 {
   var src = e.target || e.srcElement;
-  var seats = src.getAttribute('data-value');
+  var seats = src.getAttribute('value');
   var dates = getDates();
   var href = "/vehicles/" + seats + "/available/" + dates['from'] + "/" + dates['to'];
   // make the call
   ajax.get(href, function(data) {
-    var stick = doc.getElementById("vehicle-selection");
-    stick.innerHTML = data;
+    var stickTo = doc.getElementById("vehicle-selection");
+    stickTo.innerHTML = data;
   });
 }
 

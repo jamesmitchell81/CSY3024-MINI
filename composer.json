@@ -10,13 +10,11 @@
     ],
     "require": {
         "php": ">=5.5.0",
-        "filp/whoops": ">=1.1.2",       // debugging
-        "patricklouys/http": ">=1.1.0", // http
-        "nikic/fast-route": "^0.6.0",   // routing
-        "rdlowrey/auryn": "^1.1",       // dependancy injection
-        // "mustache/mustache": "^2.9",
-        "twig/twig": "~1.0",            // templates
-        "phpunit/phpunit": "4.8.*"      // unit testing.
+        "filp/whoops": ">=1.1.2",
+        "patricklouys/http": ">=1.1.0",
+        "nikic/fast-route": "^0.6.0",
+        "rdlowrey/auryn": "^1.1",
+        "twig/twig": "~1.5"
     },
     "autoload": {
         "psr-4": {

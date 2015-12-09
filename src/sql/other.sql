@@ -4,6 +4,8 @@ DROP DATABASE MINI;
 USE MINI;
 SHOW TABLES;
 
+DELETE FROM Reservations;
+
 SELECT * FROM Departments;
 SELECT * FROM Vehicles;
 SELECT * FROM VehicleType;

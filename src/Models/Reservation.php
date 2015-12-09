@@ -4,7 +4,8 @@ class Reservation
 {
   public $facultyMember;
   public $vehicle;
-  public $status = "Pending";
+  public $status;
   public $departure;
   public $return;
+  public $destination;
 }
