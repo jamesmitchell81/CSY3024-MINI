@@ -13,7 +13,15 @@ class ReservationGateway
     $this->connection = new Connection;
   }
 
-  public function findByUser($id)
+  public function find($id)
+  {
+    $SQL = "SELECT * FROM Reservations WHERE idReservations = :id";
+    $statement = new Statement($this->connection);
+    $statement->setInt($id);
+    return $statement->select($sql)->first();
+  }
+
+  public function findAllByUser($userId)
   {
     $SQL = 'SELECT r.idReservations, v.VehicleReg, v.Manufacturer, v.Model,
                    v.TypeName, v.Seats,
@@ -26,21 +34,29 @@ class ReservationGateway
             WHERE r._idFacultyMembers = :id';
 
     $statement = new Statement($this->connection);
-    $statement->setInt("id", $id);
+    $statement->setInt("id", $userId);
     return $statement->select($SQL)->all();
+  }
+
+  public function findUserReservation($userId, $reservation)
+  {
+    $SQL = "SELECT * FROM Reservations WHERE _idFacultyMembers = :user AND idReservations = :id";
+    $statement = new Statement($this->connection);
+    $statement->setInt("user", $userId);
+    $statement->setInt("id", $reservation);
+    return $statement->select($SQL)->first();
   }
 
   public function insert(Reservation $reservation)
   {
-    $SQL = 'INSERT INTO Reservations (_idVehicles, _idFacultyMembers, _idReservationStatusCode, DepartureDate, ReturnDueDate, Destination)
-            VALUES (:vehicle, :faculty, :status, :datefrom, :dateto, :destination)';
+    $SQL = 'INSERT INTO Reservations (_idVehicles, _idFacultyMembers, DepartureDate, ReturnDueDate, Destination)
+            VALUES (:vehicle, :faculty, :datefrom, :dateto, :destination)';
 
     $statement = new Statement($this->connection);
     $statement->setInt("vehicle", $reservation->vehicle);
     $statement->setInt("faculty", $reservation->facultyMember);
-    $statement->setInt("status", $reservation->status);
-    $statement->setStr("datefrom", date('Y-m-d H:i:s', strtotime($reservation->departure)));
-    $statement->setStr("dateto", date('Y-m-d H:i:s', strtotime($reservation->return)));
+    $statement->setStr("datefrom", date('Y-m-d', strtotime($reservation->departure)));
+    $statement->setStr("dateto", date('Y-m-d', strtotime($reservation->return)));
     $statement->setStr("destination", $reservation->destination);
 
     $success = $statement->insert($SQL);

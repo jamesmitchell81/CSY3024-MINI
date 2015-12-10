@@ -1,6 +1,11 @@
 (function(win, doc) {
 
 var requiredSeatsBox = doc.querySelectorAll('#required-seats input');
+var fromDate = doc.getElementById("departuredate");
+var toDate = doc.getElementById("returndate");
+
+fromDate.addEventListener('change', getAvailableVehicles, false);
+toDate.addEventListener('change', getAvailableVehicles, false);
 
 for ( var i = 0; i < requiredSeatsBox.length; i++ )
 {
@@ -9,25 +14,28 @@ for ( var i = 0; i < requiredSeatsBox.length; i++ )
 
 function getDates()
 {
-  var fromDate = doc.getElementById("departuredate").value;
-  var toDate = doc.getElementById("returndate").value;
-
-  from = new Date(fromDate);
-  to = new Date(toDate);
+  from = new Date(fromDate.value);
+  to = new Date(toDate.value);
 
   return {
-    'from' :  from.getFullYear() + "-" + from.getMonth() + "-" + from.getDate(),
-    'to'   :  to.getFullYear() + "-" + to.getMonth() + "-" + to.getDate()
+    'from' :  from.getFullYear() + "-" + (from.getMonth() + 1) + "-" + from.getDate(),
+    'to'   :  to.getFullYear() + "-" + (to.getMonth() + 1) + "-" + to.getDate()
   }
 }
 
-function getAvailableVehicles(e)
-{
-  var src = e.target || e.srcElement;
-  var seats = src.getAttribute('value');
+function seatsValue() {
+  for ( var i = 0; i < requiredSeatsBox.length; i++ ) {
+    if ( requiredSeatsBox[i].checked ) {
+      return requiredSeatsBox[i].getAttribute("value");
+    }
+  }
+}
+
+function getAvailableVehicles() {
+  var seats = seatsValue();
   var dates = getDates();
   var href = "/vehicles/" + seats + "/available/" + dates['from'] + "/" + dates['to'];
-  // make the call
+
   ajax.get(href, function(data) {
     var stickTo = doc.getElementById("vehicle-selection");
     stickTo.innerHTML = data;

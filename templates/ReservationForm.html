@@ -2,6 +2,8 @@
 {% block content %}
     <h1>Make Reservation</h1>
 
+    <!-- {{ dump(field) }} -->
+
     <form class="form form-50" action="{{ action }}" method="post">
       <fieldset class="form__fieldset">
         <legend class="form__legend">Travel Dates</legend>
@@ -11,14 +13,14 @@
           <span class="form__error">{{ errors.departuredate }}</span>
         {% endif %}
         <input class="form__input" type="date" id="departuredate" name="departuredate"
-                value="{{ field.departuredate ? field.departuredate : 'now'|date('Y-m-d') }}" required>
+                value="{{ field.departuredate ? field.departuredate|date('Y-m-d') : 'now'|date('Y-m-d') }}" required>
 
         <label class="form__label" for="returndate">Return Date <span class='label-help'>yyyy/mm/dd</span></label>
         {% if errors.returndate %}
           <span class="form__error">{{ errors.returndate }}</span>
         {% endif %}
         <input class="form__input" type="date" id="returndate" name="returndate"
-                value="{{ field.returndate ? field.returndate : 'now'|date('Y-m-d') }}" required>
+                value="{{ field.returndate ? field.returndate|date('Y-m-d') : 'now'|date('Y-m-d') }}" required>
 
       </fieldset>
 
@@ -27,22 +29,26 @@
 
         <div class="flex-row" id="required-seats">
           <div class='form__group-element form__group-element-col'>
-            <input class='form__radio' name='requiredseats' id='seats-2' type="radio" value="2" checked="checked">
+            <input class='form__radio' type="radio"
+                   name='requiredseats' id='seats-2' value="2" {{ field.requiredseats == 2 ? 'checked="checked"' : '' }}>
             <label class='form__radio-label' for='seats-2'>2</label>
           </div>
 
           <div class='form__group-element form__group-element-col'>
-            <input class='form__radio' name='requiredseats' id='seats-5' type="radio" value="5">
+            <input class='form__radio' type="radio"
+                   name='requiredseats' id='seats-5' value="5" {{ field.requiredseats == 5 ? 'checked="checked"' : '' }}>
             <label class='form__radio-label' for='seats-5'>5</label>
           </div>
 
           <div class='form__group-element form__group-element-col'>
-            <input class='form__radio' name='requiredseats' id='seats-8' type="radio" value="8">
+            <input class='form__radio' type="radio"
+                   name='requiredseats' id='seats-8' value="8" {{ field.requiredseats == 8 ? 'checked="checked"' : '' }}>
             <label class='form__radio-label' for='seats-8'>8</label>
           </div>
 
           <div class='form__group-element form__group-element-col'>
-            <input class='form__radio' name='requiredseats' id='seats-12' type="radio" value="12">
+            <input class='form__radio' type="radio"
+                   name='requiredseats' id='seats-12' value="12" {{ field.requiredseats == 12 ? 'checked="checked"' : '' }}>
             <label class='form__radio-label' for='seats-12'>12</label>
           </div>
         </div>
@@ -54,9 +60,14 @@
         {% if errors.vehicle %}
           <span class="form__error">{{ errors.vehicle }}</span>
         {% endif %}
+
+        {% if field.vehicle %}
+
+        {% else %}
           <span class="label-help">
             Please enter your dates of travel and select required seating.
           </span>
+        {% endif %}
         </div>
       </fieldset>
 

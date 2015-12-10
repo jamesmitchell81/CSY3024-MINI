@@ -26,8 +26,6 @@ class VehicleList extends Controller
     $from = Clean::date($params['from']);
     $to = Clean::date($params['to']);
 
-    // validate
-
     $vehicles = new VehicleGateway;
     $list = $vehicles->findAvailable($seats, $from, $to);
 

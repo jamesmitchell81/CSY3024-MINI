@@ -27,7 +27,7 @@ class FacultyHome
 
       // get user details.
       $details = (new FacultyGateway)->find($id);
-      $reservations = (new ReservationGateway)->findByUser($id);
+      $reservations = (new ReservationGateway)->findAllByUser($id);
 
       // get user reservations
       // get user checked out

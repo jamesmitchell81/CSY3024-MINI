@@ -49,7 +49,6 @@ class ReservationAdd extends Controller
     $reservation = new Reservation;
     $reservation->facultyMember = $params['id'];
     $reservation->vehicle = $form['vehicle'];
-    $reservation->status = 1; // remove this.
     $reservation->departure = $form['departuredate'];
     $reservation->return = $form['returndate'];;
     $reservation->destination = $form['postcode'];

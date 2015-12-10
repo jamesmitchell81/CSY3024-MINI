@@ -38,6 +38,17 @@ class VehicleGateway
     return $statement->select($SQL)->first();
   }
 
+  public function findVehicleSeats($vid)
+  {
+    $SQL = 'SELECT Seats FROM VehicleType t
+            INNER JOIN Models m ON m._idVehicleType = t.idVehicleType
+            INNER JOIN Vehicles v ON v._idModels = m.idModels
+            WHERE v.idVehicles = :id';
+    $statement = new Statement($this->connection);
+    $statement->setInt("id", $vid);
+    return $statement->select($SQL)->first();
+  }
+
   public function findAvailable($seats, $start, $end)
   {
     $reservations = 'SELECT _idVehicles FROM Reservations
