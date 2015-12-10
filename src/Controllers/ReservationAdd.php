@@ -1,28 +1,38 @@
 <?php namespace MINI\Controllers;
 
+use MINI\Util\Session;
 use MINI\Util\Validation;
 use MINI\Models\Reservation;
 use MINI\Models\ReservationGateway;
+use MINI\Models\VehicleGateway;
 
 class ReservationAdd extends Controller
 {
-  public function display($params)
+  public function display()
   {
+    $id = Session::get('id');
+    // default form dates
+    $from = date('Y-m-d');
+    $to = date('Y-m-d');
 
-    // $valid = new Validation;
-    // if ( !$valid->numberInt('id', $params['id'])->passed() )
-    //   header("Location:/");
+    $vehicles = (new VehicleGateway)->findAvailable($from, $to);
 
     $data = [
-      "action" => "/faculty/{$params['id']}/reservation/add"
+      "action" => "/faculty/reservation/add",
+      "field"    => [
+        'departuredate'  => $from,
+        'returndate'     => $to,
+        "vehicles" => $vehicles
+      ]
     ];
 
     $html = $this->view->render('ReservationForm', $data);
     $this->response->setContent($html);
   }
 
-  public function add($params)
+  public function add()
   {
+    $id = Session::get('id');
     $form = $this->request->getParameters();
 
     if  (!array_key_exists('vehicle', $form) ) $form['vehicle'] = 0;
@@ -30,14 +40,13 @@ class ReservationAdd extends Controller
     $valid = new Validation;
     $valid->validate("departuredate", $form['departuredate'])->required()->date();
     $valid->validate("returndate", $form['returndate'])->required()->date();
-    $valid->validate("requiredseats", $form['requiredseats'])->required();
     $valid->validate("vehicle", $form['vehicle'])->not(0, "A vehicle has not be selected");
     $valid->validate("postcode", $form['postcode'])->required()->ukPostCode();
 
     if ( !$valid->passed() )
     {
       $data = [
-        "action" => "/faculty/{$params['id']}/reservation/add",
+        "action" => "/faculty/reservation/add",
         "errors" => $valid->feedback(),
         "fields" => $form
       ];
@@ -47,7 +56,7 @@ class ReservationAdd extends Controller
     }
 
     $reservation = new Reservation;
-    $reservation->facultyMember = $params['id'];
+    $reservation->facultyMember = $id;
     $reservation->vehicle = $form['vehicle'];
     $reservation->departure = $form['departuredate'];
     $reservation->return = $form['returndate'];;
@@ -56,6 +65,6 @@ class ReservationAdd extends Controller
     $reserve = (new ReservationGateway)->insert($reservation);
 
     // redirect on success.
-    header("Location: /faculty/{$params['id']}");
+    header("Location: /faculty");
   }
 }

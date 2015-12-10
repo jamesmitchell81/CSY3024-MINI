@@ -16,7 +16,6 @@
             <th>Seats</th>
             <th>Pick up Date</th>
             <th>Return Date</th>
-            <th>Journey Duration</th>
             <th>Destination</th>
             <th></th>
             <th></th>
@@ -31,16 +30,46 @@
             <td>{{ reservation.ReturnDueDate }}</td>
             <td>{{ reservation.Duration }}</td>
             <td>{{ reservation.Destination }}</td>
-            <td><a class='btn btn-neutral' href="/faculty/{{details.idFacultyMembers}}/reservation/update/{{reservation.idReservations}}">Update</a></td>
-            <td><a class='btn btn-warning' href="/faculty/{{details.idFacultyMembers}}/reservation/delete/{{reservation.idReservations}}">Delete</a></td>
+            <td><a class='btn btn-positive' href="/faculty/checkout/{{reservation.idReservations}}">Checkout</a></td>
+            <td><a class='btn btn-neutral' href="/faculty/reservation/update/{{reservation.idReservations}}">Update</a></td>
+            <td><a class='btn btn-warning' href="/faculty/reservation/delete/{{reservation.idReservations}}">Delete</a></td>
           </tr>
           {% endfor %}
         </table>
       {% else %}
         <span>No Pending reservations.</span>
       {% endif %}
-      <a class="btn btn-positive" href="/faculty/{{details.idFacultyMembers}}/reservation/add">Create Reservation</a>
+      <a class="btn btn-positive" href="/faculty/reservation/add">Create Reservation</a>
     </div>
 
-    <h2>Checked Out</h2>
+
+    {% if checkouts %}
+    <div>
+      <h2>Checked Out</h2>
+
+      <table>
+        <tr>
+          <th>Vehicle Registration</th>
+          <th>Vehicle</th>
+          <th>Type</th>
+          <th>Mileage Start</th>
+          <th>Checked Out</th>
+          <th>Check in Due</th>
+          <th></th>
+        </tr>
+        {% for checkout in checkouts %}
+          <td>..</td>
+          <td>..</td>
+          <td>...</td>
+          <td>{{ checkout.OdometerStart }}</td>
+          <td>{{ checkout.JourneyStart }}</td>
+          <td>{{ checkout.ReturnDueDate }}</td>
+          <td>
+            <a class="btn btn-positive" href="/faculty/checkin/{{checkout.idReservations}}">Check In</a>
+          </td>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+
 {% endblock %}

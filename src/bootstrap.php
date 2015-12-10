@@ -4,8 +4,10 @@
 namespace MINI;
 
 use PDO;
+use MINI\Util\Session as Session;
 
 require __DIR__ . '/../vendor/autoload.php';
+
 
 date_default_timezone_set('Europe/London');
 error_reporting(E_ALL);
@@ -27,6 +29,8 @@ $injector = include('Dependencies.php');
 
 $request = $injector->make('Http\HttpRequest');
 $response = $injector->make('Http\HttpResponse');
+
+Session::set('id', 1);
 
 foreach ($response->getHeaders() as $header) {
     header($header, false);

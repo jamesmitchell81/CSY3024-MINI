@@ -1,6 +1,6 @@
 <?php namespace MINI\Controllers;
 
-class FacultyCheckin extends Controllers
+class FacultyCheckin extends Controller
 {
 
   public function display($params)

@@ -24,11 +24,8 @@ class ReservationGateway
   public function findAllByUser($userId)
   {
     $SQL = 'SELECT r.idReservations, v.VehicleReg, v.Manufacturer, v.Model,
-                   v.TypeName, v.Seats,
-                   DATE_FORMAT(r.DepartureDate, "%W %D %M %Y at %H:%i") AS DepartureDate,
-                   DATE_FORMAT(r.ReturnDueDate, "%W %D %M %Y at %H:%i") AS ReturnDueDate,
-                   r.Destination,
-                   DATEDIFF(r.ReturnDueDate, r.DepartureDate) AS Duration
+                   v.TypeName, v.Seats, r.DepartureDate, r.ReturnDueDate,
+                   r.Destination
             FROM Reservations r
             INNER JOIN VehicleView v ON r._idVehicles = v.idVehicles
             WHERE r._idFacultyMembers = :id';
@@ -47,6 +44,15 @@ class ReservationGateway
     return $statement->select($SQL)->first();
   }
 
+  // move to vehicles.
+  public function findVehicle($reservationID)
+  {
+    $SQL = "SELECT * FROM VehicleView WHERE idVehicles IN (SELECT _idVehicles FROM Reservations WHERE idReservations = :id)";
+    $statement = new Statement($this->connection);
+    $statement->setInt("id", $reservationID);
+    return $statement->select($SQL)->all();
+  }
+
   public function insert(Reservation $reservation)
   {
     $SQL = 'INSERT INTO Reservations (_idVehicles, _idFacultyMembers, DepartureDate, ReturnDueDate, Destination)
@@ -63,5 +69,28 @@ class ReservationGateway
     return $success;
   }
 
+  public function update(Reservation $reservation)
+  {
+    $SQL = 'UPDATE Reservations SET _idVehicles = :vehicle, DepartureDate = :datefrom,
+                                    ReturnDueDate = :dateto, Destination = :destination
+            WHERE idReservations = :id';
 
+    $statement = new Statement($this->connection);
+    $statement->setInt("id", $reservation->id);
+    $statement->setInt("vehicle", $reservation->vehicle);
+    $statement->setStr("datefrom", date('Y-m-d', strtotime($reservation->departure)));
+    $statement->setStr("dateto", date('Y-m-d', strtotime($reservation->return)));
+    $statement->setStr("destination", $reservation->destination);
+
+    $success = $statement->update($SQL);
+    return $success;
+  }
+
+  public function delete($reservation)
+  {
+    $SQL = "DELETE FROM Reservations WHERE idReservations = :id";
+    $statement = new Statement($this->connection);
+    $statement->setInt("id", $reservation);
+    return $statement->delete($SQL);
+  }
 }

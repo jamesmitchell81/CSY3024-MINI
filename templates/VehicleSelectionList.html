@@ -1,16 +1,4 @@
 {% if vehicles %}
-
-  <table class='form__table'>
-    <thead>
-      <tr class="form__table-row">
-        <th>Vehicle</th>
-        <th>Type</th>
-        <th>Seats</th>
-        <th>Rate</th>
-        <th>Select</th>
-      </tr>
-    </thead>
-    <tbody>
   {% for vehicle in vehicles %}
     <tr class="form__table-row">
       <td>{{ vehicle.Manufacturer }} {{ vehicle.Model }}</td>
@@ -18,13 +6,14 @@
       <td>{{ vehicle.Seats }}</td>
       <td>{{ vehicle.MileageRate }}</td>
       <td class="">
-        <input class="table-radio" name="vehicle" id="vehicle-{{ vehicle.idVehicles }}"
-               type="radio" value="{{ vehicle.idVehicles }}" {{ loop.first ? 'checked="checked"' : '' }}>
+        {% if vid == vehicle.idVehicles %}
+      <input class="table-radio" name="vehicle" id="vehicle-{{ vehicle.idVehicles }}"
+             type="radio" value="{{ vehicle.idVehicles }}" checked="checked">
+          {% else %}
+      <input class="table-radio" name="vehicle" id="vehicle-{{ vehicle.idVehicles }}"
+             type="radio" value="{{ vehicle.idVehicles }}">
+        {% endif %}
       </td>
     </tr>
   {% endfor %}
-    </tbody>
-  </table>
-{% else %}
-  There are not vehicles available on these dates with the required seating.
 {% endif %}

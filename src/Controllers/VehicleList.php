@@ -22,12 +22,13 @@ class VehicleList extends Controller
 
   public function available($params)
   {
-    $seats = Clean::int($params['seats']);
+    // $seats = Clean::int($params['seats']);
     $from = Clean::date($params['from']);
     $to = Clean::date($params['to']);
 
     $vehicles = new VehicleGateway;
-    $list = $vehicles->findAvailable($seats, $from, $to);
+    // $list = $vehicles->findAvailable($seats, $from, $to);
+    $list = $vehicles->findAvailable($from, $to);
 
     $data['vehicles'] = $list;
 

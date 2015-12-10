@@ -16,7 +16,7 @@ class VehicleGateway
 
   public function findAll()
   {
-    $SQL = "SELECT * FROM VehicleView";
+    $SQL = "SELECT * FROM VehicleView ORDER BY Seats ASC";
     $statement = new Statement($this->connection);
     $data = $statement->select($SQL)->all();
     return $data;
@@ -49,7 +49,7 @@ class VehicleGateway
     return $statement->select($SQL)->first();
   }
 
-  public function findAvailable($seats, $start, $end)
+  public function findAvailable($start, $end)
   {
     $reservations = 'SELECT _idVehicles FROM Reservations
                      WHERE (:start BETWEEN DepartureDate AND ReturnDueDate)
@@ -57,13 +57,13 @@ class VehicleGateway
     $maintenance = "SELECT _idVehicle FROM Maintenance WHERE DateReturned IS NULL AND DateReturned > :start";
     $SQL = 'SELECT * FROM VehicleView
             WHERE idVehicles NOT IN (' . $reservations . ')
-            AND idVehicles NOT IN (' . $maintenance . ') AND Seats >= :seats
+            AND idVehicles NOT IN (' . $maintenance . ')
             ORDER BY Seats ASC';
 
     $statement = new Statement($this->connection);
     $statement->setStr("start", $start);
     $statement->setStr("end", $end);
-    $statement->setInt("seats", $seats);
+    // $statement->setInt("seats", $seats);
     return $statement->select($SQL)->all();
   }
 

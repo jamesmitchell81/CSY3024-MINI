@@ -68,10 +68,10 @@ class Validation
     return $this;
   }
 
-  public function futureDate()
+  public function future()
   {
     if ( is_null($this->value) ) return;
-    if ( strtotime($this->value) < time() )
+    if ( strtotime($this->value) < time() - (time() - strtotime($this->value)) )
       $this->feedback[$this->field] = "This date occurs in the past";
 
     return $this;

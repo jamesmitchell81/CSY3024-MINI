@@ -3,9 +3,11 @@
 use Http\Request;
 use Http\Response;
 
+use MINI\Util\Session;
 use MINI\Template\View;
 use MINI\Models\FacultyGateway;
 use MINI\Models\ReservationGateway;
+use MINI\Models\JourneyGateway;
 
 class FacultyHome
 {
@@ -21,22 +23,18 @@ class FacultyHome
         $this->view = $view;
     }
 
-    public function display($params)
+    public function display()
     {
-      $id = $params['id'];
 
-      // get user details.
-      $details = (new FacultyGateway)->find($id);
-      $reservations = (new ReservationGateway)->findAllByUser($id);
+      // get user details, user reservations, checked out
+      $details = (new FacultyGateway)->find(Session::get('id'));
+      $reservations = (new ReservationGateway)->findAllByUser(Session::get('id'));
+      $checkedout = (new JourneyGateway)->findCheckout(Session::get('id'));
 
-      // get user reservations
-      // get user checked out
-
-      // show user reservations
-      // show user checked out
       $data = [
         'details'      => $details,
-        'reservations' => $reservations
+        'reservations' => $reservations,
+        'checkouts'    => $checkedout
       ];
 
       $html = $this->view->render('FacultyHome', $data);
