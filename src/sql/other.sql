@@ -1,6 +1,9 @@
 ALTER TABLE FacultyMembers CHANGE MoblieNo MobileNo VARCHAR(45);
 
+
 DROP DATABASE MINI;
+
+
 USE MINI;
 SHOW TABLES;
 

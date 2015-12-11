@@ -61,6 +61,7 @@ class ReservationAdd extends Controller
     $reservation->departure = $form['departuredate'];
     $reservation->return = $form['returndate'];;
     $reservation->destination = $form['postcode'];
+    $reservation->mileageRate = (new VehicleGateway)->find($id)['MileageRate'];
 
     $reserve = (new ReservationGateway)->insert($reservation);
 

@@ -2,18 +2,26 @@
 {% block content %}
   <h1>Check In Vehicle</h1>
 
-    <form action="/faculty/checkin" method="post" class="form form-50">
+    <form action="{{ action }}" method="post" class="form form-50">
       <fieldset class='form__fieldset'>
         <legend class='form__legend'>Vehicle Check In</legend>
 
-        <label for="odometer-end" class="form__label">Journey Odometer Reading</label>
-        <input type="text" class="form__input" name="odometer-end" id="odometer-end" value="">
+        <label for="odometer-start" class="form__label">Journey Start Odometer Reading</label>
+        <input type="number" class="form__input form__input-disabled" name="odometer-start" id="odometer-start"
+               value="{{ journey.OdometerStart }}" disabled>
 
+        <label for="odometer-end" class="form__label">Journey End Odometer Reading</label>
+        <input type="number" class="form__input" min="{{ journey.OdometerStart + 1 }}"
+               name="odometer-end" id="odometer-end" value="{{ journey.OdometerStart + 1}}" required>
+
+        <!-- miles travelled. -->
         <label for="fuel-purchased" class="form__label">Fuel Purchased</label>
-        <input type="text" class="form__input" name="fuel-purchased" id="fuel-purchased" value="">
+        <input type="number" class="form__input" min="0"
+               name="fuel-purchased" id="fuel-purchased" value="">
 
         <label for="fuel-purchased" class="form__label">Maintenance Issues</label>
-        <textarea class="form__input" name="maintenance-issues" id="maintenance-issues" cols="30" rows="10"></textarea>
+        <textarea class="form__input" name="maintenance-issues" id="maintenance-issues" cols="30" rows="10">
+        </textarea>
 
       </fieldset>
 

@@ -8,4 +8,5 @@ class Reservation
   public $departure;
   public $return;
   public $destination;
+  public $mileageRate;
 }

@@ -132,6 +132,11 @@
 	padding: 0.5em;
 }
 
+.form__input-disabled {
+	background: #eaeaea;
+
+}
+
 .form__input-finder {
 	width: 80%;
 }

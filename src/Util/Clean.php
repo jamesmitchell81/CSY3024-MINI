@@ -14,6 +14,11 @@ class Clean
     return $int;
   }
 
+  public static function number($number)
+  {
+    return $number;
+  }
+
   public static function date($dt)
   {
     return $dt;

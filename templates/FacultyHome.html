@@ -44,6 +44,7 @@
 
 
     {% if checkouts %}
+
     <div>
       <h2>Checked Out</h2>
 
@@ -58,6 +59,7 @@
           <th></th>
         </tr>
         {% for checkout in checkouts %}
+        <tr>
           <td>..</td>
           <td>..</td>
           <td>...</td>
@@ -67,9 +69,38 @@
           <td>
             <a class="btn btn-positive" href="/faculty/checkin/{{checkout.idReservations}}">Check In</a>
           </td>
+        </tr>
         {% endfor %}
     </div>
     {% endif %}
 
-
+    {% if completed %}
+    <div>
+      <h2>Completed Journeys</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>From</th>
+            <th>To</th>
+            <th>Mileage</th>
+            <th>Rate</th>
+            <th>Fuel</th>
+            <th>Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for complete in completed %}
+            <tr>
+              <td>{{ complete.JourneyStart }}</td>
+              <td>{{ complete.JourneyEnd }}</td>
+              <td>{{ complete.TotalMileage }}</td>
+              <td>{{ complete.MileageRate }}</td>
+              <td>{{ complete.FuelCost }}</td>
+              <td>{{ complete.TotalCost }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+    </div>
 {% endblock %}
