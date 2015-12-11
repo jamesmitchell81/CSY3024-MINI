@@ -1,0 +1,33 @@
+.card {
+  width: 100%;
+  max-width: 500px;
+  min-width: 320px;
+
+  box-shadow: 1px 1px 4px #cacaca,
+              3px 3px 6px #cacaca;
+
+  border-radius: 0.25em;
+  padding: 0.5em;
+  margin: 0.5em;
+}
+
+.card__list {
+  width: 100%;
+  display: block;
+}
+
+.card__item {
+  width: 100%;
+  padding: 0.25em;
+}
+
+.card__button-group {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.card__button-group .btn {
+  flex-grow: 1;
+}
+

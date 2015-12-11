@@ -22,8 +22,8 @@ class JourneyGateway
 
   public function findCheckout($user)
   {
-    $SQL = 'SELECT * FROM JourneyComplete
-            WHERE _idFacultyMembers = :user';
+    $SQL = 'SELECT * FROM JourneyView
+            WHERE _idFacultyMembers = :user AND OdometerEnd IS NULL';
     $statement = new Statement($this->connection);
     $statement->setInt('user', $user);
     return $statement->select($SQL)->all();
@@ -32,7 +32,7 @@ class JourneyGateway
   public function findCompleted($user)
   {
     $SQL = 'SELECT * FROM JourneyComplete
-            WHERE _idFacultyMembers = :user';
+            WHERE _idFacultyMembers = :user AND OdometerEnd IS NOT NULL';
     $statement = new Statement($this->connection);
     $statement->setInt("user", $user);
     return $statement->select($SQL)->all();

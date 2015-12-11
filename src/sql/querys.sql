@@ -35,3 +35,4 @@ ALTER TABLE Billings CHANGE LitresFuelPurchased FuelCost FLOAT;
 ALTER TABLE Journey CHANGE JourneyStart JourneyStart DATE;
 ALTER TABLE Journey CHANGE JourneyEnd JourneyEnd DATE;
 
+SELECT * FROM JourneyComplete;

@@ -1,0 +1,53 @@
+.btn {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  padding: 1em;
+  margin: 10px 10px 10px 0;
+  display: block;
+  max-width: 250px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+  transition: box-shadow 0.1s, margin 0.1s;
+}
+
+.btn:active {
+  box-shadow: none;
+  margin-left: 5px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+.btn-positive {
+  color: #009900;
+  background: #eaffea;
+  box-shadow: 1px 1px #aaffaa,
+              2px 2px #aaffaa,
+              3px 3px #aaffaa,
+              4px 4px #aaffaa,
+              5px 5px #aaffaa;
+}
+
+.btn-neutral {
+  color: #0000ff;
+  background: #eaeaff;
+  box-shadow: 1px 1px #aaaaff,
+              2px 2px #aaaaff,
+              3px 3px #aaaaff,
+              4px 4px #aaaaff,
+              5px 5px #aaaaff;
+}
+
+.btn-negative {
+  color: #ff0000;
+  background: #ffeaea;
+  box-shadow: 1px 1px #ffaaaa,
+              2px 2px #ffaaaa,
+              3px 3px #ffaaaa,
+              4px 4px #ffaaaa,
+              5px 5px #ffaaaa;
+}

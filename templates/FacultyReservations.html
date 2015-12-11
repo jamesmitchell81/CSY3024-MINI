@@ -1,0 +1,74 @@
+   <div>
+      <h2>Reservations</h2>
+      <a class="btn btn-positive" href="/faculty/reservation/add">Create Reservation</a>
+
+      {% if not reservations %}
+        <span>No Pending reservations.</span>
+      {% endif %}
+
+      {% for reservation in reservations %}
+        <div class="card">
+            <h3 class="card__title">
+              <span class="card__item-title">Reservation No:</span>
+              <span class="card__item-value">{{ reservation.idReservation }}</span>
+            </h3>
+          <ul class="card__list">
+            <li class="card__item">
+              <span class="card__item-title">Pick up date:</span>
+              <span class="card__item-value">{{ reservation.DepartureDate }}</span>
+            </li>
+            <li class="card__item">
+              <span class="card__item-title">Return Date:</span>
+              <span class="card__item-value">{{ reservation.ReturnDueDate }}</span>
+            </li>
+            <li class="card__item">
+              <span class="card__item-title">Destination:</span>
+              <span class="card__item-value">{{ reservation.Destination }}</span>
+            </li>
+            <li class="card__item"></li>
+          </ul>
+
+          <h4>Vehicles</h4>
+          <table>
+            <thead>
+              <tr>
+                <td>Registration</td>
+                <td>Vehicle</td>
+                <td>Type</td>
+                <td>Seats</td>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody>
+            {% for vehicle in reservation.vehicle %}
+              <tr>
+                <td>{{ reservation.VehicleReg }}</td>
+                <td>{{ reservation.Manufacturer }} {{ reservation.Model }}</td>
+                <td>{{ reservation.TypeName }}</td>
+                <td>{{ reservation.Seats }}</td>
+                {% if 'now'|date('Y-m-d') == reservation.DepartureDate|date('Y-m-d') %}
+                <td><a class='btn btn-positive' href="/faculty/checkout/{{reservation.idReservations}}">Checkout</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+
+          <div class="card__button-group">
+            <a class='btn btn-neutral' href="/faculty/reservation/update/{{reservation.idReservations}}">Update Reservation</a>
+            <a class='btn btn-negative' href="/faculty/reservation/delete/{{reservation.idReservations}}">Cancel Reservation</a>
+          </div>
+        </div>
+      {% endfor %}
+
+<!--           <tr>
+            <td>{{ reservation.VehicleReg }}</td>
+            <td>{{ reservation.Manufacturer }} {{ reservation.Model }}</td>
+            <td>{{ reservation.TypeName }}</td>
+            <td>{{ reservation.Seats }}</td>
+            <td>{{ reservation.DepartureDate }}</td>
+            <td>{{ reservation.ReturnDueDate }}</td>
+            <td>{{ reservation.Destination }}</td>
+ -->    </div><!-- end of reservations -->

@@ -53,7 +53,8 @@ class VehicleGateway
   {
     $reservations = 'SELECT _idVehicles FROM Reservations
                      WHERE (:start BETWEEN DepartureDate AND ReturnDueDate)
-                     AND (:end BETWEEN DepartureDate AND ReturnDueDate)';
+                     AND (:end BETWEEN DepartureDate AND ReturnDueDate)
+                     AND idReservations NOT IN (SELECT idReservations FROM JourneyComplete WHERE OdometerEnd IS NOT NULL)';
     $maintenance = "SELECT _idVehicle FROM Maintenance WHERE DateReturned IS NULL AND DateReturned > :start";
     $SQL = 'SELECT * FROM VehicleView
             WHERE idVehicles NOT IN (' . $reservations . ')
