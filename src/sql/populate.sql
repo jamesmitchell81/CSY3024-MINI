@@ -28,6 +28,31 @@ VALUES (
   "Mrs", "Joanna", "Hatfield", "joanna@mini.ac.uk", "12345-123456", "12345-123-123"
 );
 
+SELECT * FROM FacultyMembers;
+
+INSERT INTO MINICreditCards (MINICreditCardsNum, _idFacultyMembers)
+VALUES 
+("1234567890123456", 1),
+("2345678901234561", 2),
+("3456789012345612", 3),
+("4567890123456123", 4),
+("5678901234561234", 5),
+("6789012345612345", 6),
+("7890123456123456", 7),
+("8901234561234567", 8);
+
+INSERT INTO MINICardDetails (_MINICreditCardsNum, IssueNumber, Expires, ValidFrom)
+VALUES 
+("1234567890123456", "01", "10/12", "10/15"),
+("2345678901234561", "01", "10/12", "10/16"),
+("3456789012345612", "01", "10/12", "10/16"),
+("4567890123456123", "01", "10/12", "10/16"),
+("5678901234561234", "01", "10/12", "10/16"),
+("6789012345612345", "01", "10/12", "10/16"),
+("7890123456123456", "01", "10/12", "10/16"),
+("8901234561234567", "01", "10/12", "10/16"),
+("1234567890123456", "02", "10/15", "10/19");
+
 -- INSERT INTO MechanicGrade (GradeName)
 -- VALUES ("PartsManager", "Mechanic");?
 
@@ -46,6 +71,8 @@ INSERT INTO Manufacturers (Manufacturer)
 VALUES
 ("Ford"),
 ("Volkswagen");
+
+SELECT * FROM Models;
 
 INSERT INTO Models (_idManufacturers, _idVehicleType, Model)
 VALUES
@@ -89,6 +116,8 @@ VALUES
   (SELECT idVehicleType FROM VehicleType WHERE TypeName = "Saloon" ),
   "Passat"
 );
+
+SELECT * FROM Vehicles;
 
 INSERT INTO Vehicles (_idModels, VehicleReg, MileageRate, CurrentMileage)
 VALUES

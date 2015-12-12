@@ -23,14 +23,18 @@ class PDODatabaseStatement
   public function query($sql, $fetchMode = PDO::FETCH_ASSOC)
   {
     // $this->fetchMode = $fetchMode;
-    $this->statement = $this->prepare($sql)->bindParams();
+    if ( !$this->statement )
+    {
+      $this->prepare($sql); //->bindParams();
+    }
+    $this->bindParams();
     $this->statement->setFetchMode($this->fetchMode);
     return $this->statement->execute();
   }
 
   public function set($name, $value, $type = PDO::PARAM_STR)
   {
-    $this->parameters[] = [
+    $this->parameters[$name] = [
       'name'  => $name,
       'value' => $value,
       'type'  => $type

@@ -8,6 +8,7 @@ use MINI\Template\View;
 use MINI\Models\FacultyGateway;
 use MINI\Models\ReservationGateway;
 use MINI\Models\JourneyGateway;
+use MINI\Models\VehicleGateway;
 
 class FacultyHome
 {
@@ -24,16 +25,23 @@ class FacultyHome
 
     public function display()
     {
-      $id = Session::get('id');
+      $uid = Session::get('id');
 
       // get user details, user reservations, checked out
-      $details = (new FacultyGateway)->find($id);
-      $reservations = (new ReservationGateway)->findUserPending($id);
-      $checkedout = (new JourneyGateway)->findCheckout($id);
-      $completed = (new JourneyGateway)->findCompleted($id);
+      $details = (new FacultyGateway)->find($uid);
+      $reservations = (new ReservationGateway)->findUserPending($uid);
+      $checkedout = (new JourneyGateway)->findCheckout($uid);
+      $completed = (new JourneyGateway)->findCompleted($uid);
+
+      $vehicles = [];
+      $vehicleDB = new VehicleGateway;
+      foreach ($reservations as $key => $reservation) {
+        $id = $reservation['idReservations'];
+        $reservations[$key]['vehicles'] = $vehicleDB->findReservationVehicles($id);
+      }
 
       $data = [
-        'details'      => $details,
+        'userdetails'  => $details,
         'reservations' => $reservations,
         'checkouts'    => $checkedout,
         'completed'    => $completed

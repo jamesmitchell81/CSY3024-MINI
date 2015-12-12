@@ -9,9 +9,10 @@ WHERE idVehicles NOT IN
 AND idVehicles NOT IN 
 (SELECT _idVehicle FROM Maintenance WHERE DateReturned IS NULL AND DateReturned > '2015-12-08 12:00:00');
 
+SELECT * FROM Reservations;
+SELECT * FROM VehicleReservation;
 
-
--- pending reserations
+DROP TABLE VehicleReservation;
 
 SELECT * 
 FROM Reservations r

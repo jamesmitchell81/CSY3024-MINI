@@ -7,10 +7,10 @@
       <td>{{ vehicle.MileageRate }}</td>
       <td class="">
         {% if vid == vehicle.idVehicles %}
-      <input class="table-radio" name="vehicle" id="vehicle-{{ vehicle.idVehicles }}"
+      <input class="table-radio" name="vehicle[]" id="vehicle-{{ vehicle.idVehicles }}"
              type="checkbox" value="{{ vehicle.idVehicles }}" checked="checked">
           {% else %}
-      <input class="table-radio" name="vehicle" id="vehicle-{{ vehicle.idVehicles }}"
+      <input class="table-radio" name="vehicle[]" id="vehicle-{{ vehicle.idVehicles }}"
              type="checkbox" value="{{ vehicle.idVehicles }}">
         {% endif %}
       </td>

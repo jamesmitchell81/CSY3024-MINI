@@ -23,11 +23,8 @@ class ReservationGateway
 
   public function findUserPending($userId)
   {
-    $SQL = 'SELECT r.idReservations, v.VehicleReg, v.Manufacturer, v.Model,
-                   v.TypeName, v.Seats, r.DepartureDate, r.ReturnDueDate,
-                   r.Destination
+    $SQL = 'SELECT r.idReservations, r.DepartureDate, r.ReturnDueDate, r.Destination
             FROM Reservations r
-            INNER JOIN VehicleView v ON r._idVehicles = v.idVehicles
             WHERE r._idFacultyMembers = :id
             AND idReservations NOT IN (SELECT _idReservations FROM Journey WHERE OdometerEnd IS NULL)
             AND idReservations NOT IN (SELECT _idReservations FROM Billings)';
@@ -55,18 +52,16 @@ class ReservationGateway
     return $statement->select($SQL)->all();
   }
 
-  public function insert(Reservation $reservation)
+  public function insert($uid, $departure, $return, $destination)
   {
-    $SQL = 'INSERT INTO Reservations (_idVehicles, _idFacultyMembers, DepartureDate, ReturnDueDate, Destination, MileageRate)
-            VALUES (:vehicle, :faculty, :datefrom, :dateto, :destination, :rate)';
+    $SQL = 'INSERT INTO Reservations (_idFacultyMembers, DepartureDate, ReturnDueDate, Destination)
+            VALUES (:faculty, :datefrom, :dateto, :destination)';
     $statement = new Statement($this->connection);
-    $statement->setInt("vehicle", $reservation->vehicle);
-    $statement->setInt("faculty", $reservation->facultyMember);
-    $statement->setStr("datefrom", date('Y-m-d', strtotime($reservation->departure)));
-    $statement->setStr("dateto", date('Y-m-d', strtotime($reservation->return)));
-    $statement->setStr("destination", $reservation->destination);
-    $statement->setStr('rate', $reservation->mileageRate);
-
+    // $statement->setInt("vehicle", $reservation->vehicle);
+    $statement->setInt("faculty", $uid);
+    $statement->setStr("datefrom", date('Y-m-d', strtotime($departure)));
+    $statement->setStr("dateto", date('Y-m-d', strtotime($return)));
+    $statement->setStr("destination", $destination);
     $success = $statement->insert($SQL);
     return $success;
   }
@@ -74,8 +69,7 @@ class ReservationGateway
   public function update(Reservation $reservation)
   {
     $SQL = 'UPDATE Reservations SET _idVehicles = :vehicle, DepartureDate = :datefrom,
-                                    ReturnDueDate = :dateto, Destination = :destination,
-                                    MileageRate = :rate
+                                    ReturnDueDate = :dateto, Destination = :destination
             WHERE idReservations = :id';
 
     $statement = new Statement($this->connection);
@@ -84,7 +78,6 @@ class ReservationGateway
     $statement->setStr("datefrom", date('Y-m-d', strtotime($reservation->departure)));
     $statement->setStr("dateto", date('Y-m-d', strtotime($reservation->return)));
     $statement->setStr("destination", $reservation->destination);
-    $statement->setStr('rate', $reservation->mileageRate);
 
     $success = $statement->update($SQL);
     return $success;

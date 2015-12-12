@@ -5,6 +5,8 @@ use MINI\Util\Validation;
 use MINI\Models\Reservation;
 use MINI\Models\ReservationGateway;
 use MINI\Models\VehicleGateway;
+use MINI\Models\VehicleReservations;
+use MINI\Models\VehicleReservationGateway;
 
 class ReservationAdd extends Controller
 {
@@ -40,8 +42,9 @@ class ReservationAdd extends Controller
     $valid = new Validation;
     $valid->validate("departuredate", $form['departuredate'])->required()->date();
     $valid->validate("returndate", $form['returndate'])->required()->date();
-    $valid->validate("vehicle", $form['vehicle'])->not(0, "A vehicle has not be selected");
     $valid->validate("postcode", $form['postcode'])->required()->ukPostCode();
+
+    $valid->validate("vehicle", $form['vehicle'])->not(0, "A vehicle has not be selected");
 
     if ( !$valid->passed() )
     {
@@ -55,15 +58,18 @@ class ReservationAdd extends Controller
       return;
     }
 
-    $reservation = new Reservation;
-    $reservation->facultyMember = $id;
-    $reservation->vehicle = $form['vehicle'];
-    $reservation->departure = $form['departuredate'];
-    $reservation->return = $form['returndate'];;
-    $reservation->destination = $form['postcode'];
-    $reservation->mileageRate = (new VehicleGateway)->find($id)['MileageRate'];
+    $uid = Session::get('id');
+    $departure = $form['departuredate'];
+    $return = $form['returndate'];;
+    $destination = $form['postcode'];
+    $reserve = (new ReservationGateway)->insert($uid, $departure, $return, $destination);
 
-    $reserve = (new ReservationGateway)->insert($reservation);
+    $vr = new VehicleReservations;
+    $vr->reservation = $reserve;
+    foreach ($form['vehicle'] as $vehicle) {
+      $vr->vehicles[] = $vehicle;
+    }
+    (new VehicleReservationGateway)->insert($vr);
 
     // redirect on success.
     header("Location: /faculty");
