@@ -3,8 +3,10 @@
 use MINI\Util\Session;
 use MINI\Util\Validation;
 use MINI\Models\Reservation;
-use MINI\Models\ReservationGateway;
 use MINI\Models\VehicleGateway;
+use MINI\Models\ReservationGateway;
+use MINI\Models\VehicleReservationGateway;
+use MINI\Models\VehicleReservations;
 
 class ReservationUpdate extends Controller
 {
@@ -16,16 +18,19 @@ class ReservationUpdate extends Controller
 
     // get current data.
     $current = (new ReservationGateway)->findUserReservation($id, $reservation);
-    $vehicles = (new VehicleGateway)->findAll();
+    $vehiclesBooked = (new VehicleGateway)->findReservationVehicles($reservation);
+    $available = (new VehicleGateway)->findAvailable($current['DepartureDate'], $current['ReturnDueDate']);
 
     // map date to fields.
     $fields = [
       'reservation'   => $reservation,
       'departuredate' => $current['DepartureDate'],
       'returndate'    => $current['ReturnDueDate'],
-      'vehicle'       => $current['_idVehicles'],
       'postcode'      => $current['Destination'],
-      'vehicles'      => $vehicles
+      'vehicles'      => [
+        'booked' => $vehiclesBooked,
+        'available'     => $available
+      ]
     ];
 
     $data = [
@@ -49,8 +54,9 @@ class ReservationUpdate extends Controller
     $valid = new Validation;
     $valid->validate("departuredate", $form['departuredate'])->required()->date()->future();
     $valid->validate("returndate", $form['returndate'])->required()->date()->future();
-    $valid->validate("vehicle", $form['vehicle'])->not(0, "A vehicle has not be selected");
     $valid->validate("postcode", $form['postcode'])->required()->ukPostCode();
+
+    $valid->validate("vehicle", $form['vehicle'])->not(0, "A vehicle has not be selected");
 
     if ( !$valid->passed() )
     {
@@ -64,17 +70,22 @@ class ReservationUpdate extends Controller
       return;
     }
 
-    $reservation = new Reservation;
-    $reservation->id = $params['reservation'];
-    $reservation->facultyMember = $id;
-    $reservation->vehicle = $form['vehicle'];
-    $reservation->departure = $form['departuredate'];
-    $reservation->return = $form['returndate'];;
-    $reservation->destination = $form['postcode'];
-    $reservation->mileageRate = (new VehicleGateway)->find($id)['MileageRate'];
+    $rid = $params['reservation'];
+    $departure = $form['departuredate'];
+    $return = $form['returndate'];;
+    $destination = $form['postcode'];
 
     // update
-    $reserve = (new ReservationGateway)->update($reservation);
+    $reserve = (new ReservationGateway)->update($rid, $departure, $return, $destination);
+
+    $s = (new VehicleReservationGateway)->delete($rid);
+
+    $vr = new VehicleReservations;
+    $vr->reservation = $rid;
+    foreach ($form['vehicle'] as $vehicle) {
+      $vr->vehicles[] = $vehicle;
+    }
+    (new VehicleReservationGateway)->insert($vr);
 
     // redirect
     header("Location: /faculty");

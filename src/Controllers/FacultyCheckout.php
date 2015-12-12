@@ -1,7 +1,7 @@
 <?php namespace MINI\Controllers;
 
 use MINI\Models\JourneyGateway;
-use MINI\Models\ReservationGateway;
+use MINI\Models\VehicleGateway;
 
 class FacultyCheckout extends Controller
 {
@@ -9,14 +9,15 @@ class FacultyCheckout extends Controller
   public function display($params)
   {
     // get reservation by id.
-    $res = $params['reservation'];
+    $rid = $params['reservation'];
+    $vid = $params['vehicle'];
 
     // get reserved vehicle.
-    $vehicle = (new ReservationGateway)->findVehicle($res);
+    $vehicle = (new VehicleGateway)->find($vid);
     // get vehicle odominator current.
     $data = [
-      'action' => "/faculty/checkout/$res",
-      'odometerStart' => $vehicle[0]['CurrentMileage']
+      'action' => "/faculty/checkout/$vid/$rid",
+      'odometerStart' => $vehicle['CurrentMileage']
     ];
     $html = $this->view->render('ReservationCheckout', $data);
     $this->response->setContent($html);
@@ -24,11 +25,12 @@ class FacultyCheckout extends Controller
 
   public function checkout($params)
   {
-    $id = $params['reservation'];
+    $vid = $params['vehicle'];
+    $rid = $params['reservation'];
+
     $current = $this->request->getParameters();
-    $date = date('Y-m-d');
     // insert current, update current.
-    $complete = (new JourneyGateway)->insert($id, $current['odometer-start'], $date);
+    $complete = (new JourneyGateway)->insert($vid, $rid, $current['odometer-start']);
 
     header("Location: /faculty");
   }

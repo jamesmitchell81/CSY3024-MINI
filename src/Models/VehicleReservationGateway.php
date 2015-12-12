@@ -41,13 +41,16 @@ class VehicleReservationGateway
     }
   }
 
-  public function update($vehicleID, $resID)
+  public function update($vidOld, $vidNew, $rid)
   {
 
   }
 
-  public function delete($vehicleID, $resID)
+  public function delete($rid)
   {
-
+    $SQL = "DELETE FROM VehicleReservation WHERE _idReservations = :rid";
+    $statement = new Statement($this->connection);
+    $statement->setInt("rid", $rid);
+    return $statement->delete($SQL);
   }
 }

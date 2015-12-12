@@ -14,6 +14,9 @@ SELECT * FROM VehicleReservation;
 
 DROP TABLE VehicleReservation;
 
+SELECT * FROM Billings;
+DROP TABLE Billings;
+
 SELECT * 
 FROM Reservations r
 WHERE idReservations NOT IN (SELECT _idReservations FROM Journey WHERE OdomenterEnd IS NULL);

@@ -2,34 +2,33 @@
 
     <div>
       <h2>Checked Out</h2>
+      {% for checkout in checkouts %}
 
-      <table>
-        <thead>
-        <tr>
-          <th>Vehicle Registration</th>
-          <th>Vehicle</th>
-          <th>Type</th>
-          <th>Mileage Start</th>
-          <th>Checked Out</th>
-          <th>Check in Due</th>
-          <th></th>
-        </tr>
-        {% for checkout in checkouts %}
-        </thead>
-        <tbody>
-        <tr>
-          <td>..</td>
-          <td>..</td>
-          <td>...</td>
-          <td>{{ checkout.OdometerStart }}</td>
-          <td>{{ checkout.JourneyStart }}</td>
-          <td>{{ checkout.ReturnDueDate }}</td>
-          <td>
-            <a class="btn btn-positive" href="/faculty/checkin/{{checkout.idReservations}}">Check In</a>
-          </td>
-        </tr>
-        {% endfor %}
-        </tbody>
-      </table>
+      {{ include('ReservationDetails.html') }}
+
+          <h4>Vehicles</h4>
+          <table>
+            <thead>
+              <tr>
+                <td>Registration</td>
+                <td>Vehicle</td>
+                <td>Type</td>
+                <td>Seats</td>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody>
+            {% for vehicle in checkout.vehicles %}
+              <tr>
+                <td>{{ vehicle.VehicleReg }}</td>
+                <td>{{ vehicle.Manufacturer }} {{ reservation.Model }}</td>
+                <td>{{ vehicle.TypeName }}</td>
+                <td>{{ vehicle.Seats }}</td>
+                <td><a class="btn btn-positive" href="/faculty/checkin/{{checkout.idVehicles}}/{{checkout.idReservations}}">Check In</a></td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+      {% endfor %}
     </div>
 {% endif %}

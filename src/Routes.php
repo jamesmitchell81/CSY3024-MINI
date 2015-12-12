@@ -10,17 +10,17 @@ return [
     ['GET',  '/faculty/reservation/add',             ['MINI\Controllers\ReservationAdd', 'display']],
     ['GET',  '/faculty/reservation/update/{reservation:\d+}',  ['MINI\Controllers\ReservationUpdate', 'display']],
     ['GET',  '/faculty/reservation/delete/{reservation:\d+}',  ['MINI\Controllers\ReservationDelete', 'display']],
-    ['POST', '/faculty/reservation/add',             ['MINI\Controllers\ReservationAdd', 'add']],
+    ['POST', '/faculty/reservation/add',                       ['MINI\Controllers\ReservationAdd', 'add']],
     ['POST', '/faculty/reservation/update/{reservation:\d+}',  ['MINI\Controllers\ReservationUpdate', 'update']],
     ['POST', '/faculty/reservation/delete/{reservation:\d+}',  ['MINI\Controllers\ReservationDelete', 'delete']],
     //  Checkout
-    ['GET',  '/faculty/checkout/{reservation:\d+}', ['MINI\Controllers\FacultyCheckout', 'display']],
-    ['POST', '/faculty/checkout/{reservation:\d+}', ['MINI\Controllers\FacultyCheckout', 'checkout']],
-    ['GET',  '/faculty/checkin/{reservation:\d+}',  ['MINI\Controllers\FacultyCheckin', 'display']],
-    ['POST', '/faculty/checkin/{reservation:\d+}',  ['MINI\Controllers\FacultyCheckin', 'checkin']],
+    ['GET',  '/faculty/checkout/{vehicle:\d+}/{reservation:\d+}', ['MINI\Controllers\FacultyCheckout', 'display']],
+    ['POST', '/faculty/checkout/{vehicle:\d+}/{reservation:\d+}', ['MINI\Controllers\FacultyCheckout', 'checkout']],
+    ['GET',  '/faculty/checkin/{vehicle:\d+}/{reservation:\d+}',  ['MINI\Controllers\FacultyCheckin', 'display']],
+    ['POST', '/faculty/checkin/{vehicle:\d+}/{reservation:\d+}',  ['MINI\Controllers\FacultyCheckin', 'checkin']],
     // Mechanics.
     ['GET',  '/mechanic',                        ['MINI\Controllers\MechanicHome', 'display']],
-    ['GET',  '/mechanic/{id:\d+}/checkout',       ['MINI\Controllers\MaintenanceCheckout', 'display']],
+    ['GET',  '/mechanic/{id:\d+}/checkout',      ['MINI\Controllers\MaintenanceCheckout', 'display']],
     ['POST', '/mechanic/checkout',               ['MINI\Controllers\MaintenanceCheckout', 'checkout']],
     ['GET',  '/mechanic/{id}/mot/vehicle/{reg}', ['MINI\Controllers\MaintenanceMOT', 'display']],
     // Vehicle Maintenance.

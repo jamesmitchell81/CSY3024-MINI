@@ -32,7 +32,7 @@ class FacultyCheckin extends Controller
     // validate
     $valid = new Validation;
     $valid->validate('odometer-end', $details['odometer-end'])->required()->positiveInt();
-    $valid->validate('fuel-purchased', $details['fuel-purchased'])->positiveInt();
+    $valid->validate('fuel-purchased', $details['fuel-purchased'])->numberFloat();
 
     // update journeys.
     $mileage = Clean::int($details['odometer-end']);
@@ -42,10 +42,10 @@ class FacultyCheckin extends Controller
     (new JourneyGateway)->update($resID, $mileage, date('Y-m-d'), $issues);
     // update billings
     $totalMileage = (new JourneyGateway)->findMiles($resID)['TotalMiles'];
-    $mileageRate = (new ReservationGateway)->find($resID)['MileageRate'];
+    // $mileageRate = (new ReservationGateway)->find($resID)['MileageRate'];
     $fuel = Clean::number($details['fuel-purchased']);
 
-    $totalCost =  ((int)$totalMileage * floatval($mileageRate)) + floatval($fuel);
+    $totalCost = ((int)$totalMileage * floatval($mileageRate)) + floatval($fuel);
     $billings = (new BillingGateway)->insert($resID, $totalCost, $totalMileage, $fuel);
     // update vehicles mileage, could be a trigger.
 

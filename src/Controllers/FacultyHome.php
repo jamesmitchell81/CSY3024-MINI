@@ -33,11 +33,9 @@ class FacultyHome
       $checkedout = (new JourneyGateway)->findCheckout($uid);
       $completed = (new JourneyGateway)->findCompleted($uid);
 
-      $vehicles = [];
-      $vehicleDB = new VehicleGateway;
       foreach ($reservations as $key => $reservation) {
-        $id = $reservation['idReservations'];
-        $reservations[$key]['vehicles'] = $vehicleDB->findReservationVehicles($id);
+        $rid = $reservation['idReservations'];
+        $reservations[$key]['vehicles'] = (new ReservationGateway)->findPendingVehicles($rid);
       }
 
       $data = [

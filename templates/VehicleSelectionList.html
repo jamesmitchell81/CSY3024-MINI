@@ -1,19 +1,27 @@
 {% if vehicles %}
-  {% for vehicle in vehicles %}
-    <tr class="form__table-row">
-      <td>{{ vehicle.Manufacturer }} {{ vehicle.Model }}</td>
-      <td>{{ vehicle.TypeName }}</td>
-      <td>{{ vehicle.Seats }}</td>
-      <td>{{ vehicle.MileageRate }}</td>
-      <td class="">
-        {% if vid == vehicle.idVehicles %}
-      <input class="table-radio" name="vehicle[]" id="vehicle-{{ vehicle.idVehicles }}"
-             type="checkbox" value="{{ vehicle.idVehicles }}" checked="checked">
-          {% else %}
-      <input class="table-radio" name="vehicle[]" id="vehicle-{{ vehicle.idVehicles }}"
-             type="checkbox" value="{{ vehicle.idVehicles }}">
-        {% endif %}
-      </td>
-    </tr>
+  {% for booked in vehicles.booked %}
+  <tr class="form__table-row">
+    <td>{{ booked.Manufacturer }} {{ booked.Model }}</td>
+    <td>{{ booked.TypeName }}</td>
+    <td>{{ booked.Seats }}</td>
+    <td>{{ booked.MileageRate }}</td>
+    <td class="">
+    <input class="table-radio" name="vehicle[]" id="vehicle-{{ booked.idVehicles }}"
+           type="checkbox" value="{{ booked.idVehicles }}" checked="checked">
+    </td>
+  </tr>
+  {% endfor %}
+
+  {% for available in vehicles.available %}
+  <tr class="form__table-row">
+    <td>{{ available.Manufacturer }} {{ available.Model }}</td>
+    <td>{{ available.TypeName }}</td>
+    <td>{{ available.Seats }}</td>
+    <td>{{ available.MileageRate }}</td>
+    <td class="">
+    <input class="table-radio" name="vehicle[]" id="vehicle-{{ available.idVehicles }}"
+           type="checkbox" value="{{ available.idVehicles }}">
+    </td>
+  </tr>
   {% endfor %}
 {% endif %}

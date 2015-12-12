@@ -8,25 +8,7 @@
 
       {% for reservation in reservations %}
         <div class="card">
-            <h3 class="card__title">
-              <span class="card__item-title">Reservation No:</span>
-              <span class="card__item-value">{{ reservation.details.idReservation }}</span>
-            </h3>
-          <ul class="card__list">
-            <li class="card__item">
-              <span class="card__item-title">Pick up date:</span>
-              <span class="card__item-value">{{ reservation.details.DepartureDate }}</span>
-            </li>
-            <li class="card__item">
-              <span class="card__item-title">Return Date:</span>
-              <span class="card__item-value">{{ reservation.details.ReturnDueDate }}</span>
-            </li>
-            <li class="card__item">
-              <span class="card__item-title">Destination:</span>
-              <span class="card__item-value">{{ reservation.details.Destination }}</span>
-            </li>
-            <li class="card__item"></li>
-          </ul>
+          {{ include('ReservationDetails.html') }}
 
           <h4>Vehicles</h4>
           <table>
@@ -47,7 +29,7 @@
                 <td>{{ vehicle.TypeName }}</td>
                 <td>{{ vehicle.Seats }}</td>
                 {% if 'now'|date('Y-m-d') == reservation.DepartureDate|date('Y-m-d') %}
-                <td><a class='btn btn-positive' href="/faculty/checkout/{{reservation.idReservations}}">Checkout</a></td>
+                <td><a class='btn btn-positive' href="/faculty/checkout/{{vehicle.idVehicles}}/{{reservation.idReservations}}">Checkout</a></td>
                 {% else %}
                 <td></td>
                 {% endif %}
@@ -63,12 +45,4 @@
         </div>
       {% endfor %}
 
-<!--           <tr>
-            <td>{{ reservation.VehicleReg }}</td>
-            <td>{{ reservation.Manufacturer }} {{ reservation.Model }}</td>
-            <td>{{ reservation.TypeName }}</td>
-            <td>{{ reservation.Seats }}</td>
-            <td>{{ reservation.DepartureDate }}</td>
-            <td>{{ reservation.ReturnDueDate }}</td>
-            <td>{{ reservation.Destination }}</td>
- -->    </div><!-- end of reservations -->
+ </div><!-- end of reservations -->
