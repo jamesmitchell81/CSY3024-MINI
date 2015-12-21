@@ -43,6 +43,6 @@ VALUES
 ((SELECT idMOTCategory FROM MOTCategory WHERE Title = "Under Vehicle Checks"), "Exhaust system"),
 ((SELECT idMOTCategory FROM MOTCategory WHERE Title = "Under Vehicle Checks"), "Fuel system & fuel tank"),
 ((SELECT idMOTCategory FROM MOTCategory WHERE Title = "Under Vehicle Checks"), "Structure, general vehicle condition"),
-((SELECT idMOTCategory FROM MOTCategory WHERE Title = "Emissions"), "Emissions"),
+((SELECT idMOTCategory FROM MOTCategory WHERE Title = "Emissions"), "Emissions");
 
 

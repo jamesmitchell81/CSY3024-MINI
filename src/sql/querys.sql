@@ -14,6 +14,9 @@ SELECT * FROM VehicleReservation;
 
 DROP TABLE VehicleReservation;
 
+DROP TABLE Journey;
+SELECT * FROM Journeys;
+
 SELECT * FROM Billings;
 DROP TABLE Billings;
 
@@ -40,3 +43,13 @@ ALTER TABLE Journey CHANGE JourneyStart JourneyStart DATE;
 ALTER TABLE Journey CHANGE JourneyEnd JourneyEnd DATE;
 
 SELECT * FROM JourneyComplete;
+
+
+SELECT r.idReservations, r._idFacultyMembers, r.DepartureDate, r.ReturnDueDate, r.Destination,
+	   j.OdometerStart, j.OdometerEnd, j.MaintenanceIssues,
+       b.TotalMileage, b.TotalCost, b.FuelCost
+FROM Reservations r
+INNER JOIN Billings b ON b._idReservations = r.idReservations
+INNER JOIN Journeys j ON j._idReservations = r.idReservations
+WHERE j.OdometerEnd IS NOT NULL;
+

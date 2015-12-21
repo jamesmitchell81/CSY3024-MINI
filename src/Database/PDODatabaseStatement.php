@@ -32,6 +32,11 @@ class PDODatabaseStatement
     return $this->statement->execute();
   }
 
+  public function getMetaData()
+  {
+    return $this->statement->getColumnMeta(2);
+  }
+
   public function set($name, $value, $type = PDO::PARAM_STR)
   {
     $this->parameters[$name] = [

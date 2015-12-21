@@ -29,6 +29,8 @@ class FacultyHome
 
       // get user details, user reservations, checked out
       $details = (new FacultyGateway)->find($uid);
+
+
       $reservations = (new ReservationGateway)->findUserPending($uid);
       $checkedout = (new JourneyGateway)->findCheckout($uid);
       $completed = (new JourneyGateway)->findCompleted($uid);

@@ -18,7 +18,9 @@ class FacultyGateway
     $SQL = "SELECT * FROM FacultyMembersView WHERE idFacultyMembers = :id";
     $statement = new Statement($this->connection);
     $statement->setInt("id", $id);
-    return $statement->select($SQL)->first();
+    $data = $statement->select($SQL)->first();
+    var_dump($statement->getMetaData());
+    return;
   }
 
 
