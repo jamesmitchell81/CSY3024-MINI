@@ -1,0 +1,14 @@
+DROP FUNCTION IF EXISTS getMileageRate;
+
+
+DELIMITER $$
+
+CREATE FUNCTION getMileageRate (v INT) RETURNS DECIMAL(10, 2)
+BEGIN
+
+RETURN (SELECT MileageRate FROM VehicleView WHERE idVehicle = v);
+
+
+END$$
+
+DELIMITER ;
