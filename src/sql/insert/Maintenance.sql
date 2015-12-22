@@ -78,30 +78,56 @@ WHERE
 
 
 -- Determine if maintenance is required on a vehicle.
-
 SELECT 
     m._idVehicle
 FROM
     Maintenance m
 WHERE
-    ((NOW() - YEAR(DateReturned)) > 1)
+    (DATEDIFF(NOW(), DateReturned) >= 1)
         AND MaintenanceLogNumber IN (SELECT 
             _MaintenanceLogNumber
         FROM
-            MOTCheckListItem)
+            MOTCheckListItem);
             
 
 
--- INSERT INTO Maintenance (1, 
+INSERT INTO Maintenance (_idVehicle, _ReturnedBy, BriefDescription, MaintenanceEntryDate, DateReturned)
+VALUES (1, 10, "MOT Check", DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 1 YEAR), DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 1 YEAR));
+
+
+SELECT * FROM Maintenance;
 
 
 -- Create MOT Check List Items
--- INSERT INTO MOTCheckListItem (_MaintenanceLogNumber, _idMOTCheckList, _MechanicIn
+INSERT INTO MOTCheckListItem (_MaintenanceLogNumber, _idMOTCheckList, _Mechanic, CheckPerformedDate)
+SELECT 4, idMOTCheckList, 10, DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 1 YEAR)
+FROM MOTCheckList;
+
+SELECT * FROM MOTCheckListItem;
+
+-- Find the MOTCheckListItems that did not pass.
+SELECT * 
+FROM MOTCheckListItem
+WHERE NOT Passed;
+
+-- Create MaintenanceItems for MOTCheckListItems that did not pass.
+INSERT INTO MaintenanceItem(_MaintenanceLogNumber, ItemDescription)
+SELECT i._MaintenanceLogNumber, CONCAT_WS(' - ', l.Title, l.Description) AS ItemDescription
+FROM MOTCheckListItem i
+INNER JOIN MOTListView l ON i._idMOTCheckList = l.idMOTCheckList
+WHERE i._MaintenanceLogNumber = 4
+AND NOT i.Passed;
+
+SELECT * FROM MaintenanceItem WHERE _MaintenanceLogNumber = 4;
 
 
+-- TO DO
 
+-- Prevent MOT logs from being marked complete if not all MOTItems pass
+-- Prevent Vehicles being reserved/checkout when under miantenance.
+-- Required Queries.
 
-
+-- Check Assignment Brief for anything else that is needed.
 
 
 
