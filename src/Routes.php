@@ -6,6 +6,8 @@ return [
     ['POST', '/login', ['MINI\Controllers\Login', 'authorise']],
     // Faculty.
     ['GET',  '/faculty',                 ['MINI\Controllers\FacultyHome', 'display']],
+
+    // ['GET',  '/insertParts',                 ['MINI\Controllers\InsertParts', 'insert']],
     //  Reserve
     ['GET',  '/faculty/reservation/add',             ['MINI\Controllers\ReservationAdd', 'display']],
     ['GET',  '/faculty/reservation/update/{reservation:\d+}',  ['MINI\Controllers\ReservationUpdate', 'display']],
