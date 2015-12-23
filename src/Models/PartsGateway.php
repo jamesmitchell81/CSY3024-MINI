@@ -22,16 +22,20 @@ class PartsGateway
 
     $mechanic = 11;
 
+    $loc = "0000000000";
+
     foreach ($data as $d)
     {
       $part = $d['idPartType'];
 
       for ( $i = 0; $i < 15; $i++ )
       {
-        $insert = "INSERT INTO PartsInventory (_idPartType, _MechanicIn, DateIn) VALUES (:type, :mechanic, CURRENT_TIMESTAMP)";
+        $insert = 'INSERT INTO PartsInventory (_idPartType, _MechanicIn, DateIn, Location)
+                   VALUES (:type, :mechanic, CURRENT_TIMESTAMP, :loc)';
         $statement = new Statement($this->connection);
         $statement->setInt("type", $part);
         $statement->setInt("mechanic", $mechanic);
+        $statement->setStr("loc", $loc);
         $statement->insert($insert);
       }
     }

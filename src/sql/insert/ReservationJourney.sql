@@ -146,3 +146,24 @@ VALUES
 SELECT * FROM Billings;
 
 SELECT _idVehicle FROM CheckIn WHERE MaintenanceIssues IS NOT NULL;
+
+INSERT INTO Reservation (_idFacultyMember, DepartureDate, ReturnDueDate, Destination)
+VALUES (5, '2016-01-01', '2016-01-01', 'NN1 2DL');
+
+INSERT INTO VehicleReservation (_idVehicle, _idReservation)
+VALUES 
+(4, 11),
+(5, 11),
+(6, 11);
+
+Call CheckoutReservationVehicles(11, 14);
+
+INSERT INTO CheckIn(_idVehicle, _idReservation, _AgentIn, OdometerEnd, MaintenanceIssues)
+VALUES 
+(4, 11, 13, 30, "The tyres are flat"), -- 1.2
+(5, 11, 13, 30, "The lights do not work"), -- 3.6
+(6, 11, 13, 40, "Oil Leaking"); -- 2.4
+
+SELECT * FROM Checkout;
+
+SELECT * FROM CurrentJourneys;
