@@ -1,16 +1,29 @@
 -- DISPLAY ALL AVAILABLE VEHICLES
-
-
+SELECT * 
+FROM VehicleView v
+WHERE v.idVehicle NOT IN (SELECT _idVehicle FROM Maintenance WHERE DateReturned IS NULL)
+AND NOT isVehicleInUse(v.idVehicle)
+AND isVehicleAvailable(v.idVehicle, CURDATE(), CURDATE());
 
 
 -- CHECK IF A PARTICULAR VEHICLE HAS BEEN RESERVED.
+SELECT *
+FROM VehicleView
+WHERE isVehicleAvailable(idVehicle, CURDATE(), CURDATE());
 
-
+SELECT *
+FROM VehicleView
+WHERE NOT isVehicleAvailable(idVehicle, CURDATE(), CURDATE());
 
 
 -- For a reserved vehicle, check which department has the reservation. 
-
-
+SELECT v.*, d.DepartmentName, r.DepartureDate
+FROM VehicleView v
+INNER JOIN VehicleReservation vr ON v.idVehicle = vr._idVehicle
+INNER JOIN Reservation r ON vr._idReservation = r.idReservation
+INNER JOIN FacultyMembers f ON r._idFacultyMember = f._idMINIEmployee
+INNER JOIN Department d ON f._idDepartment = d.idDepartment
+WHERE NOT isVehicleAvailable(v.idVehicle, CURDATE(), CURDATE());
 
 
 -- Display how many vehicles each department has used so far.
@@ -19,8 +32,12 @@
 
 
 -- Display the total mileage of a vehicle driven this year. 
-
-
+SELECT _idVehicle, SUM(OdometerEnd - OdometerStart)
+FROM CompletedJourneys j
+INNER JOIN Vehicle v ON v.idVehicle = j._idVehicle
+WHERE CheckedOutDate BETWEEN '2015-01-01' AND '2015-12-31'
+AND CheckInDate BETWEEN '2015-01-01' AND '2015-12-31' 
+GROUP BY _idVehicle;
 
 
 -- Display the total mileage driven by a department this year.
@@ -34,6 +51,8 @@
 
 
 -- Show the maintenance dates of a vehicle.
+
+
 
 
 

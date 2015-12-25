@@ -20,7 +20,7 @@ WHERE MaintenanceLogNumber NOT IN (SELECT _MaintenanceLogNumber FROM Maintenance
 INSERT INTO MaintenanceItem (_MaintenanceLogNumber, ItemDescription)
 SELECT MaintenanceLogNumber, BriefDescription
 FROM Maintenance
-WHERE MaintenanceLogNumber = 1;
+WHERE _ReturnedBy IS NULL AND DateReturned IS NULL;
 
 -- Outstanding Maintenance. (picked up not complete)
 SELECT *
@@ -36,7 +36,22 @@ SET
     CompletionDate = CURRENT_TIMESTAMP
 WHERE
     _MaintenanceLogNumber = 1;
+    
+-- Quickly mark all complete
+UPDATE MaintenanceItem
+SET 
+	_CompletedBy = 10,
+    CompletionDate = CURRENT_TIMESTAMP
+WHERE 
+	_CompletedBy IS NULL AND CompletionDate IS NULL;
 
+
+UPDATE Maintenance
+SET 
+	_ReturnedBy = 11,
+    DateReturned = CURRENT_TIMESTAMP
+WHERE 
+	_ReturnedBy IS NULL AND DateReturned IS NULL;
 
 -- Return Vehicle from Maintenance
 UPDATE Maintenance
