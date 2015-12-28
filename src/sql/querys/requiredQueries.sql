@@ -32,16 +32,12 @@ WHERE NOT isVehicleAvailable(v.idVehicle, CURDATE(), CURDATE());
 
 
 -- Display the total mileage of a vehicle driven this year. 
-SELECT _idVehicle, SUM(OdometerEnd - OdometerStart)
-FROM CompletedJourneys j
-INNER JOIN Vehicle v ON v.idVehicle = j._idVehicle
-WHERE CheckedOutDate BETWEEN '2015-01-01' AND '2015-12-31'
-AND CheckInDate BETWEEN '2015-01-01' AND '2015-12-31' 
-GROUP BY _idVehicle;
+SELECT idVehicle, VehicleMilesYear(idVehicle, YEAR(CURDATE()))
+FROM VehicleView;
 
 
 -- Display the total mileage driven by a department this year.
-
+SELECT * FROM CompletedJourneys;
 
 
 
