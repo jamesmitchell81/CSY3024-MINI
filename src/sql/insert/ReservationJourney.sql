@@ -167,3 +167,25 @@ VALUES
 SELECT * FROM Checkout;
 
 SELECT * FROM CurrentJourneys;
+
+
+-- Make a Reservation where only some cars are checkedout.
+INSERT INTO Reservation (_idFacultyMember, DepartureDate, ReturnDueDate, Destination)
+VALUES (1, '2015-12-24', '2015-12-24', 'NN1 2DL');
+
+INSERT INTO VehicleReservation (_idVehicle, _idReservation)
+VALUES 
+(4, 12),
+(5, 12),
+(6, 12);
+
+INSERT INTO CheckOut (_idVehicle, _idReservation, _AgentOut, OdometerStart)
+VALUES 
+(4, 12, 13, (SELECT CurrentMileage FROM Vehicle WHERE idVehicle = 4)),
+(5, 12, 13, (SELECT CurrentMileage FROM Vehicle WHERE idVehicle = 5));
+
+Call CheckInReservationVehicles(12, 14, 40);
+
+SELECT * FROM CurrentJourneys;
+
+SELECT * FROM Vehicle;

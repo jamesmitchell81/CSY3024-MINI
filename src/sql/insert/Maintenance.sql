@@ -103,11 +103,11 @@ AND NOT i.Passed;
 
 SELECT * FROM MaintenanceItem WHERE _MaintenanceLogNumber = 4;
 
-
+SELECT * FROM PartsInventoryView;
 -- Procedure: Assign a part to a maintenanceitem.
 Call UsePart(10, 1, 4, @location);
 
-
+Call UsePart(10, 2, 5, @location);
 
 -- Trigger/Procedure: Prevent MOT logs from being marked complete if not all MOTItems pass
 -- Prevent Vehicles being reserved/checkout when under maintenance.
