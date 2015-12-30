@@ -10,6 +10,7 @@ AND NOT (_idVehicle IN (SELECT m._idVehicle
 						FROM Maintenance m WHERE m.BriefDescription = i.MaintenanceIssues
 						AND DateReturned IS NULL AND m._idVehicle = i._idVehicle));
 
+SELECT * FROM Maintenance;
 
 -- Outstanding Maintenance. (Not picked up)
 SELECT *
@@ -53,6 +54,8 @@ SET
 WHERE 
 	_ReturnedBy IS NULL AND DateReturned IS NULL;
 
+SELECT * FROM Maintenance;
+
 -- Return Vehicle from Maintenance
 UPDATE Maintenance
 SET
@@ -76,7 +79,8 @@ SELECT m._idVehicle
 FROM Maintenance m
 WHERE (DATEDIFF(NOW(), DateReturned) >= 1)
 AND MaintenanceLogNumber IN (SELECT _MaintenanceLogNumber FROM MOTCheckListItem);
-            
+
+SELECT * FROM Maintenance;            
 
 INSERT INTO Maintenance (_idVehicle, _ReturnedBy, BriefDescription, MaintenanceEntryDate, DateReturned)
 VALUES (1, 10, "MOT Check", DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 1 YEAR), DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 1 YEAR));
@@ -118,7 +122,6 @@ Call UsePart(10, 2, 5, @location);
 
 
 SELECT _idVehicle FROM CheckIn WHERE MaintenanceIssues IS NOT NULL;
-
 
 
 

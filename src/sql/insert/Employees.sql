@@ -54,7 +54,7 @@ VALUES
 INSERT INTO TFBSAgent (_idMINIEmployee) VALUE (13), (14);
 
 
-INSERT INTO MINICreditCards (MINICreditCardsNum, _idFacultyMembers)
+INSERT INTO MINICreditCards (MINICreditCardsNum, _idMINIEmployee)
 VALUES 
 ("1234567890123456", 1),
 ("2345678901234561", 2),

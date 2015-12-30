@@ -2,20 +2,23 @@
 --  With 3 vehicles
 
 -- Insert the reservation
-INSERT INTO Reservation (_idFacultyMember, DepartureDate, ReturnDueDate, Destination)
+
+SELECT * FROM Reservation;
+
+INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
 VALUES (1, '2015-12-21', '2015-12-21', 'NN1 2DL');
 
 INSERT INTO VehicleReservation (_idVehicle, _idReservation)
 VALUES 
-(1, 1),
-(2, 1),
-(3, 1);
+(1, 2),
+(2, 2),
+(3, 2);
 
-Call CheckoutReservationVehicles(1, 13);
-Call CheckInReservationVehicles(1, 14, 1000);
+Call CheckoutReservationVehicles(2, 13);
+Call CheckInReservationVehicles(2, 14, 1000);
 
 -- Test to ensure a vehicle in use etc.
-INSERT INTO Reservation (_idFacultyMember, DepartureDate, ReturnDueDate, Destination)
+INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
 VALUES (2, '2015-12-22', '2015-12-22', 'NN1 2DL');
 
 INSERT INTO VehicleReservation (_idVehicle, _idReservation)
@@ -28,7 +31,7 @@ Call CheckoutReservationVehicles(2, 14);
 Call CheckInReservationVehicles(2, 14, 2500);
 
 -- Test to ensure a vehicle in use etc.
-INSERT INTO Reservation (_idFacultyMember, DepartureDate, ReturnDueDate, Destination)
+INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
 VALUES (3, '2015-12-23', '2015-12-23', 'NN1 2DL');
 
 INSERT INTO VehicleReservation (_idVehicle, _idReservation)
@@ -42,7 +45,7 @@ Call CheckInReservationVehicles(3, 14, 3500);
 
 
 -- Test to ensure a vehicle in use etc.
-INSERT INTO Reservation (_idFacultyMember, DepartureDate, ReturnDueDate, Destination)
+INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
 VALUES (4, '2015-12-24', '2015-12-24', 'NN1 2DL');
 
 INSERT INTO VehicleReservation (_idVehicle, _idReservation)
@@ -56,7 +59,7 @@ Call CheckInReservationVehicles(4, 14, 4500);
 
 
 -- Test to ensure a vehicle in use etc.
-INSERT INTO Reservation (_idFacultyMember, DepartureDate, ReturnDueDate, Destination)
+INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
 VALUES (5, '2015-12-25', '2015-12-25', 'NN1 2DL');
 
 INSERT INTO VehicleReservation (_idVehicle, _idReservation)
@@ -68,7 +71,7 @@ VALUES
 Call CheckoutReservationVehicles(5, 14);
 Call CheckInReservationVehicles(5, 14, 4500);
 
-INSERT INTO Reservation (_idFacultyMember, DepartureDate, ReturnDueDate, Destination)
+INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
 VALUES (5, '2015-12-26', '2015-12-26', 'NN1 2DL');
 
 INSERT INTO VehicleReservation (_idVehicle, _idReservation)
@@ -80,7 +83,7 @@ VALUES
 Call CheckoutReservationVehicles(6, 14);
 Call CheckInReservationVehicles(6, 14, 4500);
 
-INSERT INTO Reservation (_idFacultyMember, DepartureDate, ReturnDueDate, Destination)
+INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
 VALUES (5, '2015-12-27', '2015-12-27', 'NN1 2DL');
 
 INSERT INTO VehicleReservation (_idVehicle, _idReservation)
@@ -95,7 +98,7 @@ Call CheckInReservationVehicles(7, 14, 5500);
 SELECT * FROM Billings;
 
 
-INSERT INTO Reservation (_idFacultyMember, DepartureDate, ReturnDueDate, Destination)
+INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
 VALUES (5, '2015-12-28', '2015-12-28', 'NN1 2DL');
 
 INSERT INTO VehicleReservation (_idVehicle, _idReservation)
@@ -111,7 +114,7 @@ SELECT * FROM Billings;
 
 
 
-INSERT INTO Reservation (_idFacultyMember, DepartureDate, ReturnDueDate, Destination)
+INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
 VALUES (5, '2015-12-29', '2015-12-29', 'NN1 2DL');
 
 INSERT INTO VehicleReservation (_idVehicle, _idReservation)
@@ -124,30 +127,33 @@ Call CheckoutReservationVehicles(9, 14);
 Call CheckInReservationVehicles(9, 14, 6500);
 
 
-INSERT INTO Reservation (_idFacultyMember, DepartureDate, ReturnDueDate, Destination)
+INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
 VALUES (5, '2015-12-30', '2015-12-30', 'NN1 2DL');
+
+SELECT * FROM Reservation;
 
 INSERT INTO VehicleReservation (_idVehicle, _idReservation)
 VALUES 
-(1, 10),
-(2, 10),
-(3, 10);
+(1, 3),
+(2, 3),
+(3, 3);
 
-Call CheckoutReservationVehicles(10, 14);
+
+Call CheckoutReservationVehicles(3, 14);
 -- Call CheckInReservationVehicles(10, 14, 7500);
 
 
 INSERT INTO CheckIn(_idVehicle, _idReservation, _AgentIn, OdometerEnd, MaintenanceIssues)
 VALUES 
-(1, 10, 13, 7500, "The Brakes at soft"), -- 1.2
-(2, 10, 13, 6525, "Car would not start"), -- 3.6
-(3, 10, 13, 7000, "Oil Leak"); -- 2.4
+(1, 3, 13, 7500, "The Brakes at soft"), -- 1.2
+(2, 3, 13, 6525, "Car would not start"), -- 3.6
+(3, 3, 13, 7000, "Oil Leak"); -- 2.4
 
 SELECT * FROM Billings;
 
 SELECT _idVehicle FROM CheckIn WHERE MaintenanceIssues IS NOT NULL;
 
-INSERT INTO Reservation (_idFacultyMember, DepartureDate, ReturnDueDate, Destination)
+INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
 VALUES (5, '2016-01-01', '2016-01-01', 'NN1 2DL');
 
 INSERT INTO VehicleReservation (_idVehicle, _idReservation)
@@ -170,7 +176,7 @@ SELECT * FROM CurrentJourneys;
 
 
 -- Make a Reservation where only some cars are checkedout.
-INSERT INTO Reservation (_idFacultyMember, DepartureDate, ReturnDueDate, Destination)
+INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
 VALUES (1, '2015-12-24', '2015-12-24', 'NN1 2DL');
 
 INSERT INTO VehicleReservation (_idVehicle, _idReservation)
