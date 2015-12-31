@@ -4,14 +4,20 @@ DELIMITER $$
 
 CREATE FUNCTION DepartmentMilesYear(department INT, yr INT) RETURNS INT
 BEGIN
+DECLARE year_days INT;
 DECLARE s_date, e_date DATE;
 DECLARE miles INT;
 
+SET year_days = 365;
 SET s_date = MAKEDATE(yr, 1);
-SET e_date = MAKEDATE(yr, 365);
+-- Plus one day as '2015-12-31' is '2015-12-31 00:00:00'
+SET e_date = MAKEDATE(yr, year_days + 1); 
 
-IF DAYOFMONTH(e_date) = 30 THEN
-	SET e_date = MAKEDATE(yr, 366);
+
+IF DAYOFMONTH(e_date) = 31 THEN
+	-- Plus two days as '2015-12-31' is '2015-12-31 00:00:00'
+	SET e_date = MAKEDATE(yr, year_days + 2);
+    
 END IF;
 
 SELECT SUM(j.OdometerEnd - j.OdometerStart) INTO miles

@@ -3,7 +3,31 @@
 
 -- Insert the reservation
 
-SELECT * FROM Reservation;
+SELECT d.idReservation, v._idVehicle, d.DepartmentName
+FROM DepartmentReservations d
+INNER JOIN Reservation r ON r.idReservation = d.idReservation
+INNER JOIN VehicleReservation v ON v._idReservation = d.idReservation
+WHERE DepartureDate = CURDATE()
+AND ReturnDueDate = CURDATE()
+AND v._idVehicle = 5;
+
+
+INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
+VALUES (6, '2015-12-31', '2015-12-31', 'NN1 2DL');
+
+
+SELECT * FROM CheckIn;
+
+
+INSERT INTO VehicleReservation (_idVehicle, _idReservation)
+VALUES 
+(7, 9);
+
+Call CheckoutReservationVehicles(9, 13);
+Call CheckInReservationVehicles(9, 14, 123);
+
+
+SELECT * FROM Maintenance WHERE _ReturnedBy IS NULL;
 
 INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
 VALUES (1, '2015-12-21', '2015-12-21', 'NN1 2DL');
@@ -195,3 +219,15 @@ Call CheckInReservationVehicles(12, 14, 40);
 SELECT * FROM CurrentJourneys;
 
 SELECT * FROM Vehicle;
+
+
+
+SELECT j.OdometerStart, j.OdometerEnd, v.MileageRate, 
+CAST((j.OdometerEnd - j.OdometerStart) AS DECIMAL(10, 2)) * v.MileageRate AS VehicleCost, 
+j.MaintenanceIssues
+FROM CompletedJourneys j
+INNER JOIN VehicleView v ON v.idVehicle = j._idVehicle
+WHERE j._idReservation = 5;
+
+
+

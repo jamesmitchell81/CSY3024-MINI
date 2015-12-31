@@ -1,14 +1,14 @@
 -- General Maintenance
 SELECT * FROM Maintenance;
 
--- Create a General Maintenance Item.
+-- Create a General Maintenance.
 INSERT INTO Maintenance (_idVehicle, BriefDescription, MaintenanceEntryDate)
 SELECT  i._idVehicle, i.MaintenanceIssues, CURRENT_TIMESTAMP
 FROM CheckIn i
 WHERE MaintenanceIssues IS NOT NULL
 AND NOT (_idVehicle IN (SELECT m._idVehicle 
 						FROM Maintenance m WHERE m.BriefDescription = i.MaintenanceIssues
-						AND DateReturned IS NULL AND m._idVehicle = i._idVehicle));
+						AND DateReturned IS NULL AND m._idVehicle = i._idVehicle)) AND _idReservation = 5;
 
 SELECT * FROM Maintenance;
 
@@ -22,6 +22,13 @@ INSERT INTO MaintenanceItem (_MaintenanceLogNumber, ItemDescription)
 SELECT MaintenanceLogNumber, BriefDescription
 FROM Maintenance
 WHERE _ReturnedBy IS NULL AND DateReturned IS NULL;
+
+
+INSERT INTO MaintenanceItem (_MaintenanceLogNumber, ItemDescription)
+VALUES 
+(5, "Fix Puncture, Reinflate Tyres"),
+(6, "Replace light blubs"),
+(5, "Locate and fix oil leak");
 
 -- Outstanding Maintenance. (picked up not complete)
 SELECT *
@@ -87,7 +94,7 @@ VALUES (1, 10, "MOT Check", DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 1 YEAR), DATE_S
 
 -- Create MOT Check List Items
 INSERT INTO MOTCheckListItem (_MaintenanceLogNumber, _idMOTCheckList, _Mechanic, CheckPerformedDate)
-SELECT 4, idMOTCheckList, 10, DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 1 YEAR)
+SELECT 8, idMOTCheckList, 10, DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 1 YEAR)
 FROM MOTCheckList;
 
 SELECT * FROM MOTCheckListItem;
@@ -124,4 +131,15 @@ Call UsePart(10, 2, 5, @location);
 SELECT _idVehicle FROM CheckIn WHERE MaintenanceIssues IS NOT NULL;
 
 
+
+SELECT * FROM Maintenance;
+
+Call UsePart(10, 8, 19, @location); 
+SELECT @location;
+
+SELECT * FROM MaintenanceItem;
+
+INSERT INTO MOTCheckListItem (_MaintenanceLogNumber, _idMOTCheckList, _Mechanic, CheckPerformedDate)
+SELECT 8, idMOTCheckList, 10, DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 1 YEAR)
+FROM MOTCheckList;
 

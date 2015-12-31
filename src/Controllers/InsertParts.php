@@ -9,6 +9,5 @@ class InsertParts extends Controller
   {
     $parts = (new PartsGateway)->generatePartsInventory();
 
-
   }
 }

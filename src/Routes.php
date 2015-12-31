@@ -2,7 +2,7 @@
 
 return [
     // Global.
-    // ['GET',  '/insertParts',                 ['MINI\Controllers\InsertParts', 'insert']],
+    //['GET',  '/insertParts',                 ['MINI\Controllers\InsertParts', 'insert']],
     // Mechanics.
     ['GET',  '/mechanic',                        ['MINI\Controllers\MechanicHome', 'display']],
     ['GET',  '/mechanic/{id:\d+}/checkout',      ['MINI\Controllers\MaintenanceCheckout', 'display']],
