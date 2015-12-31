@@ -1,0 +1,25 @@
+{% extends "Layout.html" %}
+{% block content %}
+
+    <h1>Add Maintenance Item</h1>
+
+    <form action="/maintenance/checkout/general/vehicle/{{details.idVehicle}}"
+          method="post"
+          class="form">
+      <fieldset class="form__fieldset">
+        <label class="form__label" for="description">Add an item description</label>
+        <textarea class="form__input" name="description" id="description" cols="30" rows="10"></textarea>
+      </fieldset>
+
+      <fieldset class='form__fieldset'>
+        <legend class='form__legend'>Select parts</legend>
+
+        ... parts table
+
+      </fieldset>
+      <input class="form__button" type="submit" value="Checkout Vehicle">
+    </form>
+
+    <a href="/maintenance/log/{{log}}">Cancel and return</a>
+
+{% endblock %}

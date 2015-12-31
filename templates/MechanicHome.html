@@ -2,62 +2,50 @@
 {% block content %}
     <h1>Mechanic Home</h1>
 
-    <h2>Current Maintenance</h2>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Vehicle Reg</th>
-          <th>Maintenance Type</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>tfbs1</td>
-          <td>MOT</td>
-          <td><a href="/vehicle/tfbs1/maintenance-detail">Review</a></td>
-        </tr>
-        <tr>
-          <td>tfbs2</td>
-          <td>General</td>
-          <td><a href="/vehicle/tfbs2/maintenance-detail">Review</a></td>
-        </tr>
-      </tbody>
-    </table>
+    {{ mechanic.FullName }}
 
     <h2>Maintenance Issues</h2>
 
     <table>
       <thead>
         <th>Vehicle Reg</th>
+        <th>Vehicle</th>
         <th>Reported Issue</th>
         <th>Reported</th>
         <th></th>
       </thead>
       <tbody>
-        <td>tfbs1</td>
-        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas a laudantium quas ipsam, earum eos deleniti. Nulla minus explicabo possimus.</td>
-        <td>2015-11-14</td>
-        <td><a href="/mechanic/checkout/1">Checkout</a></td>
+        {% for issue in issues %}
+        <tr>
+          <td>{{ issue.VehicleReg }}</td>
+          <th>{{ issue.Vehicle }}</th>
+          <td>{{ issue.MaintenanceIssues }}</td>
+          <td>{{ issue.ReportedDate }}</td>
+          <td><a href="/maintenance/checkout/general/reservation/{{issue._idReservation}}/vehicle/{{issue.idVehicle}}">Checkout</a></td>
+        </tr>
+        {% endfor %}
       </tbody>
     </table>
 
-    <h2>MOT Due/Required</h2>
-
+    <h2>Under Maintenance</h2>
     <table>
       <thead>
         <th>Vehicle Reg</th>
-        <th>MOT Due date</th>
+        <th>Vehicle</th>
+        <th>Reported Issue</th>
+        <th>Reported</th>
         <th></th>
       </thead>
       <tbody>
-        <td>tfbs1</td>
-        <td>2015-11-14</td>
-        <td><a href="/mechanic/2414/mot/vehicle/tfbs1">Checkout</a></td>
+        {% for vehicle in maintenance %}
+        <tr>
+          <td>{{ vehicle.VehicleReg }}</td>
+          <td>{{ vehicle.Model }} {{ vehicle.Manufacturer }}</td>
+          <td>{{ vehicle.BriefDescription }}</td>
+          <td><a href="/maintenance/log/{{vehicle.MaintenanceLogNumber}}">View Details</a></td>
+        </tr>
+        {% endfor %}
       </tbody>
     </table>
-
-    <h2>Vehicles</h2>
 
 {% endblock %}

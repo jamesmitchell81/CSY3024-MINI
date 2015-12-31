@@ -30,7 +30,7 @@ $injector = include('Dependencies.php');
 $request = $injector->make('Http\HttpRequest');
 $response = $injector->make('Http\HttpResponse');
 
-Session::set('id', 1);
+Session::set('id', 10);
 
 foreach ($response->getHeaders() as $header) {
     header($header, false);

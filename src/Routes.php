@@ -4,10 +4,14 @@ return [
     // Global.
     //['GET',  '/insertParts',                 ['MINI\Controllers\InsertParts', 'insert']],
     // Mechanics.
-    ['GET',  '/mechanic',                        ['MINI\Controllers\MechanicHome', 'display']],
-    ['GET',  '/mechanic/{id:\d+}/checkout',      ['MINI\Controllers\MaintenanceCheckout', 'display']],
-    ['POST', '/mechanic/checkout',               ['MINI\Controllers\MaintenanceCheckout', 'checkout']],
-    ['GET',  '/mechanic/{id}/mot/vehicle/{reg}', ['MINI\Controllers\MaintenanceMOT', 'display']],
+    ['GET',   '/mechanic',                                     ['MINI\Controllers\MechanicHome', 'display']],
+    ['GET',   '/maintenance/checkout/general/reservation/{reservation:\d+}/vehicle/{vehicle:\d+}',      ['MINI\Controllers\MaintenanceCheckout', 'display']],
+    ['POST',  '/maintenance/checkout/general/vehicle/{vehicle:\d+}',      ['MINI\Controllers\MaintenanceCheckout', 'checkout']],
+    ['GET',  '/maintenance/log/{log:\d+}', ['MINI\Controllers\MaintenanceDetail', 'display']],
+
+    ['GET',  '/maintenance/log/{log:\d+}/additem', ['MINI\Controllers\MaintenanceDetailItem', 'display']],
+    ['POST',  '/maintenance/log/{log:\d+}/additem', ['MINI\Controllers\MaintenanceDetailItem', 'add']],
+
     // Vehicle Maintenance.
     ['GET',  '/vehicle/{reg}/maintenance-detail', ['MINI\Controllers\MaintenanceDetail', 'display']],
     ['GET',  '/vehicle/{reg}/maintenance-detail/{lognumber}/maintenace-item', ['MINI\Controllers\MaintenanceDetailItem', 'display']],

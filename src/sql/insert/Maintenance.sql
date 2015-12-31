@@ -2,13 +2,23 @@
 SELECT * FROM Maintenance;
 
 -- Create a General Maintenance.
-INSERT INTO Maintenance (_idVehicle, BriefDescription, MaintenanceEntryDate)
-SELECT  i._idVehicle, i.MaintenanceIssues, CURRENT_TIMESTAMP
+-- INSERT INTO Maintenance (_idVehicle, BriefDescription, MaintenanceEntryDate)
+SELECT v.idVehicle, v.VehicleReg, CONCAT_WS(' ', v.Model, v.Manufacturer) AS Vehicle, i.MaintenanceIssues
 FROM CheckIn i
+INNER JOIN VehicleView v ON i._idVehicle = v.idVehicle
 WHERE MaintenanceIssues IS NOT NULL
 AND NOT (_idVehicle IN (SELECT m._idVehicle 
 						FROM Maintenance m WHERE m.BriefDescription = i.MaintenanceIssues
-						AND DateReturned IS NULL AND m._idVehicle = i._idVehicle)) AND _idReservation = 5;
+						AND DateReturned IS NULL AND m._idVehicle = i._idVehicle));
+
+SELECT * FROM CheckIn;
+
+SELECT * FROM  Maintenance l
+            INNER JOIN VehicleView v ON v.idVehicle = l._idVehicle;
+
+SELECT m._idVehicle 
+FROM Maintenance m 
+WHERE DateReturned IS NULL;
 
 SELECT * FROM Maintenance;
 

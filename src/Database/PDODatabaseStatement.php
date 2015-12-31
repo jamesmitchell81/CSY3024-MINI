@@ -34,7 +34,7 @@ class PDODatabaseStatement
 
   public function getMetaData()
   {
-    return $this->statement->getColumnMeta(2);
+    // return $this->statement->getColumnMeta(2);
   }
 
   public function set($name, $value, $type = PDO::PARAM_STR)

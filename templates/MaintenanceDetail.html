@@ -1,0 +1,75 @@
+{% extends "Layout.html" %}
+{% block content %}
+
+    <h1>Check out vehicle for general maintenance</h1>
+
+    <h3>Issue Raised</h3>
+
+    <table>
+      <tr>
+        <th>Vehicle</th>
+        <td>{{ details.VehicleReg }} - {{ details.Model }} {{ details.Manufacturer }}</td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td>{{ details.BriefDescription }}</td>
+      </tr>
+      <tr>
+        <th>Maintenance Entry Date</th>
+        <td>{{ details.MaintenanceEntryDate }}</td>
+      </tr>
+    </table>
+
+    {% if completed %}
+    <h4>Completed items</h4>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Item Description</th>
+          <th>Parts Used</th>
+          <th>Completed By</th>
+          <th>Completion Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in completed %}
+        <tr>
+          <td>{{ c.ItemDescription }}</td>
+          <td>
+            Parts...
+          </td>
+          <td>{{ c.CompletedBy }}</td>
+          <td>{{ c.CompletionDate }}</td>
+          <td><a href="">Update</a></td>
+          <td><a href="">Delete</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    <h4>Open Items</h4>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Item Description</th>
+          <th>Parts Used</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for o in open %}
+        <tr>
+          <td>{{ o.ItemDescription }}</td>
+          <td>
+            Parts...
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <a href="/maintenance/log/{{log}}/additem">Add Item</a>
+
+{% endblock %}

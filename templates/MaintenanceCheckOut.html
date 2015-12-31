@@ -1,0 +1,22 @@
+{% extends "Layout.html" %}
+{% block content %}
+
+    <h1>Check out vehicle for general maintenance</h1>
+
+    <h3>Issue Raised</h3>
+
+    <p>Vehicle: {{ details.VehicleReg }} - {{ details.Vehicle }} </p>
+    <p>Issue: {{ details.MaintenanceIssues }} </p>
+    <p>Raised: {{ details.ReportedDate }} </p>
+
+    <form action="/maintenance/checkout/general/vehicle/{{details.idVehicle}}"
+          method="post"
+          class="form form-50">
+      <fieldset class="form__fieldset">
+        <label class="form__label" for="description">Add a Brief Description</label>
+        <textarea class="form__input" name="description" id="description" cols="30" rows="10"></textarea>
+      </fieldset>
+      <input class="form__button" type="submit" value="Checkout Vehicle">
+    </form>
+
+{% endblock %}
