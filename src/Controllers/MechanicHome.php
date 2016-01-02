@@ -14,24 +14,35 @@ class MechanicHome extends Controller
     $statement = new Statement($connection);
 
     //get mechanic view
-    $statement->setInt('id', Session::get('id'));
     $SQL = "SELECT * FROM MechanicView WHERE idMINIEmployee = :id";
+    $statement->setInt('id', Session::get('id'));
     $mechanic = $statement->select($SQL)->first();
 
     // get vehicles with issues that have not yet been added to maintenance.
-    $statement = new Statement($connection);
     $SQL = 'SELECT * FROM VehicleReportedIssues';
+    $statement = new Statement($connection);
     $issues = $statement->select($SQL)->all();
 
     // get vehicles in under maintenance.
+    $SQL = 'SELECT * FROM Maintenance m
+            INNER JOIN VehicleView v ON m._idVehicle = v.idVehicle
+            WHERE _ReturnedBy IS NULL';
     $statement = new Statement($connection);
-    $SQL = 'SELECT * FROM Maintenance m INNER JOIN VehicleView v ON m._idVehicle = v.idVehicle WHERE _ReturnedBy IS NULL';
     $maintenance = $statement->select($SQL)->all();
+
+    // display completed maintenance.
+    $SQL = 'SELECT * FROM Maintenance m
+            INNER JOIN VehicleView v ON m._idVehicle = v.idVehicle
+            WHERE _ReturnedBy IS NOT NULL
+            ORDER BY DateReturned DESC';
+    $statement = new Statement($connection);
+    $completed = $statement->select($SQL)->all();
 
     $data = [
       'mechanic'    => $mechanic,
       'issues'      => $issues,
-      'maintenance' => $maintenance
+      'maintenance' => $maintenance,
+      'completed'   => $completed
     ];
 
     $html = $this->view->render('MechanicHome', $data);

@@ -39,3 +39,29 @@ a {
   text-decoration: none;
   display: inline-block;
 }
+
+.info {
+  color: #333333;
+  display: block;
+  width: 98%;
+  padding: 0.5em;
+  margin: 0.2em;
+  font-style: italic;
+  font-size: 0.85em;
+  border-radius: 3px;
+}
+
+.info-error {
+  background: #ffcaca;
+  box-shadow: inset 1px 1px 2px #ddbaba;
+}
+
+.info-success {
+  background: #caffca;
+  box-shadow: inset 1px 1px 2px #baddba;
+}
+
+.info-neutral {
+  background: #cacaff;
+  box-shadow: inset 1px 1px 2px #babadd;
+}

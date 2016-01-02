@@ -5,8 +5,8 @@ return [
     //['GET',  '/insertParts',                 ['MINI\Controllers\InsertParts', 'insert']],
     // Mechanics.
     ['GET',   '/mechanic',                                     ['MINI\Controllers\MechanicHome', 'display']],
-    ['GET',   '/maintenance/checkout/general/reservation/{reservation:\d+}/vehicle/{vehicle:\d+}',      ['MINI\Controllers\MaintenanceCheckout', 'display']],
-    ['POST',  '/maintenance/checkout/general/vehicle/{vehicle:\d+}',      ['MINI\Controllers\MaintenanceCheckout', 'checkout']],
+    ['GET',   '/maintenance/checkout/general/issue/{issue:\d+}',      ['MINI\Controllers\MaintenanceCheckout', 'display']],
+    ['POST',  '/maintenance/checkout/general/issue/{issue:\d+}',      ['MINI\Controllers\MaintenanceCheckout', 'checkout']],
     ['GET',  '/maintenance/log/{log:\d+}', ['MINI\Controllers\MaintenanceDetail', 'display']],
 
     ['GET',  '/maintenance/log/{log:\d+}/complete', ['MINI\Controllers\MaintenanceDetail', 'complete']],

@@ -4,8 +4,9 @@
 
     {{ mechanic.FullName }}
 
-    <h2>Maintenance Issues</h2>
+    <h2>Reported Issues</h2>
 
+    {% if issues %}
     <table>
       <thead>
         <th>Vehicle Reg</th>
@@ -21,13 +22,18 @@
           <td>{{ issue.Vehicle }}</td>
           <td>{{ issue.MaintenanceIssues }}</td>
           <td>{{ issue.ReportedDate }}</td>
-          <td><a href="/maintenance/checkout/general/reservation/{{issue._idReservation}}/vehicle/{{issue.idVehicle}}">Checkout</a></td>
+          <td><a href="/maintenance/checkout/general/issue/{{issue.idReportedIssues}}">Checkout</a></td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
+    {% else %}
+      <p class="info info-success">The are currently no reported issues.</p>
+    {% endif %}
 
     <h2>Under Maintenance</h2>
+
+    {% if maintenance %}
     <table>
       <thead>
         <th>Vehicle Reg</th>
@@ -40,10 +46,33 @@
         {% for vehicle in maintenance %}
         <tr>
           <td>{{ vehicle.VehicleReg }}</td>
-          <td>{{ vehicle.Model }} {{ vehicle.Manufacturer }}</td>
+          <td>{{ vehicle.Manufacturer }} {{ vehicle.Model }}</td>
           <td>{{ vehicle.BriefDescription }}</td>
           <td>{{ vehicle.MaintenanceEntryDate }}</td>
           <td><a href="/maintenance/log/{{vehicle.MaintenanceLogNumber}}">View Details</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <p class="info info-neutral">There are not vehicles undergoing maintenance</p>
+    {% endif %}
+
+    <h2>Completed Maintenance</h2>
+    <table>
+      <thead>
+        <th>Vehicle Reg</th>
+        <th>Vehicle</th>
+        <th>Description</th>
+        <th>Reported</th>
+      </thead>
+      <tbody>
+        {% for complete in completed %}
+        <tr>
+          <td>{{ complete.VehicleReg }}</td>
+          <td>{{ complete.Manufacturer }} {{ complete.Model }}</td>
+          <td>{{ complete.BriefDescription }}</td>
+          <td>{{ complete.DateReturned }}</td>
         </tr>
         {% endfor %}
       </tbody>

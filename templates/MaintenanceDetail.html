@@ -59,10 +59,13 @@
         {% endfor %}
       </tbody>
     </table>
+    {% else %}
+      <p class="info info-neutual">There are no completed items</p>
     {% endif %}
 
     <h2>Open Items</h2>
 
+    {% if open %}
     <table>
       <thead>
         <tr>
@@ -93,6 +96,9 @@
         {% endfor %}
       </tbody>
     </table>
+    {% else %}
+    <p class="info info-neutual">The are not open items</p>
+    {% endif %}
 
     <a href="/maintenance/log/{{log}}/additem">Add Item</a>
 

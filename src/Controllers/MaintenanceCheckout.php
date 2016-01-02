@@ -8,14 +8,12 @@ class MaintenanceCheckout extends Controller
 
   public function display($params)
   {
-    $vehicle = $params['vehicle'];
-    $reservation = $params['reservation'];
+    $issue = $params['issue'];
 
     // select from vehiclereported issues where idVehicle =
-    $SQL = 'SELECT * FROM VehicleReportedIssues WHERE _idReservation = :reservation AND idVehicle = :vehicle';
+    $SQL = 'SELECT * FROM VehicleReportedIssues WHERE idReportedIssues = :issue';
     $statement = new Statement(new Connection);
-    $statement->setInt('vehicle', $vehicle);
-    $statement->setInt('reservation', $reservation);
+    $statement->setInt('issue', $issue);
     $details = $statement->select($SQL)->first();
 
     $data = [
@@ -28,16 +26,29 @@ class MaintenanceCheckout extends Controller
 
   public function checkout($params)
   {
-    $vehicle = $params['vehicle'];
+    $issue = $params['issue'];
     $description = $this->request->getParameter('description');
 
+    // get the vehicle form the issue number
+    $SQL = "SELECT idVehicle FROM VehicleReportedIssues WHERE idReportedIssues = :issue";
+    $statement = new Statement(new Connection);
+    $statement->setInt('issue', $issue);
+    $vehicle = $statement->select($SQL)->first()['idVehicle'];
+
+    // insert the vehicle to maintenance
     $SQL = 'INSERT INTO Maintenance (_idVehicle, BriefDescription, MaintenanceEntryDate)
             VALUES (:vehicle, :description, CURRENT_TIMESTAMP)';
-
     $statement = new Statement(new Connection);
     $statement->setInt('vehicle', $vehicle);
     $statement->setInt('description', $description);
     $log = $statement->insert($SQL);
+
+    // update the reported issues table
+    $SQL = 'UPDATE ReportedIssue SET _MaintenanceLogNumber = :log WHERE idReportedIssues = :issue';
+    $statement = new Statement(new Connection);
+    $statement->setInt('log', $log);
+    $statement->setInt('issue', $issue);
+    $statement->update($SQL);
 
     header('Location:/mechanic');
   }
