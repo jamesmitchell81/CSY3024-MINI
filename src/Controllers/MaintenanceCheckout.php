@@ -37,7 +37,7 @@ class MaintenanceCheckout extends Controller
     $statement = new Statement(new Connection);
     $statement->setInt('vehicle', $vehicle);
     $statement->setInt('description', $description);
-    $statement->insert($SQL);
+    $log = $statement->insert($SQL);
 
     header('Location:/mechanic');
   }

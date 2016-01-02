@@ -1,4 +1,17 @@
 
+SELECT * FROM CheckIn;
+
+SELECT r.idReportedIssues, i._idReservation, v.idVehicle, v.VehicleReg, 
+	   CONCAT_WS(' ', v.Model, v.Manufacturer) AS Vehicle, r.MaintenanceIssues, i.CheckInDate AS ReportedDate
+FROM CheckIn i
+INNER JOIN VehicleView v ON i._idVehicle = v.idVehicle
+INNER JOIN ReportedIssues r ON i._idReportedIssues = r.idReportedIssues
+WHERE r.MaintenanceIssues IS NOT NULL
+AND (_MaintenanceLogNumber IS NULL OR
+NOT (_MaintenanceLogNumber IN (SELECT m.MaintenanceLogNumber
+							   FROM Maintenance m 
+                               WHERE DateReturned IS NULL)));
+
 SELECT * FROM Reservation;
 
 -- Reservation 1
@@ -12,9 +25,12 @@ VALUES
 
 Call CheckoutReservationVehicles(1, 13);
 
-INSERT INTO CheckIn(_idVehicle, _idReservation, _AgentIn, OdometerEnd, MaintenanceIssues)
+INSERT INTO ReportedIssues(MaintenanceIssues) VALUES ("Brake lights are not working");
+
+
+INSERT INTO CheckIn(_idVehicle, _idReservation, _AgentIn, OdometerEnd, _idReportedIssues)
 VALUES 
-(1, 1, 13, 30, "Brake lights are not working");
+(1, 1, 13, 30, 1);
 
 
 -- Reservation 2
@@ -28,9 +44,11 @@ VALUES
 
 Call CheckoutReservationVehicles(2, 13);
 
-INSERT INTO CheckIn(_idVehicle, _idReservation, _AgentIn, OdometerEnd, MaintenanceIssues)
+INSERT INTO ReportedIssues(MaintenanceIssues) VALUES ("Brakes are Hard!");
+
+INSERT INTO CheckIn(_idVehicle, _idReservation, _AgentIn, OdometerEnd, _idReportedIssues)
 VALUES 
-(2, 2, 14, 50, "Brakes are Hard!");
+(2, 2, 14, 50, 3);
 
 
 -- Reservation 3
@@ -44,9 +62,11 @@ VALUES
 
 Call CheckoutReservationVehicles(3, 13);
 
-INSERT INTO CheckIn(_idVehicle, _idReservation, _AgentIn, OdometerEnd, MaintenanceIssues)
+INSERT INTO ReportedIssues(MaintenanceIssues) VALUES ( "Engine making high pitched noise");
+
+INSERT INTO CheckIn(_idVehicle, _idReservation, _AgentIn, OdometerEnd, _idReportedIssues)
 VALUES 
-(3, 3, 14, 45, "Engine making high pitched noise");
+(3, 3, 14, 45, 4);
 
 
 SELECT * FROM Billings;

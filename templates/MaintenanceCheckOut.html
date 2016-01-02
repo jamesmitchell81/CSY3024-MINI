@@ -3,11 +3,23 @@
 
     <h1>Check out vehicle for general maintenance</h1>
 
-    <h3>Issue Raised</h3>
+    <h2>Issue Raised</h2>
 
-    <p>Vehicle: {{ details.VehicleReg }} - {{ details.Vehicle }} </p>
-    <p>Issue: {{ details.MaintenanceIssues }} </p>
-    <p>Raised: {{ details.ReportedDate }} </p>
+    <table class="table-vert">
+      <tr>
+        <th>Vehicle</th>
+        <td>{{ details.VehicleReg }} - {{ details.Vehicle }}</td>
+      </tr>
+      <tr>
+        <th>Description</th>
+        <td>{{ details.MaintenanceIssues }}</td>
+      </tr>
+      <tr>
+        <th>Maintenance Entry Date</th>
+        <td>{{ details.ReportedDate|date('l jS F Y H:i') }}</td>
+      </tr>
+    </table>
+
 
     <form action="/maintenance/checkout/general/vehicle/{{details.idVehicle}}"
           method="post"
