@@ -6,7 +6,7 @@ class PDODatabaseStatement
 {
   private $connection;
   private $statement;
-  private $parameters = [];
+  public $parameters = [];
   private $fetchMode = PDO::FETCH_ASSOC;
 
   public function __construct(DatabaseConnection $db)
@@ -29,7 +29,20 @@ class PDODatabaseStatement
     }
     $this->bindParams();
     $this->statement->setFetchMode($this->fetchMode);
-    return $this->statement->execute();
+
+    try {
+      $a = $this->statement->execute();
+      return $a;
+    } catch (\PDOException $e) {
+      return $e;
+    }
+  }
+
+  public function execute()
+  {
+    $this->statement->setFetchMode($this->fetchMode);
+    $this->statement->execute();
+    return $this;
   }
 
   public function getMetaData()
@@ -47,13 +60,13 @@ class PDODatabaseStatement
     return $this;
   }
 
-  private function prepare($sql)
+  public function prepare($sql)
   {
     $this->statement = $this->connection->prepare($sql);
     return $this;
   }
 
-  private function bindParams()
+  public function bindParams()
   {
     foreach ($this->parameters as $parameter) {
       $name = $parameter['name'];
@@ -102,6 +115,11 @@ class PDODatabaseStatement
   public function insert($sql)
   {
     $this->query($sql);
+    return $this->connection->lastInsertId();
+  }
+
+  public function lastID()
+  {
     return $this->connection->lastInsertId();
   }
 

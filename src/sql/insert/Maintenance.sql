@@ -64,6 +64,9 @@ WHERE
 	_CompletedBy IS NULL AND CompletionDate IS NULL;
 
 
+SELECT * FROM Maintenance;
+SELECT * FROM MaintenanceItem WHERE _MaintenanceLogNumber = 1;
+
 UPDATE Maintenance
 SET 
 	_ReturnedBy = 11,
@@ -141,6 +144,9 @@ Call UsePart(10, 2, 5, @location);
 SELECT _idVehicle FROM CheckIn WHERE MaintenanceIssues IS NOT NULL;
 
 
+SELECT * FROM VehicleReportedIssues;
+
+
 
 SELECT * FROM Maintenance;
 
@@ -153,3 +159,9 @@ INSERT INTO MOTCheckListItem (_MaintenanceLogNumber, _idMOTCheckList, _Mechanic,
 SELECT 8, idMOTCheckList, 10, DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 1 YEAR)
 FROM MOTCheckList;
 
+UPDATE Maintenance 
+SET DateReturned = NULL 
+WHERE MaintenanceLogNumber = 1;
+
+
+SHOW TRIGGERS;

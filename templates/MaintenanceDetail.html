@@ -1,14 +1,16 @@
 {% extends "Layout.html" %}
 {% block content %}
 
-    <h1>Check out vehicle for general maintenance</h1>
+    <a href="/mechanic">Home</a>
 
-    <h3>Issue Raised</h3>
+    <h1>Maintenance Detail</h1>
 
-    <table>
+    <h2>Issue Raised</h2>
+
+    <table class="table-vert">
       <tr>
         <th>Vehicle</th>
-        <td>{{ details.VehicleReg }} - {{ details.Model }} {{ details.Manufacturer }}</td>
+        <td>{{ details.VehicleReg }} - {{ details.Manufacturer }} {{ details.Model }}</td>
       </tr>
       <tr>
         <th>Description</th>
@@ -16,12 +18,14 @@
       </tr>
       <tr>
         <th>Maintenance Entry Date</th>
-        <td>{{ details.MaintenanceEntryDate }}</td>
+        <td>{{ details.MaintenanceEntryDate|date('l jS F Y H:i') }}</td>
       </tr>
     </table>
 
+    <a href="/maintenance/log/{{log}}/complete">Return Vehicle to service</a>
+
     {% if completed %}
-    <h4>Completed items</h4>
+    <h2>Completed items</h2>
 
     <table>
       <thead>
@@ -30,18 +34,26 @@
           <th>Parts Used</th>
           <th>Completed By</th>
           <th>Completion Date</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         {% for c in completed %}
         <tr>
-          <td>{{ c.ItemDescription }}</td>
           <td>
-            Parts...
+            <p>{{ c.ItemDescription }}</p>
           </td>
-          <td>{{ c.CompletedBy }}</td>
-          <td>{{ c.CompletionDate }}</td>
-          <td><a href="">Update</a></td>
+          <td>
+            <ul>
+            {% for part in c.parts %}
+              <li>{{ part.PartName }}: {{ part.Count }}</li>
+            {% endfor %}
+            </ul>
+          </td>
+          <td>{{ c.FullName }}</td>
+          <td>{{ c.CompletionDate|date('l jS F Y H:i') }}</td>
+          <td><a href="/maintenance/log/{{log}}/reopen/{{c.idMaintenanceItem}}">Reopen</a></td>
           <td><a href="">Delete</a></td>
         </tr>
         {% endfor %}
@@ -49,22 +61,34 @@
     </table>
     {% endif %}
 
-    <h4>Open Items</h4>
+    <h2>Open Items</h2>
 
     <table>
       <thead>
         <tr>
           <th>Item Description</th>
           <th>Parts Used</th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         {% for o in open %}
         <tr>
-          <td>{{ o.ItemDescription }}</td>
           <td>
-            Parts...
+            <p>{{ o.ItemDescription }}</p>
           </td>
+          <td>
+            <ul>
+            {% for part in o.parts %}
+              <li>{{ part.PartName }}: {{ part.Count }}</li>
+            {% endfor %}
+            </ul>
+          </td>
+          <td><a href="/maintenance/log/{{log}}/complete/{{o.idMaintenanceItem}}">Mark Complete</a></td>
+          <td><a href="/maintenance/log/{{log}}/update/{{o.idMaintenanceItem}}">Update</a></td>
+          <td><a href="/maintenance/log/{{log}}/delete/{{o.idMaintenanceItem}}">Delete</a></td>
         </tr>
         {% endfor %}
       </tbody>

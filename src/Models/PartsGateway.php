@@ -12,6 +12,16 @@ class PartsGateway
     $this->connection = new Connection;
   }
 
+  public function partsUsedForItem($item)
+  {
+    $SQL = 'SELECT v.idPartsInventory, v.PartName, COUNT(v.idPartType) AS Count FROM PartsUsed u
+              INNER JOIN PartsInventoryView v ON v.idPartsInventory = u._idPartsInventory
+              WHERE u._idMaintenanceItem = :item GROUP BY idPartType';
+    $statement = new Statement($this->connection);
+    $statement->setInt('item', $item);
+    return $statement->select($SQL)->all();
+  }
+
   public function generatePartsInventory()
   {
     // get part types

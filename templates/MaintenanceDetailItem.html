@@ -3,23 +3,76 @@
 
     <h1>Add Maintenance Item</h1>
 
-    <form action="/maintenance/checkout/general/vehicle/{{details.idVehicle}}"
+    <form action="{{ action }}"
           method="post"
-          class="form">
+          class="form form-50">
+      <input class="form__button" type="submit" value="Complete Item">
+
+      <a href="/maintenance/log/{{log}}">Cancel and return</a>
+
       <fieldset class="form__fieldset">
         <label class="form__label" for="description">Add an item description</label>
-        <textarea class="form__input" name="description" id="description" cols="30" rows="10"></textarea>
+        <textarea class="form__input" name="description" id="description" cols="30" rows="10" required>{{ description }}</textarea>
       </fieldset>
+
+      {% if not partsUsed is empty %}
+      <fieldset class='form__fieldset'>
+        <legend class='form__legend'>Parts Used</legend>
+        <table>
+          <tbody>
+            {% for part in partsUsed %}
+            <tr>
+              <td>{{ part.PartName }}</td>
+              <td>{{ part.Count }}</td>
+              <td>
+                <a href="/maintenance/log/{{log}}/update/{{item}}/parts/remove/{{part.idPartsInventory}}">Delete one</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </fieldset>
+      {% endif %}
 
       <fieldset class='form__fieldset'>
         <legend class='form__legend'>Select parts</legend>
+        {% for category in partCategories %}
+          <table class="form__table">
+            <thead>
+              <tr>
+                <th colspan="2">{{ category.PartCategoryName }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for part in category.parts %}
+              <tr>
+                <td>
+                  {{ part.PartName }}
+                </td>
+                <td>
+                  {% if part.InStock == 0 %}
+                  <span class="form__error">
+                    Item out of stock!
+                  </span>
+                  {% else %}
+                  <input name="part-{{ part.idPartType }}"
+                         id="part-{{ part.idPartType }}"
+                         class="form__input"
+                         type="number"
+                         max="{{ part.InStock }}"
+                         min="0"
+                         value="0">
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
 
-        ... parts table
-
+        {% endfor %}
       </fieldset>
-      <input class="form__button" type="submit" value="Checkout Vehicle">
+      <input class="form__button" type="submit" value="Complete Item">
     </form>
-
-    <a href="/maintenance/log/{{log}}">Cancel and return</a>
 
 {% endblock %}

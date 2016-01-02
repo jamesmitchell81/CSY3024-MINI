@@ -1,8 +1,7 @@
 .form {
 	margin: 0 auto 2em auto;
-	padding-top: 1em;
-	box-shadow: 2px 2px 6px #989898;
-	border-radius: 2px;
+  box-shadow: 1px 1px 5px #cacaca;
+	border-radius: 3px;
 	min-width: 400px;
 }
 
@@ -35,18 +34,9 @@
 	width: 100%;
 }
 
-.form__table tr:nth-child(even) {
-	background: #eaeaea;
-}
-
-.form__table th {
-	border-bottom: 1px solid #989898;
-	text-transform: uppercase;
-	padding: 1em 0 0.5em 0.5em;
-}
-
-.form__table td {
-	padding: 1em 0.5em;
+.form__table-small {
+	width: 45%;
+	min-width: 320px;
 }
 
 .table-radio {
@@ -130,6 +120,11 @@
 	width: 100%;
 	line-height: 1.5;
 	padding: 0.5em;
+}
+
+.form__input-small {
+	width: 45%;
+	min-width: 320px;
 }
 
 .form__input-disabled {

@@ -18,7 +18,7 @@
         {% for issue in issues %}
         <tr>
           <td>{{ issue.VehicleReg }}</td>
-          <th>{{ issue.Vehicle }}</th>
+          <td>{{ issue.Vehicle }}</td>
           <td>{{ issue.MaintenanceIssues }}</td>
           <td>{{ issue.ReportedDate }}</td>
           <td><a href="/maintenance/checkout/general/reservation/{{issue._idReservation}}/vehicle/{{issue.idVehicle}}">Checkout</a></td>
@@ -32,7 +32,7 @@
       <thead>
         <th>Vehicle Reg</th>
         <th>Vehicle</th>
-        <th>Reported Issue</th>
+        <th>Description</th>
         <th>Reported</th>
         <th></th>
       </thead>
@@ -42,6 +42,7 @@
           <td>{{ vehicle.VehicleReg }}</td>
           <td>{{ vehicle.Model }} {{ vehicle.Manufacturer }}</td>
           <td>{{ vehicle.BriefDescription }}</td>
+          <td>{{ vehicle.MaintenanceEntryDate }}</td>
           <td><a href="/maintenance/log/{{vehicle.MaintenanceLogNumber}}">View Details</a></td>
         </tr>
         {% endfor %}

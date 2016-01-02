@@ -12,11 +12,6 @@ html {
   box-sizing: border-box;
 }
 
-table {
-  border-collapse: collapse;
-  table-layout: fixed;
-}
-
 *, *:before, *:after {
   box-sizing: inherit;
 }
@@ -36,3 +31,11 @@ table {
   margin: 0 auto;
 }
 
+a {
+  padding: 1em;
+  background: #555;
+  color: #fff;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+}

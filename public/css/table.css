@@ -1,0 +1,44 @@
+table {
+  margin-top: 1em;
+  margin-bottom: 5em;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.8em;
+  box-shadow: 1px 1px 5px #cacaca;
+  border-radius: 3px;
+}
+
+th {
+  border-bottom: 1px solid #989898;
+  text-transform: uppercase;
+  padding: 1em 0 0.5em 1em;
+}
+
+td {
+  padding: 1em 0.75em;
+}
+
+th, td {
+  text-align: left;
+}
+
+table tr:nth-child(even) {
+  background: #efefef;
+}
+
+.table-vert tr:nth-child(even) {
+  background: #fff;
+}
+
+.table-vert th {
+  border-bottom: 1px solid #eaeaea;
+  border-right: 1px solid #989898;
+}
+
+.table-vert td {
+  border-bottom: 1px solid #eaeaea;
+}
+
+td p {
+  max-width: 10em;
+}
