@@ -48,3 +48,5 @@ VALUES
 ("Nuts", 200, 100),
 ("Bolts", 200, 100);
 
+SELECT * FROM PartsStockView;
+

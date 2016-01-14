@@ -2,10 +2,10 @@
 
 return [
     // Global.
-    //['GET',  '/insertParts',                 ['MINI\Controllers\InsertParts', 'insert']],
+    ['GET',  '/insertParts',                 ['MINI\Controllers\InsertParts', 'insert']],
     // Mechanics.
-    ['GET',   '/mechanic',                                     ['MINI\Controllers\MechanicHome', 'display']],
-    ['GET',   '/maintenance/checkout/general/issue/{issue:\d+}',      ['MINI\Controllers\MaintenanceCheckout', 'display']],
+    ['GET',   '/mechanic', ['MINI\Controllers\MechanicHome', 'display']],
+    ['GET',   '/maintenance/checkout/general/issue/{issue:\d+}', ['MINI\Controllers\MaintenanceCheckout', 'display']],
     ['POST',  '/maintenance/checkout/general/issue/{issue:\d+}',      ['MINI\Controllers\MaintenanceCheckout', 'checkout']],
     ['GET',  '/maintenance/log/{log:\d+}', ['MINI\Controllers\MaintenanceDetail', 'display']],
 

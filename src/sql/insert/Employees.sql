@@ -51,7 +51,8 @@ VALUES
 (11, 1),
 (12, 3);
 
-INSERT INTO TFBSAgent (_idMINIEmployee) VALUE (13), (14);
+INSERT INTO TFBSAgent (_idMINIEmployee)
+VALUE (13), (14);
 
 
 INSERT INTO MINICreditCards (MINICreditCardsNum, _idMINIEmployee)
@@ -76,5 +77,10 @@ VALUES
 ("7890123456123456", "01", 10, 2012, 10, 2016),
 ("8901234561234567", "01", 10, 2012, 10, 2016),
 ("1234567890123456", "02", 10, 2015, 10, 2019);
+
+
+
+SELECT * FROM MechanicView;
+SELECT * FROM FacultyMemberView;
 
 

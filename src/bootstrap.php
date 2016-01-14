@@ -8,12 +8,12 @@ use MINI\Util\Session as Session;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-
 date_default_timezone_set('Europe/London');
 error_reporting(E_ALL);
 
 $env = 'dev';
 
+// https://github.com/PatrickLouys/no-framework-tutorial
 $whoops = new \Whoops\Run;
 if ( $env === 'dev' ) {
   $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
@@ -24,18 +24,19 @@ if ( $env === 'dev' ) {
 }
 $whoops->register();
 
-/* replace with own. */
+// https://github.com/PatrickLouys/no-framework-tutorial
 $injector = include('Dependencies.php');
-
 $request = $injector->make('Http\HttpRequest');
 $response = $injector->make('Http\HttpResponse');
 
 Session::set('id', 10);
 
+// https://github.com/PatrickLouys/no-framework-tutorial
 foreach ($response->getHeaders() as $header) {
     header($header, false);
 }
 
+// https://github.com/PatrickLouys/no-framework-tutorial
 $routeDefinitionCallback = function (\FastRoute\RouteCollector $r) {
     $routes = include('Routes.php');
     foreach ($routes as $route) {
@@ -43,9 +44,11 @@ $routeDefinitionCallback = function (\FastRoute\RouteCollector $r) {
     }
 };
 
+// https://github.com/PatrickLouys/no-framework-tutorial
 $dispatcher = \FastRoute\simpleDispatcher($routeDefinitionCallback);
 $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPath());
 
+// https://github.com/PatrickLouys/no-framework-tutorial
 switch ($routeInfo[0]) {
     case \FastRoute\Dispatcher::NOT_FOUND:
         $response->setContent('404 - Page not found');
@@ -65,4 +68,5 @@ switch ($routeInfo[0]) {
         break;
 }
 
+// https://github.com/PatrickLouys/no-framework-tutorial
 echo $response->getContent();

@@ -1,5 +1,5 @@
 <?php
-
+// https://github.com/PatrickLouys/no-framework-tutorial
 $injector = new \Auryn\Injector;
 
 $injector->alias('Http\Response', 'Http\HttpResponse');
@@ -26,3 +26,4 @@ $injector->delegate('Twig_Environment', function() use ($injector) {
 $injector->alias('MINI\Template\View', 'MINI\Template\TwigRenderer');
 
 return $injector;
+// https://github.com/PatrickLouys/no-framework-tutorial

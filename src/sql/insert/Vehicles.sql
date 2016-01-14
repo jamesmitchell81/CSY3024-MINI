@@ -1,3 +1,5 @@
+-- Inserts Vehicles, Models, Manufactures, and Vehicle Types. 
+
 -- Types: Minibus, Car
 INSERT INTO VehicleType (TypeName, Seats, MileageRate)
 VALUES
@@ -65,3 +67,6 @@ VALUES
 ( (SELECT idModel FROM Model WHERE Model = "Microbus"), "tfbs6", 0), -- VW Microbus
 ( (SELECT idModel FROM Model WHERE Model = "Touareg"),  "tfbs7", 0), -- VW Touareg
 ( (SELECT idModel FROM Model WHERE Model = "Passat"),   "tfbs8", 0); -- VW Passat
+
+
+SELECT * FROM VehicleView;

@@ -55,10 +55,13 @@
       </tbody>
     </table>
     {% else %}
-      <p class="info info-neutral">There are not vehicles undergoing maintenance</p>
+      <p class="info info-neutral">There are no vehicles undergoing maintenance</p>
     {% endif %}
 
+
     <h2>Completed Maintenance</h2>
+
+    {% if completed %}
     <table>
       <thead>
         <th>Vehicle Reg</th>
@@ -77,5 +80,8 @@
         {% endfor %}
       </tbody>
     </table>
+    {% else %}
+      <p class="info info-neutral">There are no completed maintenance items</p>
+    {% endif %}
 
 {% endblock %}

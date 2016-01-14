@@ -48,7 +48,8 @@ SELECT b._idReservation, d.DepartmentName, TotalCost, f.Name
 FROM Billings b
 INNER JOIN DepartmentReservations d ON b._idReservation = d.idReservation
 INNER JOIN Reservation r ON r.idReservation = b._idReservation
-INNER JOIN FacultyMemberView f ON r._idFacultyMember = f._idMINIEmployee;
+INNER JOIN FacultyMemberView f ON r._idMINIEmployee = f._idMINIEmployee
+WHERE idDepartment = 1;
 
 
 -- Show the maintenance dates of a vehicle.
@@ -69,7 +70,7 @@ GROUP BY idMaintenanceItem;
 SELECT f.Name, f.DepartmentName, r.DepartureDate, r.ReturnDueDate, r.Destination, vv.VehicleReg
 FROM Reservation r
 INNER JOIN VehicleReservation v ON v._idReservation = r.idReservation
-INNER JOIN FacultyMemberView f ON f._idMINIEmployee = r._idFacultyMember
+INNER JOIN FacultyMemberView f ON f._idMINIEmployee = r._idMINIEmployee
 INNER JOIN VehicleView vv ON vv.idVehicle = v._idvehicle
 WHERE v._idVehicle NOT IN (SELECT o._idVehicle FROM CheckOut o WHERE o._idReservation = r.idReservation)
 AND CURDATE() > r.ReturnDueDate;

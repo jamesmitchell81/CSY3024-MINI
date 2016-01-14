@@ -29,23 +29,25 @@ class MaintenanceCheckout extends Controller
     $issue = $params['issue'];
     $description = $this->request->getParameter('description');
 
+    $connection = new Connection();
+
     // get the vehicle form the issue number
     $SQL = "SELECT idVehicle FROM VehicleReportedIssues WHERE idReportedIssues = :issue";
-    $statement = new Statement(new Connection);
+    $statement = new Statement($connection);
     $statement->setInt('issue', $issue);
     $vehicle = $statement->select($SQL)->first()['idVehicle'];
 
     // insert the vehicle to maintenance
     $SQL = 'INSERT INTO Maintenance (_idVehicle, BriefDescription, MaintenanceEntryDate)
             VALUES (:vehicle, :description, CURRENT_TIMESTAMP)';
-    $statement = new Statement(new Connection);
+    $statement = new Statement($connection);
     $statement->setInt('vehicle', $vehicle);
     $statement->setInt('description', $description);
     $log = $statement->insert($SQL);
 
     // update the reported issues table
-    $SQL = 'UPDATE ReportedIssue SET _MaintenanceLogNumber = :log WHERE idReportedIssues = :issue';
-    $statement = new Statement(new Connection);
+    $SQL = 'UPDATE ReportedIssues SET _MaintenanceLogNumber = :log WHERE idReportedIssues = :issue';
+    $statement = new Statement($connection);
     $statement->setInt('log', $log);
     $statement->setInt('issue', $issue);
     $statement->update($SQL);

@@ -46,3 +46,4 @@ VALUES
 ((SELECT idMOTCategory FROM MOTCategory WHERE Title = "Emissions"), "Emissions");
 
 
+SELECT * FROM MOTListView;

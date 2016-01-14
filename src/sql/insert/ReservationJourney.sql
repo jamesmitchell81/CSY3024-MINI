@@ -1,8 +1,7 @@
 
 -- Reservation 1
-
 INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
-VALUES (1, '2015-12-31', '2015-12-31', 'NN1 2DL');
+VALUES (1, CURDATE(), CURDATE(), 'NN1 2DL');
 
 INSERT INTO VehicleReservation
 VALUES 
@@ -11,15 +10,15 @@ VALUES
 Call CheckoutReservationVehicles(1, 13);
 
 INSERT INTO ReportedIssues(MaintenanceIssues) VALUES ("Brake lights are not working");
+
 INSERT INTO CheckIn(_idVehicle, _idReservation, _AgentIn, OdometerEnd, _idReportedIssues)
 VALUES 
 (1, 1, 13, 30, 1);
 
 
 -- Reservation 2
-
 INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
-VALUES (2, '2015-12-31', '2015-12-31', 'NN1 2DL');
+VALUES (2, CURDATE(), CURDATE(), 'NN1 2DL');
 
 INSERT INTO VehicleReservation (_idVehicle, _idReservation)
 VALUES 
@@ -34,9 +33,8 @@ VALUES
 
 
 -- Reservation 3
-
 INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
-VALUES (3, '2015-12-31', '2015-12-31', 'NN1 2DL');
+VALUES (3, CURDATE(), CURDATE(), 'NN1 2DL');
 
 INSERT INTO VehicleReservation (_idVehicle, _idReservation)
 VALUES 
@@ -51,11 +49,9 @@ VALUES
 
 
 SELECT * FROM Billings;
-SELECT * FROM CheckIn;
 
 
 -- Reservation 4
-
 INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
 VALUES (4, CURDATE(), CURDATE(), 'NN1 2DL');
 
@@ -72,7 +68,6 @@ VALUES
 
 
 -- Reservation 5
-
 INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
 VALUES (5, CURDATE(), CURDATE(), 'NN1 2DL');
 
@@ -90,7 +85,6 @@ VALUES
 
 
 -- Reservation 6
-
 INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
 VALUES (6, CURDATE(), CURDATE(), 'NN1 2DL');
 
@@ -106,13 +100,14 @@ VALUES
 (7, 6, 13, 35, 6);
 
 -- Reservation 7
+SELECT * FROM Reservation;
 
 INSERT INTO Reservation (_idMINIEmployee, DepartureDate, ReturnDueDate, Destination)
-VALUES (7, CURDATE(), CURDATE(), 'NN1 2DL');
+VALUES (7, DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 1 DAY), DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 1 DAY), 'NN1 2DL');
 
 INSERT INTO VehicleReservation (_idVehicle, _idReservation)
 VALUES 
-(8, 7);
+(8, 5);
 
 Call CheckoutReservationVehicles(7, 14);
 

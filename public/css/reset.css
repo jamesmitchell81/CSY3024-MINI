@@ -27,7 +27,9 @@ html {
 }
 
 .wrap {
-  max-width: 75%;
+  max-width: 700px;
+  min-width: 600tpx;
+  width: 75%;
   margin: 0 auto;
 }
 

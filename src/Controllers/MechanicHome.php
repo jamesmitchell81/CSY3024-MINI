@@ -1,7 +1,6 @@
 <?php namespace MINI\Controllers;
 
 use MINI\Util\Session as Session;
-use MINI\Template\View;
 use MINI\Database\MySQLDatabaseConnection as Connection;
 use MINI\Database\PDODatabaseStatement as Statement;
 

@@ -22,7 +22,6 @@ class PDODatabaseStatement
 
   public function query($sql, $fetchMode = PDO::FETCH_ASSOC)
   {
-    // $this->fetchMode = $fetchMode;
     if ( !$this->statement )
     {
       $this->prepare($sql); //->bindParams();
